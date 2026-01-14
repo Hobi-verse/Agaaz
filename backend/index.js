@@ -1,12 +1,12 @@
-// Main Server - Express app with MongoDB and Cloudinary
+// Main Server - Express app with MongoDB, Cloudinary, and Razorpay
 const express = require('express');
 const cors = require('cors');
-const path = require('path');
 require('dotenv').config();
 
 const connectDB = require('./config/dataBase');
 const { cloudinaryConnect } = require('./config/cloudinary');
 const registrationRoutes = require('./routes/registration');
+const paymentRoutes = require('./routes/payment');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -18,6 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // API Routes
 app.use('/api', registrationRoutes);
+app.use('/api/payment', paymentRoutes);
 
 // Health check endpoint
 app.get('/health', (req, res) => {

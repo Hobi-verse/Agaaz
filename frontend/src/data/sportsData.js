@@ -1,16 +1,16 @@
-// Sports Data Configuration - All sports categories, events, types, and team sizes
+// Sports Data Configuration - All sports categories, events, types, team sizes, and fees
 
 // Sport types - defines if a sport is individual or team-based
 export const SPORT_TYPES = {
-    INDIVIDUAL: 'individual',       // Single player (100m race, Long Jump)
-    TEAM: 'team',                   // Team with captain (Football, Volleyball)
-    SINGLES: 'singles',             // Single player (Chess, Badminton Singles)
-    DOUBLES: 'doubles',             // Two players (Badminton Doubles)
-    MIXED_DOUBLES: 'mixed_doubles', // One boy + one girl (Mixed Doubles)
-    SQUAD: 'squad',                 // Esports squad (4 players)
+    INDIVIDUAL: 'individual',
+    TEAM: 'team',
+    SINGLES: 'singles',
+    DOUBLES: 'doubles',
+    MIXED_DOUBLES: 'mixed_doubles',
+    SQUAD: 'squad',
 };
 
-// Main sports data - 6 categories, 16 sports
+// Main sports data - 6 categories, 16 sports with fees
 export const sportsData = [
     // Athletics - Individual Track & Field Events
     {
@@ -24,6 +24,7 @@ export const sportsData = [
                 name: '100 Meter Race',
                 type: SPORT_TYPES.INDIVIDUAL,
                 teamSize: 1,
+                fee: 50,
                 description: 'Sprint race - Individual participation',
             },
             {
@@ -31,6 +32,7 @@ export const sportsData = [
                 name: 'Long Jump',
                 type: SPORT_TYPES.INDIVIDUAL,
                 teamSize: 1,
+                fee: 50,
                 description: 'Long Jump - Individual participation',
             },
         ],
@@ -48,6 +50,7 @@ export const sportsData = [
                 name: 'Tug of War',
                 type: SPORT_TYPES.TEAM,
                 teamSize: 8,
+                fee: 500,
                 description: '6 Players + 2 Substitutes',
             },
             {
@@ -55,6 +58,7 @@ export const sportsData = [
                 name: 'Kho-Kho (Girls Only)',
                 type: SPORT_TYPES.TEAM,
                 teamSize: 12,
+                fee: 600,
                 description: '12 Players per team - Girls Only',
                 genderRestriction: 'female',
             },
@@ -63,6 +67,7 @@ export const sportsData = [
                 name: 'Volleyball',
                 type: SPORT_TYPES.TEAM,
                 teamSize: 8,
+                fee: 500,
                 description: '6 Players + 2 Substitutes',
             },
             {
@@ -70,6 +75,7 @@ export const sportsData = [
                 name: 'Football',
                 type: SPORT_TYPES.TEAM,
                 teamSize: 15,
+                fee: 1000,
                 description: '11 Players + 4 Substitutes (15 total)',
             },
             {
@@ -77,6 +83,7 @@ export const sportsData = [
                 name: 'Basketball',
                 type: SPORT_TYPES.TEAM,
                 teamSize: 7,
+                fee: 500,
                 description: '5 Players + 2 Substitutes (7 total)',
             },
         ],
@@ -94,6 +101,7 @@ export const sportsData = [
                 name: 'Chess',
                 type: SPORT_TYPES.SINGLES,
                 teamSize: 1,
+                fee: 50,
                 description: 'Singles - Individual participation',
             },
             {
@@ -101,11 +109,12 @@ export const sportsData = [
                 name: 'Carrom',
                 type: SPORT_TYPES.SINGLES,
                 teamSize: 1,
+                fee: 50,
                 description: 'Singles - Individual participation',
                 hasSubTypes: true,
                 subTypes: [
-                    { id: 'carrom_singles', name: 'Singles', type: SPORT_TYPES.SINGLES, teamSize: 1 },
-                    { id: 'carrom_doubles', name: 'Doubles', type: SPORT_TYPES.DOUBLES, teamSize: 2 },
+                    { id: 'carrom_singles', name: 'Singles', type: SPORT_TYPES.SINGLES, teamSize: 1, fee: 50 },
+                    { id: 'carrom_doubles', name: 'Doubles', type: SPORT_TYPES.DOUBLES, teamSize: 2, fee: 100 },
                 ],
             },
         ],
@@ -123,6 +132,7 @@ export const sportsData = [
                 name: 'Badminton Singles',
                 type: SPORT_TYPES.SINGLES,
                 teamSize: 1,
+                fee: 100,
                 description: 'Singles - Individual participation',
             },
             {
@@ -130,6 +140,7 @@ export const sportsData = [
                 name: 'Badminton Doubles',
                 type: SPORT_TYPES.DOUBLES,
                 teamSize: 2,
+                fee: 150,
                 description: 'Doubles - 2 Players',
             },
             {
@@ -137,6 +148,7 @@ export const sportsData = [
                 name: 'Badminton Mixed Doubles',
                 type: SPORT_TYPES.MIXED_DOUBLES,
                 teamSize: 2,
+                fee: 150,
                 description: 'Mixed Doubles - 1 Boy + 1 Girl',
             },
         ],
@@ -154,6 +166,7 @@ export const sportsData = [
                 name: 'Table Tennis Singles',
                 type: SPORT_TYPES.SINGLES,
                 teamSize: 1,
+                fee: 100,
                 description: 'Singles - Individual participation',
             },
             {
@@ -161,6 +174,7 @@ export const sportsData = [
                 name: 'Table Tennis Doubles',
                 type: SPORT_TYPES.DOUBLES,
                 teamSize: 2,
+                fee: 150,
                 description: 'Doubles - 2 Players',
             },
             {
@@ -168,6 +182,7 @@ export const sportsData = [
                 name: 'Table Tennis Mixed Doubles',
                 type: SPORT_TYPES.MIXED_DOUBLES,
                 teamSize: 2,
+                fee: 150,
                 description: 'Mixed Doubles - 1 Boy + 1 Girl',
             },
         ],
@@ -185,6 +200,7 @@ export const sportsData = [
                 name: 'BGMI (Battlegrounds Mobile India)',
                 type: SPORT_TYPES.SQUAD,
                 teamSize: 4,
+                fee: 200,
                 description: 'Squad Only - 4 Players (No Solo/Duo)',
             },
             {
@@ -192,6 +208,7 @@ export const sportsData = [
                 name: 'Free Fire',
                 type: SPORT_TYPES.SQUAD,
                 teamSize: 4,
+                fee: 200,
                 description: 'Squad Only - 4 Players (No Solo/Duo)',
             },
         ],

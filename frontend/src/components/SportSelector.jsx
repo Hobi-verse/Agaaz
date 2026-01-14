@@ -106,6 +106,9 @@ const SportSelector = ({ onSportSelect, selectedSport }) => {
                     {selectedSport.teamSize > 1 && (
                         <p style={{ marginTop: '8px' }}>👥 Team Size: {selectedSport.teamSize} players</p>
                     )}
+                    <p style={{ marginTop: '8px', fontSize: '18px', fontWeight: '600' }}>
+                        💰 Registration Fee: ₹{selectedSport.fee}
+                    </p>
                 </div>
             )}
         </div>

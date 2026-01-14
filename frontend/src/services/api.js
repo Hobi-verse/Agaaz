@@ -1,10 +1,10 @@
-// API Service - Axios instance with production optimizations
+// API Service - Axios with Razorpay payment integration
 import axios from 'axios';
 
 // Create axios instance with base config
 const api = axios.create({
     baseURL: 'http://localhost:5000/api',
-    timeout: 30000, // 30 second timeout for file uploads
+    timeout: 30000,
     headers: {
         'Accept': 'application/json',
     },
@@ -14,90 +14,90 @@ const api = axios.create({
 api.interceptors.response.use(
     (response) => response,
     (error) => {
-        // Handle network errors
         if (!error.response) {
-            return Promise.reject({
-                message: 'Network error. Please check your connection.',
-            });
+            return Promise.reject({ message: 'Network error. Please check your connection.' });
         }
-
-        // Handle timeout
         if (error.code === 'ECONNABORTED') {
-            return Promise.reject({
-                message: 'Request timeout. Please try again.',
-            });
+            return Promise.reject({ message: 'Request timeout. Please try again.' });
         }
-
-        // Return error response
         return Promise.reject(error.response.data);
     }
 );
 
-// Submit registration form
-export const submitRegistration = async (formData) => {
+// Create Razorpay order
+export const createPaymentOrder = async (orderData) => {
     try {
-        // Create FormData for file upload
-        const data = new FormData();
-
-        Object.keys(formData).forEach((key) => {
-            if (key === 'aadharPhoto' && formData[key]) {
-                data.append('aadharPhoto', formData[key]);
-            } else if (formData[key] !== null && formData[key] !== undefined) {
-                data.append(key, formData[key]);
-            }
-        });
-
-        const response = await api.post('/register', data, {
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
-        });
-
+        const response = await api.post('/payment/create-order', orderData);
         return {
             success: true,
-            registrationId: response.data.registrationId,
-            message: response.data.message,
+            order: response.data.order,
+            key: response.data.key,
         };
-
     } catch (error) {
-        console.error('Registration error:', error);
         return {
             success: false,
-            error: error.message || 'Something went wrong',
+            error: error.message || 'Failed to create payment order',
         };
     }
 };
 
-// Get all registrations (for dashboard later)
+// Verify payment and complete registration
+export const verifyPaymentAndRegister = async (paymentData, formData, aadharPhoto) => {
+    try {
+        const data = new FormData();
+
+        // Add payment data
+        data.append('razorpay_order_id', paymentData.razorpay_order_id);
+        data.append('razorpay_payment_id', paymentData.razorpay_payment_id);
+        data.append('razorpay_signature', paymentData.razorpay_signature);
+
+        // Add form data as JSON
+        data.append('formData', JSON.stringify(formData));
+
+        // Add Aadhar photo
+        if (aadharPhoto) {
+            data.append('aadharPhoto', aadharPhoto);
+        }
+
+        const response = await api.post('/payment/verify', data, {
+            headers: { 'Content-Type': 'multipart/form-data' },
+        });
+
+        return {
+            success: true,
+            message: response.data.message,
+            registrationId: response.data.registrationId,
+        };
+    } catch (error) {
+        return {
+            success: false,
+            error: error.message || 'Payment verification failed',
+        };
+    }
+};
+
+// Load Razorpay script
+export const loadRazorpayScript = () => {
+    return new Promise((resolve) => {
+        if (window.Razorpay) {
+            resolve(true);
+            return;
+        }
+        const script = document.createElement('script');
+        script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+        script.onload = () => resolve(true);
+        script.onerror = () => resolve(false);
+        document.body.appendChild(script);
+    });
+};
+
+// Get all registrations (for dashboard)
 export const getAllRegistrations = async () => {
     try {
         const response = await api.get('/registrations');
-        return {
-            success: true,
-            data: response.data.data,
-            count: response.data.count,
-        };
+        return { success: true, data: response.data.data, count: response.data.count };
     } catch (error) {
-        return {
-            success: false,
-            error: error.message || 'Failed to fetch registrations',
-        };
-    }
-};
-
-// Get registration by ID
-export const getRegistrationById = async (registrationId) => {
-    try {
-        const response = await api.get(`/registration/${registrationId}`);
-        return {
-            success: true,
-            data: response.data.data,
-        };
-    } catch (error) {
-        return {
-            success: false,
-            error: error.message || 'Registration not found',
-        };
+        return { success: false, error: error.message || 'Failed to fetch registrations' };
     }
 };
 

@@ -220,7 +220,7 @@ const RegistrationForm = ({ selectedSport, onSubmit, isLoading }) => {
             />
 
             <button type="submit" disabled={isLoading} style={{ padding: '10px 20px', marginTop: '10px' }}>
-                {isLoading ? 'Submitting...' : 'Register Now'}
+                {isLoading ? 'Processing...' : `Pay ₹${selectedSport.fee} & Register`}
             </button>
 
             {showTeamField && (
