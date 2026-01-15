@@ -1,4 +1,5 @@
 // Committee Data
+import { memberImage } from "./memberData.js";
 
 export const committeeData = {
   title: "Organizing Committee",
@@ -11,19 +12,19 @@ export const committeeData = {
         name: "Aditya Yadav",
         role: "President",
         department: "CSE AI, 3rd Year",
-        image: null
+        image: memberImage.aditya
       },
       {
         name: "Himanshu Singh",
         role: "Vice-President",
         department: "CE, 3rd Year",
-        image: null
+        image: memberImage.himanshu
       },
       {
         name: "Priyanshu Shukla",
         role: "Secretary",
         department: "ME, 3rd Year",
-        image: null
+        image: memberImage.priyanshu
       },
       {
         name: "Anubhav Rathore",
@@ -35,7 +36,7 @@ export const committeeData = {
         name: "Vishwas Yadav",
         role: "Treasurer",
         department: "CE, 3rd Year",
-        image: null
+        image: memberImage.vishwas
       }
     ]
   },
@@ -47,7 +48,7 @@ export const committeeData = {
         name: "Aditya Ranjan",
         role: "Web Developer",
         department: "CSE, 4th Year",
-        image: null
+        image: memberImage.adityaRanjan
       },
       {
         name: "Aman Singh Nishad",
@@ -59,13 +60,13 @@ export const committeeData = {
         name: "Ayush Singh",
         role: "Web Developer",
         department: "CSE, 4th Year",
-        image: null
+        image: memberImage.ayushSingh
       },
       {
         name: "Aman Chaurasiya",
         role: "Web Developer",
         department: "CSE, 3rd Year",
-        image: null
+        image: memberImage.aman
       }
     ]
   },
@@ -83,7 +84,7 @@ export const committeeData = {
         name: "Om Gupta",
         role: "Event & Management Head",
         department: "EE, 3rd Year",
-        image: null
+        image: memberImage.omGupta
       },
       {
         name: "Anup Kumar",
@@ -95,19 +96,19 @@ export const committeeData = {
         name: "Sagar Singh Patel",
         role: "Social Media Lead",
         department: "CSE, 3rd Year",
-        image: null
+        image: memberImage.sagar
       },
       {
         name: "Aman Chaurasiya",
         role: "Discipline In-Charge",
         department: "CSE, 3rd Year",
-        image: null
+        image: memberImage.aman
       },
       {
         name: "Amretesh Mishra",
         role: "Discipline In-Charge",
         department: "CSE AI, 3rd Year",
-        image: null
+        image: memberImage.amritesh
       }
     ]
   },
@@ -117,21 +118,27 @@ export const committeeData = {
     members: [
       {
         name: "Ayushman Kumar",
-        role: "Team Member",
+        role: "Head",
         department: "ECE, 3rd Year",
-        image: null
+        image: memberImage.ayushman
+      },
+      {
+        name: "Harshit Kesarwani",
+        role: "In-charge",
+        department: "CSE, 3rd Year",
+        image: memberImage.harshit
       },
       {
         name: "Devansh Dwivedi",
         role: "Team Member",
         department: "BCA, 2nd Year",
-        image: null
+        image: memberImage.devansh
       },
       {
         name: "Harsh Gupta",
         role: "Team Member",
         department: "CSE AI, 2nd Year",
-        image: null
+        image: memberImage.harshGupta
       },
       {
         name: "Sumit Kushwaha",
@@ -143,12 +150,6 @@ export const committeeData = {
         name: "Yuvraj Singh",
         role: "Team Member",
         department: "ME, 2nd Year",
-        image: null
-      },
-      {
-        name: "Harshit Kesarwani",
-        role: "Team Member",
-        department: "CSE, 3rd Year",
         image: null
       },
       {

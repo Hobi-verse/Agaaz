@@ -6,7 +6,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: calc(100vh - 70px);
+  /* min-height: calc(100vh - 70px); */
   padding: 28px 18px;
 }
 
@@ -19,7 +19,7 @@
   margin: 0 0 14px;
   color: rgba(255, 255, 255, 0.96);
   font-weight: 900;
-  font-size: clamp(30px, 9vw, 64px);
+  font-size: clamp(30px, 9vw, 56px);
   line-height: 1.02;
   letter-spacing: 1px;
   transform: skewX(-10deg);
@@ -47,7 +47,7 @@
 .heroCtaRow {
   display: flex;
   justify-content: center;
-  margin: 12px 0 22px;
+  margin: 80px 0 22px;
 }
 
 .heroStatus {
@@ -61,7 +61,7 @@
 }
 
 .heroSponsors {
-  margin: 34px auto 0;
+  margin:  auto 0;
   width: min(980px, 100%);
 
   display: flex;

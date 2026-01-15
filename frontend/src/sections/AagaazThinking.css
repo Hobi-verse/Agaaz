@@ -1,0 +1,87 @@
+.aagaaz-thinking-section {
+  position: relative;
+  width: 100%;
+  padding: 120px 20px;
+  background: radial-gradient(circle at top, #2b1369, #12062f 40%, #080414);
+  color: #e5e5e5;
+  overflow: hidden;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.aagaaz-glow {
+  position: absolute;
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.4;
+}
+
+.aagaaz-glow-orange {
+  background: #ff8c00;
+  top: 50px;
+  left: 50px;
+}
+
+.aagaaz-glow-green {
+  background: #3cff8f;
+  bottom: 80px;
+  right: 60px;
+}
+
+.aagaaz-content {
+  max-width: 900px;
+  margin: auto;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.aagaaz-title {
+  font-size: 42px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  margin-bottom: 40px;
+}
+
+.aagaaz-highlight {
+  display: block;
+  margin-top: 10px;
+  font-size: 56px;
+  color: #ff8c00;
+  text-shadow: 0 0 25px rgba(255, 140, 0, 0.6);
+}
+
+.aagaaz-content p {
+  font-size: 18px;
+  line-height: 1.8;
+  margin-bottom: 24px;
+  color: #d1d1d1;
+}
+
+.highlight-word {
+  color: #ff8c00;
+  font-weight: 600;
+}
+
+.legacy-line {
+  font-size: 20px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-top: 30px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .aagaaz-title {
+    font-size: 32px;
+  }
+
+  .aagaaz-highlight {
+    font-size: 42px;
+  }
+
+  .aagaaz-content p {
+    font-size: 16px;
+  }
+}

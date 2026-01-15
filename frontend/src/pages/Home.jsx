@@ -8,6 +8,32 @@ import CommitteeSection from "../sections/CommitteeSection";
 import FeesSection from "../sections/FeesSection";
 import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
+import AagaazThinking from "../sections/AagaazThinking";
+import ChiefGuest from "../sections/ChiefGuest";
+import vcSir from "../assets/chief-guest/vc-image.jpeg"
+import deanSir from "../assets/chief-guest/dean-sir.jpeg"
+import registrarMam from "../assets/chief-guest/registrar-mam.jpeg"
+
+const members = [
+  {
+    name: "Prof. Jai Prakash Saini",
+    designation: "Hon’ble Vice Chancellor",
+    role: "University of Lucknow",
+    image: vcSir,
+  },
+  {
+    name: "Prof. S. P. Singh",
+    designation: "Dean FoET",
+    role: "University of Lucknow",
+    image: deanSir,
+  },
+  {
+    name: "Dr. Bhavna Mishra",
+    designation: "Registrar",
+    role: "University of Lucknow",
+    image: registrarMam,
+  },
+];
 
 export default function Home() {
   const navigate = useNavigate();
@@ -67,6 +93,8 @@ export default function Home() {
           </p>
         </div>
       </section>
+      <ChiefGuest members={members}/>
+      <AagaazThinking/>
 
       <SportsSection />
       <ScheduleSection />
