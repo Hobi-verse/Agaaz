@@ -279,13 +279,6 @@
   transform: translateX(6px);
 }
 
-.rule-bullet {
-  color: #ffb24a;
-  font-weight: 900;
-  font-size: 18px;
-  min-width: 20px;
-}
-
 /* Penalties Section */
 .penalties-section {
   background: linear-gradient(180deg, #1c0f53 0%, #221060 100%);
@@ -293,12 +286,6 @@
   padding: 32px;
   border: 2px solid rgba(255, 150, 55, 0.6);
   box-shadow: 0 0 30px rgba(255, 120, 40, 0.2), 0 20px 50px rgba(0, 0, 0, 0.4);
-}
-
-.penalties-section .section-icon {
-  background: linear-gradient(180deg, rgba(34, 20, 96, 0.92) 0%, rgba(23, 12, 70, 0.92) 100%);
-  border-color: rgba(255, 150, 55, 0.8);
-  box-shadow: 0 0 20px rgba(255, 120, 40, 0.3);
 }
 
 .penalties-section .section-header {
@@ -327,12 +314,6 @@
   transform: translateX(6px);
 }
 
-.penalty-bullet {
-  color: #ffb24a;
-  font-size: 18px;
-  font-weight: bold;
-}
-
 .penalty-text {
   color: rgba(255, 255, 255, 0.9);
   font-size: 15px;
@@ -346,12 +327,6 @@
   padding: 32px;
   border: 2px solid rgba(255, 150, 55, 0.6);
   box-shadow: 0 0 30px rgba(255, 120, 40, 0.2), 0 20px 50px rgba(0, 0, 0, 0.4);
-}
-
-.format-section .section-icon {
-  background: linear-gradient(180deg, rgba(34, 20, 96, 0.92) 0%, rgba(23, 12, 70, 0.92) 100%);
-  border-color: rgba(255, 150, 55, 0.8);
-  box-shadow: 0 0 20px rgba(255, 120, 40, 0.3);
 }
 
 .format-section .section-header {

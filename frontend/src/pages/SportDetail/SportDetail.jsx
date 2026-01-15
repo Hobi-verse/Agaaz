@@ -1,6 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { getRulesBySportId } from "../../data/rulesData";
-import { getSportById } from "../../data/sportsData";
 import Button from "../../components/Button";
 import "./SportDetail.css";
 import { useEffect } from "react";
@@ -9,7 +8,6 @@ export default function SportDetail() {
   const { sportId } = useParams();
   const navigate = useNavigate();
   const rules = getRulesBySportId(sportId);
-  const sportInfo = getSportById(sportId);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -49,7 +47,6 @@ export default function SportDetail() {
       {/* Eligibility Section */}
       <section className="sport-section eligibility-section">
         <div className="section-header">
-          <div className="section-icon">✓</div>
           <h2 className="section-title">Eligibility Criteria</h2>
         </div>
         <div className="eligibility-grid">
@@ -65,7 +62,6 @@ export default function SportDetail() {
       {/* Rules Section */}
       <section className="sport-section rules-section">
         <div className="section-header">
-          <div className="section-icon">📋</div>
           <h2 className="section-title">Rules & Regulations</h2>
         </div>
         <div className="rules-container">
@@ -78,7 +74,6 @@ export default function SportDetail() {
               <ul className="rule-points">
                 {ruleCategory.points.map((point, pointIndex) => (
                   <li key={pointIndex} className="rule-point">
-                    <span className="rule-bullet">→</span>
                     {point}
                   </li>
                 ))}
@@ -91,13 +86,11 @@ export default function SportDetail() {
       {/* Penalties Section */}
       <section className="sport-section penalties-section">
         <div className="section-header">
-          <div className="section-icon">⚠️</div>
           <h2 className="section-title">Penalties & Violations</h2>
         </div>
         <div className="penalties-list">
           {rules.penalties.map((penalty, index) => (
             <div key={index} className="penalty-item">
-              <span className="penalty-bullet">⚡</span>
               <span className="penalty-text">{penalty}</span>
             </div>
           ))}
@@ -107,7 +100,6 @@ export default function SportDetail() {
       {/* Tournament Format Section */}
       <section className="sport-section format-section">
         <div className="section-header">
-          <div className="section-icon">🏆</div>
           <h2 className="section-title">Tournament Format</h2>
         </div>
         <div className="format-content">
