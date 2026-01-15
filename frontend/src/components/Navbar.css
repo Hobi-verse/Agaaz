@@ -203,3 +203,16 @@
     height: 28px;
   }
 }
+
+.tagLine{
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 12px;
+  font-weight: 500;
+  margin-left: 4px;
+  letter-spacing: 0.4px;
+}
+.brandContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}

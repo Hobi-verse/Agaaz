@@ -41,9 +41,13 @@ export default function Navbar({ links = defaultLinks }) {
         <div className="navInner">
           <Link className="brand" to="/" aria-label="AAGAAZ">
             <img className="brandLogo" src={logo} alt="" aria-hidden="true" />
-            <span className="brandText" aria-hidden="true">
-              AAGAAZ
-            </span>
+            <div className="brandContainer">
+              <span className="brandText" aria-hidden="true">
+                AAGAAZ
+              </span>
+              <span className="tagLine">Play, Progress, Prosper</span>
+            </div>
+            
           </Link>
 
           <button
