@@ -9,6 +9,8 @@ import AllSports from "./pages/AllSports/AllSports";
 import FeesAwards from "./pages/FeesAwards/FeesAwards";
 import Committee from "./pages/Committee/Committee";
 import Rules from "./pages/Rules/Rules";
+import CodeOfConduct from "./pages/CodeOfConduct/CodeOfConduct";
+import RefundPolicy from "./pages/RefundPolicy/RefundPolicy";
 import Footer from "./components/Footer";
 
 function ScrollToHash() {
@@ -54,6 +56,8 @@ function App() {
         <Route path="/fees-awards" element={<FeesAwards />} />
         <Route path="/committee" element={<Committee />} />
         <Route path="/rules" element={<Rules />} />
+        <Route path="/code-of-conduct" element={<CodeOfConduct />} />
+        <Route path="/refund-policy" element={<RefundPolicy />} />
       </Routes>
       <Footer />
     </>

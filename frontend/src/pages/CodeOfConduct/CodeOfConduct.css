@@ -1,0 +1,201 @@
+/* Code of Conduct Page */
+
+.conduct-page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #1c0f53 0%, #221060 100%);
+}
+
+/* Hero Section */
+.conduct-hero {
+  padding: 120px 18px 60px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.conduct-hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(255, 150, 55, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(255, 120, 40, 0.06) 0%, transparent 40%);
+  pointer-events: none;
+}
+
+.conduct-hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.conduct-page-title {
+  margin: 0 0 16px;
+  color: rgba(255, 255, 255, 0.96);
+  font-weight: 900;
+  font-size: clamp(36px, 8vw, 64px);
+  letter-spacing: 3px;
+  line-height: 1.05;
+  text-transform: uppercase;
+  transform: skewX(-8deg);
+  text-shadow: 0 5px 0 rgba(0, 0, 0, 0.35), 0 20px 42px rgba(0, 0, 0, 0.3);
+  -webkit-text-stroke: 1.5px rgba(0, 0, 0, 0.28);
+  animation: titleGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlow {
+  from {
+    text-shadow: 0 5px 0 rgba(0, 0, 0, 0.35), 0 20px 42px rgba(0, 0, 0, 0.3),
+      0 0 30px rgba(255, 100, 0, 0.3);
+  }
+  to {
+    text-shadow: 0 5px 0 rgba(0, 0, 0, 0.35), 0 20px 42px rgba(0, 0, 0, 0.3),
+      0 0 60px rgba(255, 150, 50, 0.5), 0 0 100px rgba(255, 100, 0, 0.3);
+  }
+}
+
+.conduct-page-subtitle {
+  font-size: clamp(16px, 2.5vw, 20px);
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+/* Content Section */
+.conduct-content-section {
+  padding: 20px 18px 80px;
+  position: relative;
+}
+
+.conduct-page-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Intro Section */
+.conduct-intro {
+  background: linear-gradient(135deg, rgba(255, 150, 55, 0.1) 0%, rgba(255, 100, 0, 0.05) 100%);
+  border: 2px solid rgba(255, 150, 55, 0.3);
+  border-radius: 16px;
+  padding: 24px 28px;
+  margin-bottom: 40px;
+  backdrop-filter: blur(10px);
+}
+
+.conduct-intro-text {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 16px;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.conduct-intro-text strong {
+  color: #ff9933;
+}
+
+/* Conduct Card */
+.conduct-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 32px;
+  backdrop-filter: blur(10px);
+}
+
+/* Conduct List */
+.conduct-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.conduct-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.conduct-item:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.conduct-number {
+  color: #ff9933;
+  font-size: 18px;
+  font-weight: 900;
+  flex-shrink: 0;
+  min-width: 28px;
+}
+
+.conduct-text {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* Footer Note */
+.conduct-footer-note {
+  background: linear-gradient(135deg, rgba(100, 200, 100, 0.1) 0%, rgba(50, 150, 50, 0.05) 100%);
+  border: 2px solid rgba(100, 200, 100, 0.3);
+  border-radius: 16px;
+  padding: 24px 28px;
+  margin-top: 40px;
+}
+
+.conduct-footer-note .note-text {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .conduct-hero {
+    padding: 100px 16px 40px;
+  }
+
+  .conduct-content-section {
+    padding: 16px 16px 60px;
+  }
+
+  .conduct-intro {
+    padding: 20px;
+  }
+
+  .conduct-card {
+    padding: 24px 20px;
+  }
+
+  .conduct-item {
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .conduct-hero {
+    padding: 90px 12px 32px;
+  }
+
+  .conduct-page-title {
+    transform: skewX(-5deg);
+  }
+
+  .conduct-card {
+    padding: 20px 16px;
+  }
+
+  .conduct-text {
+    font-size: 14px;
+  }
+}

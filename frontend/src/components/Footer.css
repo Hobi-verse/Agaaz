@@ -127,6 +127,34 @@
   height: 16px;
 }
 
+.footerLinks {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footerPolicyLink {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  transition: color 0.2s ease;
+}
+
+.footerPolicyLink:hover {
+  color: rgba(255, 178, 74, 1);
+}
+
+.footerLinkDivider {
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 12px;
+}
+
 .footerBottom {
   margin-top: 14px;
   padding-top: 12px;
@@ -183,6 +211,10 @@
 
   .footerSocial {
     justify-content: center;
+  }
+
+  .footerLinks {
+    gap: 12px;
   }
 
   .footerBottom {

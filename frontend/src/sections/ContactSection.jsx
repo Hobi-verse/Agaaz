@@ -18,7 +18,7 @@ export default function ContactSection() {
               name={c.name}
               role={c.role}
               imageSrc={c.imageSrc}
-              links={c.links}
+              showSocials={false}
             />
           ))}
         </div>

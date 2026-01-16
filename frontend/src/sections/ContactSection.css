@@ -86,14 +86,16 @@
 }
 
 .contactGrid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  display: flex;
+  justify-content: center;
   gap: 18px;
   align-items: stretch;
 }
 
 .contactGrid .profileCard {
-  width: 100%;
+  width: calc(25% - 14px);
+  max-width: 240px;
+  flex-shrink: 0;
 }
 
 /* Keep cards compact so 4-per-row stays clean */

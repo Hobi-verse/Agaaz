@@ -1,5 +1,6 @@
 import "./Footer.css";
 import { footerData } from "../data/footerData";
+import { Link } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
@@ -67,6 +68,16 @@ export default function Footer() {
               <FontAwesomeIcon className="footerIcon" icon={faEnvelope} />
             </a>
           </div>
+        </div>
+
+        <div className="footerLinks" aria-label="Policy links">
+          <Link to="/code-of-conduct" className="footerPolicyLink">
+            Code of Conduct
+          </Link>
+          <span className="footerLinkDivider">|</span>
+          <Link to="/refund-policy" className="footerPolicyLink">
+            Refund Policy
+          </Link>
         </div>
 
         <div className="footerBottom">
