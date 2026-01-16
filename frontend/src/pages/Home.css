@@ -176,6 +176,20 @@
   animation: fadeInUp 1s ease-out 0.5s backwards;
 }
 
+.flickerButton {
+  animation: subtleGlow 2s ease-in-out infinite;
+  font-size: 0.85rem;
+}
+
+@keyframes subtleGlow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(255, 100, 0, 0.4), 0 0 10px rgba(255, 50, 0, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(255, 100, 0, 0.7), 0 0 30px rgba(255, 50, 0, 0.4);
+  }
+}
+
 .heroCtaRow button {
   position: relative;
   overflow: hidden;

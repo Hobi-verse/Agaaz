@@ -134,9 +134,10 @@ export default function Home() {
           </p>
 
           <div className="heroCtaRow">
-            <Button onClick={() => navigate("/register")}>
+            {/* <Button onClick={() => navigate("/register")}>
               {homeHero.ctaText}
-            </Button>
+            </Button> */}
+            <Button className="flickerButton">Registrations will start soon</Button>
             <Button onClick={() => navigate("/rules")}>
               Rules & Regulations
             </Button>
