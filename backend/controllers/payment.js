@@ -5,7 +5,6 @@ const Registration = require('../models/Registration');
 const { getRazorpayInstance } = require('../config/razorpay');
 const { uploadToCloudinary } = require('../middleware/upload');
 const { sendRegistrationEmail } = require('../config/resend');
-const { checkDuplicate, addToCache } = require('../config/aadharCache');
 
 // Generate unique registration ID
 const generateRegistrationId = (sportId) => {
@@ -37,16 +36,9 @@ const createOrder = async (req, res) => {
             });
         }
 
-        // Check if Aadhar or Email is already registered (O(1) cache lookup - no DB call)
-        const duplicate = checkDuplicate(aadharNo, email);
-        if (duplicate.isDuplicate) {
-            return res.status(400).json({
-                success: false,
-                message: duplicate.message,
-            });
-        }
 
-        // Create Razorpay order
+
+        // Create Razorpay order (NO DB entry here - only after successful payment)
         const options = {
             amount: amount * 100, // Amount in paise
             currency: 'INR',
@@ -56,24 +48,15 @@ const createOrder = async (req, res) => {
                 sportName,
                 name,
                 email,
+                mobileNo,
+                aadharNo,
             },
         };
 
         const order = await instance.orders.create(options);
 
-        // Save payment record
-        const payment = new Payment({
-            orderId: order.id,
-            amount: amount,
-            name,
-            email,
-            mobileNo,
-            sportId,
-            sportName,
-            status: 'created',
-        });
-
-        await payment.save();
+        // Don't save to DB here - only after successful payment verification
+        // This prevents failed/cancelled payments from creating DB entries
 
         res.status(201).json({
             success: true,
@@ -166,20 +149,23 @@ const verifyPayment = async (req, res) => {
 
         await registration.save();
 
-        // Add new Aadhar and Email to cache for future lookups
-        addToCache(formData.aadharNo, formData.email);
 
-        // Update payment with registration ID and get payment amount
-        const payment = await Payment.findOneAndUpdate(
-            { orderId: razorpay_order_id },
-            {
-                paymentId: razorpay_payment_id,
-                signature: razorpay_signature,
-                status: 'paid',
-                registrationId: registration._id,
-            },
-            { new: true }
-        );
+
+        // Create payment record ONLY after successful verification
+        const payment = new Payment({
+            orderId: razorpay_order_id,
+            paymentId: razorpay_payment_id,
+            signature: razorpay_signature,
+            amount: formData.amount,
+            name: formData.name,
+            email: formData.email,
+            mobileNo: formData.mobileNo,
+            sportId: formData.sportId,
+            sportName: formData.sportName,
+            status: 'paid',
+            registrationId: registration._id,
+        });
+        await payment.save();
 
         // Send confirmation email (async - don't block response)
         sendRegistrationEmail({

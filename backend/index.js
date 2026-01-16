@@ -6,31 +6,30 @@ require('dotenv').config();
 
 const connectDB = require('./config/dataBase');
 const { cloudinaryConnect } = require('./config/cloudinary');
-const { loadAadharCache } = require('./config/aadharCache');
 const registrationRoutes = require('./routes/registration');
 const paymentRoutes = require('./routes/payment');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-const allowedOrigins = ["https://www.aagaaz.online","https://aagaaz.online","http://localhost:5173"]
+const allowedOrigins = ["https://www.aagaaz.online", "https://aagaaz.online", "http://localhost:5173"]
 
 // Middleware
 app.use(cors({
     origin: function (origin, callback) {
-      // allow server-to-server or Postman requests
-      if (!origin) return callback(null, true);
+        // allow server-to-server or Postman requests
+        if (!origin) return callback(null, true);
 
-      if (allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
+        if (allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
     },
     credentials: true, // IMPORTANT if using cookies / auth
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
-  }));
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -72,10 +71,9 @@ app.use((err, req, res, next) => {
     });
 });
 
-// Connect to MongoDB, Cloudinary, load cache and start server
-connectDB().then(async () => {
+// Connect to MongoDB, Cloudinary and start server
+connectDB().then(() => {
     cloudinaryConnect();
-    await loadAadharCache(); // Load all Aadhars into memory for O(1) lookups
     app.listen(PORT, () => {
         console.log(`Server running on http://localhost:${PORT}`);
     });
