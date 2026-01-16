@@ -4,6 +4,7 @@ const Payment = require('../models/Payment');
 const Registration = require('../models/Registration');
 const { getRazorpayInstance } = require('../config/razorpay');
 const { uploadToCloudinary } = require('../middleware/upload');
+const { sendRegistrationEmail } = require('../config/resend');
 
 // Generate unique registration ID
 const generateRegistrationId = (sportId) => {
@@ -84,7 +85,6 @@ const createOrder = async (req, res) => {
         });
 
     } catch (error) {
-        console.error('Create order error:', error);
         res.status(500).json({
             success: false,
             message: 'Failed to create payment order',
@@ -165,25 +165,37 @@ const verifyPayment = async (req, res) => {
 
         await registration.save();
 
-        // Update payment with registration ID
-        await Payment.findOneAndUpdate(
+        // Update payment with registration ID and get payment amount
+        const payment = await Payment.findOneAndUpdate(
             { orderId: razorpay_order_id },
             {
                 paymentId: razorpay_payment_id,
                 signature: razorpay_signature,
                 status: 'paid',
                 registrationId: registration._id,
-            }
+            },
+            { new: true }
         );
+
+        // Send confirmation email (async - don't block response)
+        sendRegistrationEmail({
+            name: formData.name,
+            email: formData.email,
+            sportName: formData.sportName,
+            sportType: formData.sportType,
+            teamName: formData.teamName,
+            universityName: formData.universityName,
+            registrationId: registration.registrationId,
+            amount: payment?.amount || formData.amount,
+        }).catch(err => console.error('Email error:', err));
 
         res.status(200).json({
             success: true,
-            message: 'Payment successful! Registration completed.',
+            message: 'Payment successful! Registration completed. Confirmation email sent.',
             registrationId: registration.registrationId,
         });
 
     } catch (error) {
-        console.error('Verify payment error:', error);
 
         // Handle duplicate Aadhar
         if (error.code === 11000 && error.keyPattern?.aadharNo) {

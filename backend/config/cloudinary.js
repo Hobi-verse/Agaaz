@@ -9,14 +9,11 @@ const cloudinaryConnect = () => {
             api_secret: process.env.API_SECRET,
         });
 
-        // Log to verify credentials are loaded
+        // Verify credentials are loaded (don't log sensitive info)
         if (process.env.CLOUD_NAME && process.env.API_KEY && process.env.API_SECRET) {
-            console.log('Cloudinary Connected:', process.env.CLOUD_NAME);
+            console.log('Cloudinary Connected');
         } else {
             console.error('Cloudinary Error: Missing credentials in .env file');
-            console.log('CLOUD_NAME:', process.env.CLOUD_NAME || 'NOT SET');
-            console.log('API_KEY:', process.env.API_KEY ? 'SET' : 'NOT SET');
-            console.log('API_SECRET:', process.env.API_SECRET ? 'SET' : 'NOT SET');
         }
     } catch (error) {
         console.error('Cloudinary Connection Error:', error.message);

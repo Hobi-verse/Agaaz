@@ -74,7 +74,6 @@ const createRegistration = async (req, res) => {
         });
 
     } catch (error) {
-        console.error('Registration error:', error);
 
         if (error.name === 'ValidationError') {
             const messages = Object.values(error.errors).map(err => err.message);
@@ -119,7 +118,6 @@ const getAllRegistrations = async (req, res) => {
             data: registrations,
         });
     } catch (error) {
-        console.error('Fetch error:', error);
         res.status(500).json({
             success: false,
             message: 'Failed to fetch registrations',
@@ -146,7 +144,6 @@ const getRegistrationById = async (req, res) => {
             data: registration,
         });
     } catch (error) {
-        console.error('Fetch error:', error);
         res.status(500).json({
             success: false,
             message: 'Failed to fetch registration',
