@@ -1,0 +1,19 @@
+/* Global Styles */
+
+/* Toast container - MUST be above navbar (z-index: 1000) */
+[data-sonner-toaster],
+div[role="region"],
+.Toaster {
+    z-index: 9999999 !important;
+    position: fixed !important;
+    top: 20px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+}
+
+/* Individual toast styling */
+[data-sonner-toast],
+.go4109123758,
+.go3958317564 {
+    z-index: 9999999 !important;
+}

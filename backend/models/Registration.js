@@ -37,7 +37,6 @@ const registrationSchema = new mongoose.Schema({
     aadharNo: {
         type: String,
         required: [true, 'Aadhar number is required'],
-        unique: true,
         match: [/^\d{12}$/, 'Aadhar number must be 12 digits'],
     },
     aadharPhotoPath: {
