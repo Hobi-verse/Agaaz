@@ -89,12 +89,25 @@
 
 .committee-container .profileName {
   font-size: 18px;
-  line-height: 1.15;
+  line-height: 1.25;
+  word-break: break-word;
+  hyphens: auto;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .committee-container .profileRole {
   margin: 4px 0 0;
   font-size: 13px;
+  line-height: 1.4;
+  word-break: break-word;
+  hyphens: auto;
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @media (max-width: 620px) {

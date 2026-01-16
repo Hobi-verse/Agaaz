@@ -11,13 +11,15 @@ import harshGupta from "../assets/member-image/harsh-gupta.jpg"
 import himanshu from "../assets/member-image/himanshu2.jpeg"
 import omGupta from "../assets/member-image/om-gupta.jpg"
 import priyanshu from "../assets/member-image/priyanshu.jpg"
-import tushar from "../assets/member-image/Tushar.jpeg"
+import tushar from "../assets/member-image/tushar1.jpeg"
 import vishwas from "../assets/member-image/vishwas.jpg"
-import yatharth from "../assets/member-image/yatharth.jpg"
+import yatharth from "../assets/member-image/yatharth.jpeg"
 import yogesh from "../assets/member-image/Yogesh.jpg"
 import harshit from "../assets/member-image/harshit.jpeg"
 import sagar from "../assets/member-image/sagar.jpeg"
 import amanSinghNishad from "../assets/member-image/amansingh.webp"
+import manvendra from "../assets/member-image/manvendra.jpeg"
+import anubhav from "../assets/member-image/anubhav.jpeg"
 
 
 export const memberImage = {
@@ -41,4 +43,6 @@ export const memberImage = {
     , yogesh
     , harshit
     , sagar
+    , manvendra
+    , anubhav
 }

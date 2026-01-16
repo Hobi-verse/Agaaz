@@ -95,6 +95,13 @@ export default function Committee() {
         />
 
         <CommitteeGroup
+          title={committeeData.coordinationTeam.title}
+          members={committeeData.coordinationTeam.members}
+          className="executiveGroup"
+          onImageClick={handleImageClick}
+        />
+
+        <CommitteeGroup
           title={committeeData.trainingTeam.title}
           members={committeeData.trainingTeam.members}
           className="trainingGroup"

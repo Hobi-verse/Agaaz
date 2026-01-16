@@ -26,6 +26,16 @@ export default function ContactSection() {
                   showSocials={false}
                 />
               ))}
+              {/* Duplicate for seamless loop */}
+              {contactCards.map((c) => (
+                <ProfileCard
+                  key={`dup-${c.key}`}
+                  name={c.name}
+                  role={c.role}
+                  imageSrc={c.imageSrc}
+                  showSocials={false}
+                />
+              ))}
             </div>
           </div>
         </div>
@@ -49,6 +59,16 @@ export default function ContactSection() {
               {contactCards2.map((c) => (
                 <ProfileCard
                   key={c.key}
+                  name={c.name}
+                  role={c.role}
+                  imageSrc={c.imageSrc}
+                  showSocials={false}
+                />
+              ))}
+              {/* Duplicate for seamless loop */}
+              {contactCards2.map((c) => (
+                <ProfileCard
+                  key={`dup-${c.key}`}
                   name={c.name}
                   role={c.role}
                   imageSrc={c.imageSrc}

@@ -30,7 +30,7 @@ export const committeeData = {
         name: "Anubhav Rathore",
         role: "Joint Secretary",
         department: "CSE AI, 3rd Year",
-        image: null
+        image: memberImage.anubhav
       },
       {
         name: "Vishwas Yadav",
@@ -113,6 +113,36 @@ export const committeeData = {
     ]
   },
 
+  coordinationTeam: {
+    title: "Coordination Team",
+    members: [
+      {
+        name: "Anurag Gupta",
+        role: "Event Coordinator Head",
+        department: "CSE-AI, 4th Year",
+        image: memberImage.anurag
+      },
+      {
+        name: "Tushar Tyagi",
+        role: "Event Coordinator Head",
+        department: "CSE, 4th Year",
+        image: memberImage.tushar
+      },
+      {
+        name: "Yatharth Bajpai",
+        role: "Event Coordinator Head",
+        department: "B. Pharma, 4th Year",
+        image: memberImage.yatharth
+      },
+      {
+        name: "Ayush Gupta",
+        role: "Event Coordinator Co-Head",
+        department: "CSE-AI, 2nd Year",
+        image: memberImage.ayushGupta
+      },
+    ]
+  },
+
   trainingTeam: {
     title: "Training and Skills Team",
     members: [
@@ -149,8 +179,8 @@ export const committeeData = {
       {
         name: "Manvendra Pratap Singh",
         role: "Team Member",
-        department: "ME, 2nd Year",
-        image: null
+        department: "EE, 3rd Year",
+        image: memberImage.manvendra
       },
       {
         name: "Rishabh Panday",

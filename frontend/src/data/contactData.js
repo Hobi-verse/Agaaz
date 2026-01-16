@@ -55,7 +55,7 @@ export const contactCards = [
   {
     key: "6",
     name: "Dr. Rakesh Kumar Singh",
-    role: "Director",
+    role: "Director New Campus",
     imageSrc: RakeshKumarSingh,
   },
   {
@@ -94,31 +94,31 @@ export const contactCards2 = [
   {
     key: "4",
     name: "Dr. Siddharth Singh ",
-    role: "HOD-Electronics & Comm. Engg.",
+    role: "Coordinator-Electronics & Comm. Engg.",
     imageSrc: eceHod,
   },
   {
     key: "5",
     name: "Dr. Zeeshan Ali Siddiqui",
-    role: "HOD-Computer Science & Engg.",
+    role: "Coordinator-Computer Science & Engg.",
     imageSrc: CseHod,
   },
   {
     key: "6",
     name: "Er. Wazid Ali",
-    role: "HOD-Electrical Engineering",
+    role: "Coordinator-Electrical Engineering",
     imageSrc: electricalHod,
   },
   {
     key: "7",
     name: "Er. Nidhi Srivastava",
-    role: "HOD-Civil Engineering",
+    role: "Coordinator-Civil Engineering",
     imageSrc: CeHod,
   },
   {
     key: "8",
     name: "Dr. Kamlesh Tiwari",
-    role: "HOD-Mechanical Engineering",
+    role: "Coordinator-Mechanical Engineering",
     imageSrc: meHod,
   },
 ];
