@@ -3,7 +3,7 @@ import axios from 'axios';
 
 // Create axios instance with base config
 const api = axios.create({
-    baseURL: 'http://localhost:5000/api',
+    baseURL: 'https://arambhbackend.onrender.com/api',
     timeout: 30000,
     headers: {
         'Accept': 'application/json',
