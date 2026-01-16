@@ -4,131 +4,89 @@ export const feesAndAwards = [
   // Team Sports
   {
     sport: "Cricket",
-    category: "Male",
-    entryFee: 3000,
-    winner: 7000,
-    runnerUp: 5000
-  },
-  {
-    sport: "Basketball",
-    category: "Male",
-    entryFee: 2000,
-    winner: 4000,
-    runnerUp: 3000
-  },
-  {
-    sport: "Basketball",
-    category: "Female",
-    entryFee: 2000,
-    winner: 4000,
-    runnerUp: 3000
+    category: "Male/Female",
+    entryFee: 1500,
+    winner: "Will be Announced Soon",
   },
   {
     sport: "Football",
-    category: "Male",
-    entryFee: 2500,
-    winner: 5000,
-    runnerUp: 3750
+    category: "Male/Female",
+    entryFee: 1500,
+    winner: "Will be Announced Soon",
   },
   {
     sport: "Volleyball",
-    category: "Male",
-    entryFee: 2000,
-    winner: 4000,
-    runnerUp: 3000
-  },
-  {
-    sport: "Volleyball",
-    category: "Female",
-    entryFee: 2000,
-    winner: 4000,
-    runnerUp: 3000
+    category: "Male/Female",
+    entryFee: 900,
+    winner: "Will be Announced Soon",
   },
   {
     sport: "Tug of War",
-    category: "Male",
-    entryFee: 1500,
-    winner: 3000,
-    runnerUp: 2250
+    category: "Male/Female",
+    entryFee: 500,
+    winner: "Will be Announced Soon",
   },
   {
-    sport: "Tug of War",
-    category: "Female",
-    entryFee: 1500,
-    winner: 3000,
-    runnerUp: 2250
+    sport: "Cycling",
+    category: "Male/Female",
+    entryFee: 100,
+    winner: "Will be Announced Soon",
   },
   
   // Racquet Sports
   {
     sport: "Badminton",
     category: "Male Singles",
-    entryFee: 250,
-    winner: 1000,
-    runnerUp: "KIND"
+    entryFee: 100,
+    winner: "Will be Announced Soon",
   },
   {
     sport: "Badminton",
     category: "Female Singles",
-    entryFee: 250,
-    winner: 1000,
-    runnerUp: "KIND"
+    entryFee: 100,
+    winner: "Will be Announced Soon",
   },
   {
     sport: "Badminton",
     category: "Male Doubles",
-    entryFee: 500,
-    winner: 1500,
-    runnerUp: "KIND"
-  },
-  {
-    sport: "Badminton",
-    category: "Female Doubles",
-    entryFee: 500,
-    winner: 1500,
-    runnerUp: "KIND"
+    entryFee: 200,
+    winner: "Will be Announced Soon",
   },
   {
     sport: "Badminton",
     category: "Mixed Doubles",
-    entryFee: 500,
-    winner: 1500,
-    runnerUp: "KIND"
+    entryFee: 200,
+    winner: "Will be Announced Soon",
   },
   {
     sport: "Table Tennis",
     category: "Male Singles",
-    entryFee: 250,
-    winner: 1000,
-    runnerUp: "KIND"
+    entryFee: 100,
+    winner: "Will be Announced Soon",
   },
   {
     sport: "Table Tennis",
     category: "Female Singles",
-    entryFee: 250,
-    winner: 1000,
-    runnerUp: "KIND"
+    entryFee: 100,
+    winner: "Will be Announced Soon",
   },
   {
     sport: "Table Tennis",
     category: "Male Doubles",
     entryFee: 500,
-    winner: 1500,
-    runnerUp: "KIND"
+    winner: "Will be Announced Soon",
   },
   {
     sport: "Table Tennis",
     category: "Female Doubles",
     entryFee: 500,
-    winner: 1500,
-    runnerUp: "KIND"
+    winner: "Will be Announced Soon",
   },
   {
     sport: "Table Tennis",
     category: "Mixed Doubles",
     entryFee: 500,
-    winner: 1500,
-    runnerUp: "KIND"
+    winner: "Will be Announced Soon",
   },
   
   // Indoor/Board Games
@@ -136,38 +94,33 @@ export const feesAndAwards = [
     sport: "Chess",
     category: "Mixed",
     entryFee: 250,
-    winner: 1000,
-    runnerUp: "KIND"
+    winner: "Will be Announced Soon",
   },
   {
     sport: "Carrom",
     category: "Single Mixed",
     entryFee: 250,
-    winner: 1000,
-    runnerUp: "KIND"
+    winner: "Will be Announced Soon",
   },
   {
     sport: "Carrom",
     category: "Doubles Mixed",
     entryFee: 500,
-    winner: 1500,
-    runnerUp: "KIND"
+    winner: "Will be Announced Soon",
   },
   {
-    sport: "8 Ball Pool",
+    sport: "Free Fire",
     category: "Mixed",
-    entryFee: 250,
-    winner: 1000,
-    runnerUp: "KIND"
+    entryFee: 400,
+    winner: "Will be Announced Soon",
   },
   
   // E-Sports
   {
     sport: "BGMI",
     category: "Mixed",
-    entryFee: 500,
-    winner: 2000,
-    runnerUp: 1000
+    entryFee: 400,
+    winner: "Will be Announced Soon",
   }
 ];
 

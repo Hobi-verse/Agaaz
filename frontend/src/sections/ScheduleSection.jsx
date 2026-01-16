@@ -1,93 +1,52 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import "./ScheduleSection.css";
-import { scheduleByDay, schedulePage } from "../data/scheduleData";
+import { schedulePage } from "../data/scheduleData";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faBasketball,
-  faFutbol,
-  faTableTennisPaddleBall,
-  faPersonRunning,
-} from "@fortawesome/free-solid-svg-icons";
-
-function getSportIcon(sport) {
-  const key = String(sport || "").toLowerCase();
-  if (key.includes("basket")) return faBasketball;
-  if (key.includes("foot")) return faFutbol;
-  if (key.includes("badminton")) return faTableTennisPaddleBall;
-  if (key.includes("athletic") || key.includes("run")) return faPersonRunning;
-  // cricket fallback (no perfect icon in all FA sets)
-  return faTableTennisPaddleBall;
-}
+import { faCalendarAlt, faTimes } from "@fortawesome/free-solid-svg-icons";
 
 export default function ScheduleSection() {
-  const [activeDay, setActiveDay] = useState(
-    schedulePage.days[0]?.key ?? "day1"
-  );
-
-  const rows = useMemo(() => {
-    return scheduleByDay[activeDay] ?? [];
-  }, [activeDay]);
+  const [showPopup, setShowPopup] = useState(false);
 
   return (
     <section id="schedule" className="scheduleSection" aria-label="Schedule">
       <header className="scheduleHeader" aria-label="Schedule section header">
         <h2 className="scheduleTitle">{schedulePage.title}</h2>
         <p className="scheduleSubtitle">{schedulePage.subtitle}</p>
+        <p className="scheduleEventDates">
+          <FontAwesomeIcon icon={faCalendarAlt} />
+          <span>{schedulePage.eventDates}</span>
+        </p>
       </header>
 
-      <div className="scheduleTabs" role="tablist" aria-label="Schedule days">
-        {schedulePage.days.map((day) => {
-          const isActive = day.key === activeDay;
-          return (
-            <button
-              key={day.key}
-              type="button"
-              role="tab"
-              aria-selected={isActive}
-              className={
-                isActive ? "scheduleTab scheduleTabActive" : "scheduleTab"
-              }
-              onClick={() => setActiveDay(day.key)}
-            >
-              {day.label}
-            </button>
-          );
-        })}
+      <div className="scheduleComingSoon">
+        <button
+          className="scheduleViewBtn"
+          onClick={() => setShowPopup(true)}
+        >
+          View Schedule
+        </button>
       </div>
 
-      <div
-        className="scheduleTableWrap"
-        role="region"
-        aria-label="Schedule table"
-        tabIndex={0}
-      >
-        <table className="scheduleTable">
-          <thead>
-            <tr>
-              <th scope="col">TIME</th>
-              <th scope="col">SPORT</th>
-              <th scope="col">EVENT TYPE</th>
-              <th scope="col">VENUE</th>
-            </tr>
-          </thead>
-          <tbody>
-            {rows.map((r, idx) => (
-              <tr key={`${r.time}-${r.sport}-${idx}`}>
-                <td className="scheduleTime">{r.time}</td>
-                <td className="scheduleSport">
-                  <span className="scheduleSportIcon" aria-hidden="true">
-                    <FontAwesomeIcon icon={getSportIcon(r.sport)} />
-                  </span>
-                  <span>{r.sport}</span>
-                </td>
-                <td>{r.type}</td>
-                <td>{r.venue}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      {showPopup && (
+        <div className="schedulePopupOverlay" onClick={() => setShowPopup(false)}>
+          <div className="schedulePopup" onClick={(e) => e.stopPropagation()}>
+            <button
+              className="schedulePopupClose"
+              onClick={() => setShowPopup(false)}
+              aria-label="Close popup"
+            >
+              <FontAwesomeIcon icon={faTimes} />
+            </button>
+            <div className="schedulePopupContent">
+              <FontAwesomeIcon icon={faCalendarAlt} className="schedulePopupIcon" />
+              <h3>Schedule Coming Soon!</h3>
+              <p>The detailed schedule will be released soon. Stay tuned!</p>
+              <p className="schedulePopupDates">Event Dates: {schedulePage.eventDates}</p>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

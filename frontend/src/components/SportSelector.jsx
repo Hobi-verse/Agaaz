@@ -59,7 +59,7 @@ const SportSelector = ({ onSportSelect, selectedSport }) => {
                     <option value="">-- Select Category --</option>
                     {sportsData.map((category) => (
                         <option key={category.id} value={category.id}>
-                            {category.icon} {category.name}
+                            {category.name}
                         </option>
                     ))}
                 </select>
@@ -73,7 +73,7 @@ const SportSelector = ({ onSportSelect, selectedSport }) => {
                         <option value="">-- Select Event --</option>
                         {availableSports.map((sport) => (
                             <option key={sport.id} value={sport.id}>
-                                {sport.name} ({getSportTypeLabel(sport.type)})
+                                {sport.name} - {getSportTypeLabel(sport.type)}
                             </option>
                         ))}
                     </select>

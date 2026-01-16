@@ -186,3 +186,181 @@
     border-color: rgba(255, 255, 255, 0.22);
   }
 }
+
+/* Event Dates */
+.scheduleEventDates {
+  margin: 16px 0 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 24px;
+  background: rgba(255, 142, 47, 0.15);
+  border: 2px solid rgba(255, 142, 47, 0.5);
+  border-radius: 50px;
+  color: #ff8e2f;
+  font-weight: 700;
+  font-size: clamp(14px, 2vw, 18px);
+}
+
+.scheduleEventDates svg {
+  font-size: 1.1em;
+}
+
+/* Coming Soon Section */
+.scheduleComingSoon {
+  width: min(1180px, 100%);
+  margin: 32px auto 0;
+  text-align: center;
+}
+
+.scheduleViewBtn {
+  padding: 16px 48px;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background: #ff8e2f;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(255, 142, 47, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.scheduleViewBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 36px rgba(255, 142, 47, 0.5);
+}
+
+.scheduleViewBtn:active {
+  transform: translateY(1px);
+}
+
+/* Popup Styles */
+.schedulePopupOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.schedulePopup {
+  position: relative;
+  background: linear-gradient(145deg, #1a1a2e 0%, #16213e 100%);
+  border: 2px solid rgba(255, 142, 47, 0.5);
+  border-radius: 16px;
+  padding: 48px 40px;
+  max-width: 480px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+  animation: popIn 0.3s ease;
+}
+
+@keyframes popIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.schedulePopupClose {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.schedulePopupClose:hover {
+  background: rgba(255, 142, 47, 0.3);
+  color: white;
+}
+
+.schedulePopupContent h3 {
+  margin: 20px 0 12px;
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.schedulePopupContent p {
+  margin: 0 0 12px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.schedulePopupIcon {
+  font-size: 56px;
+  color: #ff8e2f;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.schedulePopupDates {
+  margin-top: 20px !important;
+  padding: 12px 24px;
+  background: rgba(255, 142, 47, 0.15);
+  border: 2px solid rgba(255, 142, 47, 0.4);
+  border-radius: 50px;
+  color: #ff8e2f !important;
+  font-weight: 700 !important;
+  display: inline-block;
+}
+
+@media (max-width: 520px) {
+  .schedulePopup {
+    padding: 36px 24px;
+  }
+
+  .schedulePopupContent h3 {
+    font-size: 22px;
+  }
+
+  .schedulePopupIcon {
+    font-size: 42px;
+  }
+}

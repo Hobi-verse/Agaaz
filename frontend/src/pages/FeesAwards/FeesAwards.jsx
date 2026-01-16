@@ -38,7 +38,6 @@ export default function FeesAwards() {
                   <th>CATEGORY</th>
                   <th>ENTRY FEES</th>
                   <th>WINNER</th>
-                  <th>RUNNER - UP</th>
                 </tr>
               </thead>
               <tbody>
@@ -56,11 +55,6 @@ export default function FeesAwards() {
                       <td className="category-name">{item.category.toUpperCase()}</td>
                       <td className="entry-fee">{formatAmount(item.entryFee)}</td>
                       <td className="winner-prize">{formatAmount(item.winner)}</td>
-                      <td className="runner-prize">
-                        {typeof item.runnerUp === "string" 
-                          ? item.runnerUp 
-                          : formatAmount(item.runnerUp)}
-                      </td>
                     </tr>
                   ))
                 )}
@@ -71,7 +65,7 @@ export default function FeesAwards() {
           <div className="fees-note">
             <span className="note-icon">ℹ️</span>
             <p>
-              <strong>KIND</strong> = Kind gesture/participation certificate for runner-up
+              Prize money will be announced soon. Stay tuned!
             </p>
           </div>
         </div>

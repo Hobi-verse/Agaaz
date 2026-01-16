@@ -152,7 +152,7 @@ export default function Registration() {
         key: orderResult.key,
         amount: orderResult.order.amount,
         currency: orderResult.order.currency,
-        name: 'ARAMBH 2026',
+        name: 'AAGAAZ 2026',
         description: `Registration for ${selectedSport.name}`,
         order_id: orderResult.order.id,
         prefill: {
@@ -230,7 +230,7 @@ export default function Registration() {
       />
 
       <header className="regHeader">
-        <h1 className="regTitle">🏆 ARAMBH 2026</h1>
+        <h1 className="regTitle">🏆 AAGAAZ 2026</h1>
         <p className="regSubtitle">College Sports Event Registration</p>
       </header>
 
@@ -366,7 +366,7 @@ export default function Registration() {
       </button>
 
       <footer className="regFooter">
-        <p>© 2026 ARAMBH Sports Event</p>
+        <p>© 2026 AAGAAZ Sports Event</p>
       </footer>
     </main>
   );

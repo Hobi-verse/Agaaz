@@ -15,9 +15,9 @@ const FormInput = ({
 }) => {
     return (
         <div style={{ marginBottom: '15px' }}>
-            <label htmlFor={name} style={{ display: 'block', marginBottom: '5px', fontWeight: '500' }}>
+            <label htmlFor={name} style={{ display: 'block', marginBottom: '5px', fontWeight: '500', color: 'rgba(255, 255, 255, 0.9)' }}>
                 {label}
-                {required && <span style={{ color: 'red' }}> *</span>}
+                {required && <span style={{ color: '#ff6b6b' }}> *</span>}
             </label>
 
             <input
@@ -31,19 +31,22 @@ const FormInput = ({
                 maxLength={maxLength}
                 style={{
                     width: '100%',
-                    padding: '8px 12px',
-                    border: error ? '1px solid red' : '1px solid #ccc',
-                    borderRadius: '4px',
-                    fontSize: '14px'
+                    padding: '12px 16px',
+                    border: error ? '2px solid #ff6b6b' : '2px solid rgba(255, 150, 55, 0.35)',
+                    borderRadius: '10px',
+                    fontSize: '15px',
+                    background: 'rgba(0, 0, 0, 0.3)',
+                    color: 'rgba(255, 255, 255, 0.9)',
+                    transition: 'all 0.3s ease'
                 }}
             />
 
             {helpText && !error && (
-                <small style={{ color: '#666', display: 'block', marginTop: '4px' }}>{helpText}</small>
+                <small style={{ color: 'rgba(255, 255, 255, 0.6)', display: 'block', marginTop: '4px' }}>{helpText}</small>
             )}
 
             {error && (
-                <small style={{ color: 'red', display: 'block', marginTop: '4px' }}>{error}</small>
+                <small style={{ color: '#ff6b6b', display: 'block', marginTop: '4px' }}>{error}</small>
             )}
         </div>
     );

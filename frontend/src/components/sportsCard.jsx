@@ -4,8 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBasketball } from "@fortawesome/free-solid-svg-icons";
 
 export default function SportsCard({
-  title = "BASKETBALL 5V5",
-  meta = "Open Category | Max 10 Teams",
+  title = "Cricket",
+  meta = "Open Category",
   cta = "VIEW RULES & REGISTER",
   icon = faBasketball,
   iconSrc,

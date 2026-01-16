@@ -45,9 +45,9 @@ const FileUpload = ({ label, name, onChange, required = false, error }) => {
 
     return (
         <div style={{ marginBottom: '15px' }}>
-            <label style={{ display: 'block', marginBottom: '5px', fontWeight: '500' }}>
+            <label style={{ display: 'block', marginBottom: '5px', fontWeight: '500', color: 'rgba(255, 255, 255, 0.9)' }}>
                 {label}
-                {required && <span style={{ color: 'red' }}> *</span>}
+                {required && <span style={{ color: '#ff6b6b' }}> *</span>}
             </label>
 
             {!preview ? (

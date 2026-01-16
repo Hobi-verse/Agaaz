@@ -145,3 +145,33 @@
     min-height: calc(100vh - 62px);
   }
 }
+
+/* Event Dates in Hero */
+.heroEventDates {
+  margin: 24px 0 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 28px;
+  background: rgba(255, 142, 47, 0.15);
+  border: 2px solid rgba(255, 142, 47, 0.5);
+  border-radius: 50px;
+  color: #ff8e2f;
+  font-weight: 700;
+  font-size: clamp(14px, 2.5vw, 20px);
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 10px rgba(255, 142, 47, 0.2);
+  }
+  to {
+    box-shadow: 0 0 20px rgba(255, 142, 47, 0.4);
+  }
+}
+
+.heroEventDates svg {
+  font-size: 1.1em;
+}

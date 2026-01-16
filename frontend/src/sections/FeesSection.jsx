@@ -25,7 +25,6 @@ export default function FeesSection() {
                 <th>Category</th>
                 <th>Entry Fees</th>
                 <th>Winner</th>
-                <th>Runner-Up</th>
               </tr>
             </thead>
             <tbody>
@@ -35,7 +34,6 @@ export default function FeesSection() {
                   <td className="category-name">{item.category}</td>
                   <td className="entry-fee">{formatAmount(item.entryFee)}</td>
                   <td className="winner-prize">{formatAmount(item.winner)}</td>
-                  <td className="runner-prize">{formatAmount(item.runnerUp)}</td>
                 </tr>
               ))}
             </tbody>
@@ -45,7 +43,7 @@ export default function FeesSection() {
         <div className="fees-note">
           <span className="note-icon">ℹ️</span>
           <p>
-            <strong>KIND</strong> = Kind gesture/participation certificate for runner-up
+            Prize money will be announced soon. Stay tuned!
           </p>
         </div>
       </div>

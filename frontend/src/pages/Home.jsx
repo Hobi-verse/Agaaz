@@ -1,6 +1,8 @@
 import "./Home.css";
 import Button from "../components/Button";
 import { homeHero, homeSponsors } from "../data/homeData";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 import SportsSection from "../sections/SportsSection";
 import ScheduleSection from "../sections/ScheduleSection";
 import ContactSection from "../sections/ContactSection";
@@ -86,6 +88,11 @@ export default function Home() {
               {homeHero.ctaText}
             </Button>
           </div>
+
+          <p className="heroEventDates">
+            <FontAwesomeIcon icon={faCalendarAlt} />
+            <span>{homeHero.eventDates}</span>
+          </p>
 
           <p className="heroStatus">
             <span>{homeHero.statusPrefix}</span>

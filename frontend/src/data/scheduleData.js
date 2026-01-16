@@ -1,10 +1,11 @@
 export const schedulePage = {
   title: "EVENT SCHEDULE",
   subtitle: "Plan your days. Don't miss the action.",
+  eventDates: "31st Jan, 1st Feb & 2nd Feb 2026",
   days: [
-    { key: "day1", label: "DAY 1: JAN 26" },
-    { key: "day2", label: "DAY 2: JAN 27" },
-    { key: "day3", label: "DAY 3: JAN 28" },
+    { key: "day1", label: "DAY 1: JAN 31" },
+    { key: "day2", label: "DAY 2: FEB 1" },
+    { key: "day3", label: "DAY 3: FEB 2" },
   ],
 };
 
