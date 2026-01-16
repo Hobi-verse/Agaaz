@@ -40,6 +40,10 @@ export default function AllSports() {
                 <p className="allSportsCategoryDesc">{category.description}</p>
               </div>
 
+              <div className="scrollHintMobile">
+                <span>Scroll right →</span>
+              </div>
+
               <div
                 className="sportsTableWrap"
                 role="region"

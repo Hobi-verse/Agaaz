@@ -184,6 +184,41 @@
   box-shadow: 0 10px 0 rgba(140, 60, 15, 0.95), 0 18px 22px rgba(0, 0, 0, 0.35);
 }
 
+/* Scroll hint - hidden by default, shown on mobile */
+.scrollHintMobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .scrollHintMobile {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 6px;
+    margin-bottom: 8px;
+    padding-right: 4px;
+  }
+
+  .scrollHintMobile span {
+    font-size: 12px;
+    color: rgba(255, 178, 74, 0.85);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    animation: scrollHintPulse 1.5s ease-in-out infinite;
+  }
+
+  @keyframes scrollHintPulse {
+    0%, 100% {
+      opacity: 0.7;
+      transform: translateX(0);
+    }
+    50% {
+      opacity: 1;
+      transform: translateX(3px);
+    }
+  }
+}
+
 @media (max-width: 520px) {
   .allSportsTitle {
     letter-spacing: 0.4px;
