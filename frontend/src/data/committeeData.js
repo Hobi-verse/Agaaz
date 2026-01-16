@@ -147,7 +147,7 @@ export const committeeData = {
         image: null
       },
       {
-        name: "Yuvraj Singh",
+        name: "Manvendra Pratap Singh",
         role: "Team Member",
         department: "ME, 2nd Year",
         image: null
