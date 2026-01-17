@@ -183,6 +183,7 @@ export default function Registration() {
               sportId: selectedSport.id,
               sportType: selectedSport.type,
               teamSize: selectedSport.teamSize,
+              amount: selectedSport.fee,
             },
             formData.aadharPhoto
           );
