@@ -142,8 +142,8 @@ const getRegistrationEmailHTML = (data) => {
 const sendRegistrationEmail = async (data) => {
   try {
     const apiKey = process.env.BREVO_API_KEY;
-    const fromEmail = process.env.BREVO_FROM_EMAIL || 'dumbledore932@gmail.com';
-    const fromName = process.env.BREVO_FROM_NAME || 'AAGAAZ';
+    const fromEmail = process.env.BREVO_FROM_EMAIL;
+    const fromName = process.env.BREVO_FROM_NAME;
 
     if (!apiKey) {
       return { success: false, error: 'API key not configured' };
