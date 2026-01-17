@@ -1,23 +1,11 @@
-// Email Configuration - Brevo SMTP (formerly Sendinblue)
-// File name kept as resend.js to avoid changes in other files
-const nodemailer = require('nodemailer');
+// Resend Email Configuration
+const { Resend } = require('resend');
 
-// Create Brevo SMTP transporter
-const createTransporter = () => {
-  return nodemailer.createTransport({
-    host: process.env.BREVO_SMTP_HOST || 'smtp-relay.brevo.com',
-    port: parseInt(process.env.BREVO_SMTP_PORT) || 587,
-    secure: false,
-    auth: {
-      user: process.env.BREVO_SMTP_USER,
-      pass: process.env.BREVO_SMTP_PASS,
-    },
-  });
-};
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Email template with AAGAAZ branding colors
 const getRegistrationEmailHTML = (data) => {
-  return `
+    return `
 <!DOCTYPE html>
 <html>
 <head>
@@ -151,37 +139,26 @@ const getRegistrationEmailHTML = (data) => {
   `;
 };
 
-// Send registration confirmation email via Brevo SMTP
+// Send registration confirmation email
 const sendRegistrationEmail = async (data) => {
-  try {
-    console.log('=== EMAIL FUNCTION CALLED ===');
-    console.log('BREVO_SMTP_USER:', process.env.BREVO_SMTP_USER);
-    console.log('BREVO_FROM_EMAIL:', process.env.BREVO_FROM_EMAIL);
+    try {
+        const { data: result, error } = await resend.emails.send({
+            from: process.env.RESEND_FROM_EMAIL || 'AAGAAZ 2026 <onboarding@resend.dev>',
+            to: data.email,
+            subject: `Registration Confirmed - ${data.sportName} | AAGAAZ 2026`,
+            html: getRegistrationEmailHTML(data),
+        });
 
-    const transporter = createTransporter();
+        if (error) {
+            console.error('Resend error:', error);
+            return { success: false, error: error.message };
+        }
 
-    const fromEmail = process.env.BREVO_FROM_EMAIL;
-    const fromName = process.env.BREVO_FROM_NAME;
-
-    const mailOptions = {
-      from: `${fromName} <${fromEmail}>`,
-      to: data.email,
-      subject: `Registration Confirmed - ${data.sportName} | AAGAAZ 2026`,
-      html: getRegistrationEmailHTML(data),
-    };
-
-    console.log('Sending email to:', data.email);
-    console.log('From:', mailOptions.from);
-
-    const result = await transporter.sendMail(mailOptions);
-
-    console.log('✅ Email sent successfully:', result.messageId);
-    return { success: true, id: result.messageId };
-  } catch (error) {
-    console.error('❌ Email send error:', error.message);
-    console.error('Full error:', error);
-    return { success: false, error: error.message };
-  }
+        return { success: true, id: result?.id };
+    } catch (error) {
+        console.error('Email send error:', error);
+        return { success: false, error: error.message };
+    }
 };
 
 module.exports = { sendRegistrationEmail };
