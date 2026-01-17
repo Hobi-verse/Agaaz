@@ -144,7 +144,9 @@ export default function Home() {
             {/* <Button onClick={() => navigate("/register")}>
               {homeHero.ctaText}
             </Button> */}
-            <Button className="flickerButton">Registrations will start soon</Button>
+            <Button className="flickerButton">
+              Registrations will <br /> start soon
+            </Button>
             <Button onClick={() => navigate("/rules")}>
               Rules & Regulations
             </Button>
@@ -180,7 +182,9 @@ export default function Home() {
             <span className="liveScoreItem">🎾 Team 1 vs Team 2 - TBD</span>
           </div>
         </div>
-        <p className="liveScoresNote">Live scores will be available when events are live</p>
+        <p className="liveScoresNote">
+          Live scores will be available when events are live
+        </p>
       </section>
 
       <ChiefGuest members={members} />

@@ -44,18 +44,17 @@ export const committeeData = {
   webTeam: {
     title: "Web Team",
     members: [{
-      name: "Aditya Ranjan",
-      role: "Web Developer",
-      department: "CSE, 4th Year",
-      image: memberImage.adityaRanjan
-    },
-    {
       name: "Aman Singh Nishad",
       role: "Web Developer",
       department: "CSE, 4th Year",
       image: memberImage.amanSinghNishad
     },
-
+    {
+      name: "Aditya Ranjan",
+      role: "Web Developer",
+      department: "CSE, 4th Year",
+      image: memberImage.adityaRanjan
+    },
     {
       name: "Ayush Singh",
       role: "Web Developer",

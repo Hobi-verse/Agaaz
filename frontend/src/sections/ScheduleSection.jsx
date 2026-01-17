@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./ScheduleSection.css";
 import { schedulePage } from "../data/scheduleData";
-
+import Button from "../components/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarAlt, faTimes } from "@fortawesome/free-solid-svg-icons";
 
@@ -20,16 +20,16 @@ export default function ScheduleSection() {
       </header>
 
       <div className="scheduleComingSoon">
-        <button
-          className="scheduleViewBtn"
-          onClick={() => setShowPopup(true)}
-        >
+        <Button className="scheduleViewBtn" onClick={() => setShowPopup(true)}>
           View Schedule
-        </button>
+        </Button>
       </div>
 
       {showPopup && (
-        <div className="schedulePopupOverlay" onClick={() => setShowPopup(false)}>
+        <div
+          className="schedulePopupOverlay"
+          onClick={() => setShowPopup(false)}
+        >
           <div className="schedulePopup" onClick={(e) => e.stopPropagation()}>
             <button
               className="schedulePopupClose"
@@ -39,10 +39,15 @@ export default function ScheduleSection() {
               <FontAwesomeIcon icon={faTimes} />
             </button>
             <div className="schedulePopupContent">
-              <FontAwesomeIcon icon={faCalendarAlt} className="schedulePopupIcon" />
+              <FontAwesomeIcon
+                icon={faCalendarAlt}
+                className="schedulePopupIcon"
+              />
               <h3>Schedule Coming Soon!</h3>
               <p>The detailed schedule will be released soon. Stay tuned!</p>
-              <p className="schedulePopupDates">Event Dates: {schedulePage.eventDates}</p>
+              <p className="schedulePopupDates">
+                Event Dates: {schedulePage.eventDates}
+              </p>
             </div>
           </div>
         </div>

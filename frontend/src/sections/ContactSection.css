@@ -1,6 +1,6 @@
 .contactSection {
   width: 100%;
-  padding: 64px 18px 86px;
+  padding: 64px 0 86px;
   position: relative;
   overflow: hidden;
 }
@@ -10,7 +10,8 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: radial-gradient(
+  background:
+    radial-gradient(
       1200px 480px at 50% 0%,
       rgba(255, 255, 255, 0.06),
       transparent 60%
@@ -32,7 +33,8 @@
   position: absolute;
   inset: -40px -40px;
   pointer-events: none;
-  background: linear-gradient(
+  background:
+    linear-gradient(
       110deg,
       transparent 0 40%,
       rgba(255, 140, 30, 0.55) 45%,
@@ -61,6 +63,15 @@
   z-index: 1;
 }
 
+.contactBlock {
+  position: relative;
+  z-index: 1;
+}
+
+.contactBlockSpacer {
+  margin-top: 10%;
+}
+
 .contactHeader {
   text-align: center;
   margin: 0 auto 22px;
@@ -75,7 +86,9 @@
   line-height: 1.05;
 
   transform: skewX(-10deg);
-  text-shadow: 0 5px 0 rgba(0, 0, 0, 0.35), 0 20px 42px rgba(0, 0, 0, 0.3);
+  text-shadow:
+    0 5px 0 rgba(0, 0, 0, 0.35),
+    0 20px 42px rgba(0, 0, 0, 0.3);
   -webkit-text-stroke: 1.3px rgba(0, 0, 0, 0.26);
 }
 
@@ -110,14 +123,14 @@
   align-items: stretch;
 }
 
-/* Scrolling contact grid - single line only */
-.contactGrid.liveScrollItem {
+/* Scrolling contact row - single line only */
+.contactGrid.contactMarqueeRow {
   flex-wrap: nowrap;
   justify-content: flex-start;
   gap: 24px;
 }
 
-.contactGrid.liveScrollItem .profileCard {
+.contactGrid.contactMarqueeRow .profileCard {
   width: 260px;
   min-width: 260px;
   max-width: 260px;
@@ -125,20 +138,20 @@
   height: auto;
 }
 
-.contactGrid.liveScrollItem .profilePhotoFrame {
+.contactGrid.contactMarqueeRow .profilePhotoFrame {
   width: 100%;
   height: auto;
   aspect-ratio: 1 / 1;
 }
 
-.contactGrid.liveScrollItem .profilePhoto {
+.contactGrid.contactMarqueeRow .profilePhoto {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
 }
 
-.contactGrid.liveScrollItem .profileName {
+.contactGrid.contactMarqueeRow .profileName {
   font-size: 16px;
   line-height: 1.3;
   word-break: break-word;
@@ -146,7 +159,7 @@
   white-space: normal;
 }
 
-.contactGrid.liveScrollItem .profileRole {
+.contactGrid.contactMarqueeRow .profileRole {
   font-size: 11px;
   line-height: 1.5;
   word-break: break-word;
@@ -212,20 +225,20 @@
   .contactGrid .profileCard {
     width: calc(33.33% - 14px);
   }
-  
+
   /* Keep scrolling cards consistent */
-  .contactGrid.liveScrollItem .profileCard {
+  .contactGrid.contactMarqueeRow .profileCard {
     width: 240px;
     min-width: 240px;
     max-width: 240px;
   }
 
-  .contactGrid.liveScrollItem .profileName {
+  .contactGrid.contactMarqueeRow .profileName {
     font-size: 15px;
     line-height: 1.25;
   }
 
-  .contactGrid.liveScrollItem .profileRole {
+  .contactGrid.contactMarqueeRow .profileRole {
     font-size: 10px;
     line-height: 1.5;
   }
@@ -235,57 +248,29 @@
   .contactGrid .profileCard {
     width: calc(50% - 14px);
   }
-  
+
   /* Keep scrolling cards consistent */
-  .contactGrid.liveScrollItem .profileCard {
+  .contactGrid.contactMarqueeRow .profileCard {
     width: 200px;
     min-width: 200px;
     max-width: 200px;
     height: auto;
   }
 
-  .contactGrid.liveScrollItem .profilePhotoFrame {
+  .contactGrid.contactMarqueeRow .profilePhotoFrame {
     width: 100%;
     height: auto;
     aspect-ratio: 1 / 1;
   }
 
-  .contactGrid.liveScrollItem .profilePhoto {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-  }
-}
-
-@media (max-width: 560px) {
-  .contactGrid .profileCard {
-    width: 100%;
-    max-width: 280px;
-  }
-  
-  /* Keep scrolling cards consistent */
-  .contactGrid.liveScrollItem .profileCard {
-    width: 200px;
-    min-width: 200px;
-    max-width: 200px;
-    height: auto;
-  }
-
-  .contactGrid.liveScrollItem .profilePhotoFrame {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 1 / 1;
-  }
-
-  .contactGrid.liveScrollItem .profilePhoto {
+  .contactGrid.contactMarqueeRow .profilePhoto {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
   }
 
-  .contactGrid.liveScrollItem .profileName {
+  .contactGrid.contactMarqueeRow .profileName {
     font-size: 14px;
     line-height: 1.3;
     min-height: 36px;
@@ -294,7 +279,7 @@
     justify-content: center;
   }
 
-  .contactGrid.liveScrollItem .profileRole {
+  .contactGrid.contactMarqueeRow .profileRole {
     font-size: 9px;
     line-height: 1.4;
     margin-bottom: 6px;
@@ -304,44 +289,85 @@
     justify-content: center;
   }
 
-  .contactGrid.liveScrollItem .profileCardInner {
+  .contactGrid.contactMarqueeRow .profileCardInner {
     padding: 10px;
     gap: 8px;
   }
 
-  .contactGrid.liveScrollItem .profileCard {
+  .contactGrid.contactMarqueeRow .profileCard {
     padding: 10px;
   }
 }
 
-/* Scrolling animation styles */
-.liveScoresTicker {
+/* Marquee / scrolling animation styles */
+.contactMarquee {
   width: 100%;
   overflow: hidden;
   position: relative;
+
+  /* Subtle vignette so edges feel seamless */
+  box-shadow:
+    inset 110px 0 140px -120px rgba(10, 8, 24, 0.55),
+    inset -110px 0 140px -120px rgba(10, 8, 24, 0.55);
 }
 
-.liveScoresTrack {
+.contactMarqueeMask {
   width: 100%;
   overflow: hidden;
-  position: relative;
-  mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    black 8%,
-    black 92%,
-    transparent 100%
-  );
+
+  /* Fade edges so the scroll doesn't hard-cut */
   -webkit-mask-image: linear-gradient(
     to right,
     transparent 0%,
-    black 8%,
-    black 92%,
+    black 18%,
+    black 82%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 18%,
+    black 82%,
     transparent 100%
   );
 }
 
-.liveScoresScroll {
+.contactMarquee::before,
+.contactMarquee::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: clamp(70px, 12vw, 170px);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.contactMarquee::before {
+  left: 0;
+  background: linear-gradient(
+    to right,
+    rgba(10, 8, 24, 0.65) 0%,
+    rgba(10, 8, 24, 0.32) 35%,
+    rgba(10, 8, 24, 0.12) 60%,
+    rgba(10, 8, 24, 0) 100%
+  );
+}
+
+.contactMarquee::after {
+  right: 0;
+  background: linear-gradient(
+    to left,
+    rgba(10, 8, 24, 0.65) 0%,
+    rgba(10, 8, 24, 0.32) 35%,
+    rgba(10, 8, 24, 0.12) 60%,
+    rgba(10, 8, 24, 0) 100%
+  );
+}
+
+.contactMarqueeScroll {
+  position: relative;
+  z-index: 1;
   display: inline-flex;
   animation: scrollLeft 40s linear infinite;
   width: max-content;
@@ -357,13 +383,13 @@
 }
 
 @media (max-width: 900px) {
-  .liveScoresScroll {
+  .contactMarqueeScroll {
     animation-duration: 35s;
   }
 }
 
 @media (max-width: 560px) {
-  .liveScoresScroll {
+  .contactMarqueeScroll {
     animation-duration: 30s;
   }
 }
