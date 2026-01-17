@@ -193,14 +193,7 @@ export default function Home() {
         rootMargin="700px 0px"
         fallback={<SportsLoader label="Setting the stage…" />}
       />
-
-      <LazySection
-        importer={() => import("../sections/SportsSection")}
-        minHeight={320}
-        rootMargin="700px 0px"
-        fallback={<SportsLoader label="Loading sports…" />}
-      />
- {/* Live Scores Ticker */}
+{/* Live Scores Ticker */}
       <section className="liveScoresTicker" aria-label="Live Scores">
         <div className="liveScoresHeader">
           <span className="liveScoresLiveDot" aria-hidden="true" />
@@ -227,6 +220,13 @@ export default function Home() {
           Live scores will be available when events are live
         </p>
       </section>
+      <LazySection
+        importer={() => import("../sections/SportsSection")}
+        minHeight={320}
+        rootMargin="700px 0px"
+        fallback={<SportsLoader label="Loading sports…" />}
+      />
+ 
 
       <LazySection
         importer={() => import("../sections/ScheduleSection")}
