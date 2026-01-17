@@ -1,19 +1,5 @@
-// Email Configuration - Brevo SMTP (formerly Sendinblue)
+// Email Configuration - Brevo HTTP API (works on Render free tier)
 // File name kept as resend.js to avoid changes in other files
-const nodemailer = require('nodemailer');
-
-// Create Brevo SMTP transporter
-const createTransporter = () => {
-  return nodemailer.createTransport({
-    host: process.env.BREVO_SMTP_HOST || 'smtp-relay.brevo.com',
-    port: parseInt(process.env.BREVO_SMTP_PORT) || 587,
-    secure: false,
-    auth: {
-      user: process.env.BREVO_SMTP_USER,
-      pass: process.env.BREVO_SMTP_PASS,
-    },
-  });
-};
 
 // Email template with AAGAAZ branding colors
 const getRegistrationEmailHTML = (data) => {
@@ -34,8 +20,9 @@ const getRegistrationEmailHTML = (data) => {
           <!-- Header -->
           <tr>
             <td style="background: linear-gradient(135deg, #e94560 0%, #ff6b35 100%); padding: 30px; text-align: center;">
+              <img src="https://www.aagaaz.online/aagaaz-logo.png" alt="AAGAAZ" style="width: 80px; height: 80px; margin-bottom: 15px; border-radius: 12px;" />
               <h1 style="margin: 0; color: #fff; font-size: 28px; font-weight: 700; letter-spacing: 2px;">
-                🏆 AAGAAZ 2026
+                AAGAAZ 2026
               </h1>
               <p style="margin: 8px 0 0; color: rgba(255,255,255,0.9); font-size: 14px;">
                 The Arena Calls
@@ -151,35 +138,50 @@ const getRegistrationEmailHTML = (data) => {
   `;
 };
 
-// Send registration confirmation email via Brevo SMTP
+// Send registration confirmation email via Brevo HTTP API
 const sendRegistrationEmail = async (data) => {
   try {
-    console.log('=== EMAIL FUNCTION CALLED ===');
-    console.log('BREVO_SMTP_USER:', process.env.BREVO_SMTP_USER);
-    console.log('BREVO_FROM_EMAIL:', process.env.BREVO_FROM_EMAIL);
-
-    const transporter = createTransporter();
-
+    const apiKey = process.env.BREVO_API_KEY;
     const fromEmail = process.env.BREVO_FROM_EMAIL || 'dumbledore932@gmail.com';
     const fromName = process.env.BREVO_FROM_NAME || 'AAGAAZ';
 
-    const mailOptions = {
-      from: `${fromName} <${fromEmail}>`,
-      to: data.email,
+    if (!apiKey) {
+      return { success: false, error: 'API key not configured' };
+    }
+
+    const emailData = {
+      sender: {
+        name: fromName,
+        email: fromEmail
+      },
+      to: [
+        {
+          email: data.email,
+          name: data.name
+        }
+      ],
       subject: `Registration Confirmed - ${data.sportName} | AAGAAZ 2026`,
-      html: getRegistrationEmailHTML(data),
+      htmlContent: getRegistrationEmailHTML(data)
     };
 
-    console.log('Sending email to:', data.email);
-    console.log('From:', mailOptions.from);
+    const response = await fetch('https://api.brevo.com/v3/smtp/email', {
+      method: 'POST',
+      headers: {
+        'accept': 'application/json',
+        'api-key': apiKey,
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(emailData)
+    });
 
-    const result = await transporter.sendMail(mailOptions);
+    const result = await response.json();
 
-    console.log('✅ Email sent successfully:', result.messageId);
-    return { success: true, id: result.messageId };
+    if (response.ok) {
+      return { success: true, id: result.messageId };
+    } else {
+      return { success: false, error: result.message || 'Failed to send email' };
+    }
   } catch (error) {
-    console.error('❌ Email send error:', error.message);
-    console.error('Full error:', error);
     return { success: false, error: error.message };
   }
 };
