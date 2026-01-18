@@ -49,6 +49,7 @@ export const sportRules = {
       "Improper conduct: Warning or disqualification",
     ],
     format: "Heats, Semi-finals, and Finals (based on number of participants)",
+    support:"Ayush Gupta (7355963738)",
     registrationFee: 100,
   },
 
@@ -98,6 +99,7 @@ export const sportRules = {
       "Walking back through landing area: Foul",
     ],
     format: "Preliminary round (3 attempts) → Finals (Top 5)",
+    support:"Ayush Gupta (7355963738)",
     registrationFee: 100,
   },
 
@@ -157,6 +159,7 @@ export const sportRules = {
       "Unsportsmanlike conduct: Warning or disqualification",
     ],
     format: "Single race or heats based on number of participants",
+    support:"Ayush Gupta (7355963738)",
     registrationFee: 100,
   },
 
@@ -209,6 +212,7 @@ export const sportRules = {
       "Unsportsmanlike conduct: Warning or disqualification",
     ],
     format: "Single elimination rounds",
+    support:"Ayush Gupta (7355963738)",
     registrationFee:500,
   },
 
@@ -258,6 +262,7 @@ export const sportRules = {
       "Defender leaving the court: Defender out",
     ],
     format: "Knockout rounds",
+    support:"Priyanshu Shukla (9305233609)",
     registrationFee: 600,
   },
 
@@ -312,6 +317,7 @@ export const sportRules = {
       "Catch or lift: Point to opponent",
     ],
     format: "Knockout rounds",
+    support:"Devansh (9389604174)",
     registrationFee: 900,
   },
 
@@ -378,6 +384,7 @@ export const sportRules = {
       "Violent conduct: Red card",
     ],
     format: "knockout rounds",
+    support:"Harsh Gupta (8881386255)",
     registrationFee: 1500,
   },
 
@@ -496,6 +503,7 @@ export const sportRules = {
       "Unsportsmanlike conduct: Warning or disqualification",
     ],
     format: "Knockout rounds",
+    support:"Ayushman Kumar (7007292844)",
     registrationFee: 100,
   },
 
@@ -553,6 +561,7 @@ export const sportRules = {
       "Touching any coin before striker settles: Foul",
     ],
     format: "Knockout rounds",
+    support:"Ayushman Kumar (7007292844)",
     registrationFee: 100,
   },
 
@@ -659,6 +668,7 @@ export const sportRules = {
       "Double hit: Point to opponent",
     ],
     format: "Knockout rounds",
+    support:"Harshit Kesharwani ( 8756349695 )",
     registrationFee: 100,
   },
 
@@ -719,6 +729,7 @@ export const sportRules = {
     ],
 
     format: "Knockout rounds",
+    support:"Harshit Kesharwani ( 8756349695 )",
     registrationFee:200,
   },
 
@@ -778,6 +789,7 @@ export const sportRules = {
       "Double hit: Point to opponent",
     ],
     format: "Knockout rounds",
+    support:"Harshit Kesharwani ( 8756349695 )",
     registrationFee: 200,
   },
 
@@ -823,6 +835,7 @@ export const sportRules = {
       "Same general fault rules as singles",
     ],
     format: "Knockout rounds",
+    support:"Mohammad Arshad ( 8395850798 )",
     registrationFee: 200,
   },
 
@@ -858,6 +871,7 @@ export const sportRules = {
       "Same fault rules as regular doubles",
     ],
     format: "Knockout rounds",
+    support:"Mohammad Arshad ( 8395850798 )",
     registrationFee: 200,
   },
 
@@ -916,6 +930,7 @@ export const sportRules = {
       "Late arrival: Match starts without team",
     ],
     format: "Knockout rounds",
+    support:"Rajat Satsangi ( 7456076594 )",
     registrationFee: 400,
   },
 
@@ -964,6 +979,7 @@ export const sportRules = {
       "Not joining on time: Forfeit match",
     ],
     format: "Knockout rounds",
+    support:"Mohammad Anas ( 7275784756 )",
     registrationFee: 400,
   },
 
@@ -1059,6 +1075,7 @@ export const sportRules = {
       "Fake fielding: 5 penalty runs to batting team",
     ],
     format: "Knockout rounds",
+    support:"Himanshu Singh ( 8127155421 )",
     registrationFee:1500,
   },
 };

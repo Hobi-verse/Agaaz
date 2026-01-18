@@ -1,6 +1,5 @@
 // Sports Data Configuration - All sports categories, events, types, team sizes, and fees
 import {
-  faBasketball,
   faFutbol,
   faPersonRunning,
 } from "@fortawesome/free-solid-svg-icons";

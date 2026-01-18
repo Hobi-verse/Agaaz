@@ -25,13 +25,13 @@ export const contactCards = [
   {
     key: "1",
     name: "Prof. Rakesh Dwivedi",
-    role: "Chief Proctor",
+    role: "Chief Proctor University of Lucknow",
     imageSrc: RakeshDiwedi,
   },
   {
     key: "2",
     name: "Dr. Rakesh Kumar Singh",
-    role: "Director,Second Campus",
+    role: "Director Second Campus",
     imageSrc: RakeshKumarSingh,
   },
   {
@@ -49,7 +49,7 @@ export const contactCards = [
   {
     key: "5",
     name: "Prof. Rakesh Dwivedi",
-    role: "Chief Proctor",
+    role: "Chief Proctor University of Lucknow",
     imageSrc: RakeshDiwedi,
   },
   {

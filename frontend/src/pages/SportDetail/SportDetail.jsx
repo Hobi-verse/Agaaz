@@ -118,8 +118,17 @@ export default function SportDetail() {
         <div className="section-header">
           <h2 className="section-title">Tournament Format</h2>
         </div>
+
         <div className="format-content">
           <p className="format-description">{rules.format}</p>
+        </div>
+
+        <div>
+          <h2 className="py-3 section-title">For any queries contact us:</h2>
+        </div>
+
+        <div>
+          <p className="format-description">{rules.support}</p>
         </div>
       </section>
 
