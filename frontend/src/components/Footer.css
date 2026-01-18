@@ -10,7 +10,8 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: radial-gradient(
+  background:
+    radial-gradient(
       900px 380px at 50% 0%,
       rgba(255, 255, 255, 0.06),
       transparent 62%
@@ -34,7 +35,8 @@
   );
 
   border: 2px solid rgba(255, 150, 55, 0.55);
-  box-shadow: 0 0 0 2px rgba(255, 120, 40, 0.12) inset,
+  box-shadow:
+    0 0 0 2px rgba(255, 120, 40, 0.12) inset,
     0 18px 42px rgba(0, 0, 0, 0.38);
 }
 
@@ -107,7 +109,9 @@
   text-decoration: none;
 
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  transition: transform 140ms ease, background-color 140ms ease,
+  transition:
+    transform 140ms ease,
+    background-color 140ms ease,
     color 140ms ease;
 }
 
@@ -179,6 +183,18 @@
   letter-spacing: 0.3px;
 }
 
+.footerVisits {
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.footerVisitsValue {
+  color: rgba(255, 178, 74, 0.92);
+  font-weight: 800;
+}
+
 .footerHeart {
   color: #ff6b6b;
   display: inline-block;
@@ -186,7 +202,8 @@
 }
 
 @keyframes heartbeat {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
   }
   50% {

@@ -8,34 +8,36 @@ const connectDB = require('./config/dataBase');
 const { cloudinaryConnect } = require('./config/cloudinary');
 const registrationRoutes = require('./routes/registration');
 const paymentRoutes = require('./routes/payment');
+const visitsRoutes = require('./routes/visits');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-const allowedOrigins = ["https://www.aagaaz.online","https://aagaaz.online","http://localhost:5173"]
+const allowedOrigins = ["https://www.aagaaz.online", "https://aagaaz.online", "http://localhost:5173"]
 
 // Middleware
 app.use(cors({
     origin: function (origin, callback) {
-      // allow server-to-server or Postman requests
-      if (!origin) return callback(null, true);
+        // allow server-to-server or Postman requests
+        if (!origin) return callback(null, true);
 
-      if (allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
+        if (allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
     },
     credentials: true, // IMPORTANT if using cookies / auth
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
-  }));
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // API Routes
 app.use('/api', registrationRoutes);
 app.use('/api/payment', paymentRoutes);
+app.use('/api/visits', visitsRoutes);
 
 // Serve frontend (Vite build) in production
 // This prevents 404s when refreshing on client-side routes (React Router).

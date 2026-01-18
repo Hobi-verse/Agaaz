@@ -1,9 +1,11 @@
 // API Service - Axios with Razorpay payment integration
 import axios from 'axios';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://arambhbackend.onrender.com/api';
+
 // Create axios instance with base config
 const api = axios.create({
-    baseURL: 'https://arambhbackend.onrender.com/api',
+    baseURL: API_BASE_URL,
     timeout: 30000,
     headers: {
         'Accept': 'application/json',
@@ -112,6 +114,25 @@ export const warmupBackend = async () => {
     } catch (error) {
         // Silently fail - this is just a warm-up call
         console.log('Backend warm-up call sent');
+    }
+};
+
+// Visit counter
+export const getVisitCount = async () => {
+    try {
+        const response = await api.get('/visits');
+        return { success: true, count: response.data.count };
+    } catch (error) {
+        return { success: false, error: error.message || 'Failed to fetch visit count' };
+    }
+};
+
+export const incrementVisitCount = async () => {
+    try {
+        const response = await api.post('/visits');
+        return { success: true, count: response.data.count };
+    } catch (error) {
+        return { success: false, error: error.message || 'Failed to update visit count' };
     }
 };
 

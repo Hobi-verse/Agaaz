@@ -13,6 +13,8 @@ const Committee = lazy(() => import("./pages/Committee/Committee"));
 const Rules = lazy(() => import("./pages/Rules/Rules"));
 const CodeOfConduct = lazy(() => import("./pages/CodeOfConduct/CodeOfConduct"));
 const RefundPolicy = lazy(() => import("./pages/RefundPolicy/RefundPolicy"));
+const NotFound = lazy(() => import("./pages/NotFound/NotFound"));
+const CrashTest = lazy(() => import("./pages/CrashTest/CrashTest"));
 import Footer from "./components/Footer";
 
 function ScrollToHash() {
@@ -61,6 +63,8 @@ function App() {
           <Route path="/rules" element={<Rules />} />
           <Route path="/code-of-conduct" element={<CodeOfConduct />} />
           <Route path="/refund-policy" element={<RefundPolicy />} />
+          <Route path="/__crash" element={<CrashTest />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
       <Footer />
