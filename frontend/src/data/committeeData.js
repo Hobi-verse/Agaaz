@@ -163,7 +163,7 @@ export const committeeData = {
         image: memberImage.harshit
       },
       {
-        name: "Manvendra Pratap Singh",
+        name: "Manvendra Pratap",
         role: "Team Member",
         department: "EE, 3rd Year",
         image: memberImage.manvendra
