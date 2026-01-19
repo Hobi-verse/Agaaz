@@ -101,13 +101,55 @@ const createRegistration = async (req, res) => {
 // GET /api/registrations - Get all registrations
 const getAllRegistrations = async (req, res) => {
     try {
-        const registrations = await Registration.find()
-            .select('-aadharNo -aadharPhotoPath')
-            .sort({ createdAt: -1 });
+        const {
+            sportId,
+            sportName,
+            sportCategory,
+            q,
+            page = '1',
+            limit = '100',
+        } = req.query;
+
+        const pageNumber = Math.max(parseInt(page, 10) || 1, 1);
+        const limitNumber = Math.min(Math.max(parseInt(limit, 10) || 100, 1), 500);
+
+        const filter = {};
+
+        if (sportId) filter.sportId = sportId;
+        if (sportName) filter.sportName = { $regex: sportName, $options: 'i' };
+        if (sportCategory) filter.sportCategory = { $regex: sportCategory, $options: 'i' };
+
+        if (q && String(q).trim()) {
+            const query = String(q).trim();
+            const regex = { $regex: query, $options: 'i' };
+            filter.$or = [
+                { name: regex },
+                { email: regex },
+                { mobileNo: regex },
+                { universityName: regex },
+                { branch: regex },
+                { registrationId: regex },
+                { sportName: regex },
+                { sportCategory: regex },
+                { teamName: regex },
+            ];
+        }
+
+        const [registrations, total] = await Promise.all([
+            Registration.find(filter)
+                .select('-aadharNo -aadharPhotoPath')
+                .sort({ createdAt: -1 })
+                .skip((pageNumber - 1) * limitNumber)
+                .limit(limitNumber),
+            Registration.countDocuments(filter),
+        ]);
 
         res.json({
             success: true,
             count: registrations.length,
+            total,
+            page: pageNumber,
+            limit: limitNumber,
             data: registrations,
         });
     } catch (error) {
@@ -148,4 +190,36 @@ module.exports = {
     createRegistration,
     getAllRegistrations,
     getRegistrationById,
+    getSportsList,
 };
+
+// GET /api/registrations/sports - Get distinct sports used in registrations
+async function getSportsList(req, res) {
+    try {
+        const sports = await Registration.aggregate([
+            {
+                $group: {
+                    _id: '$sportId',
+                    sportId: { $first: '$sportId' },
+                    sportName: { $first: '$sportName' },
+                    sportCategory: { $first: '$sportCategory' },
+                    sportCategoryId: { $first: '$sportCategoryId' },
+                    sportType: { $first: '$sportType' },
+                    teamSize: { $first: '$teamSize' },
+                },
+            },
+            { $sort: { sportCategory: 1, sportName: 1 } },
+        ]);
+
+        res.json({
+            success: true,
+            count: sports.length,
+            data: sports,
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: 'Failed to fetch sports list',
+        });
+    }
+}

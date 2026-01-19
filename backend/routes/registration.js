@@ -10,10 +10,12 @@ const {
     createRegistration,
     getAllRegistrations,
     getRegistrationById,
+    getSportsList,
 } = require('../controllers/registration');
 
 // Routes
 router.post('/register', upload.single('aadharPhoto'), createRegistration);
+router.get('/registrations/sports', getSportsList);
 router.get('/registrations', getAllRegistrations);
 router.get('/registration/:id', getRegistrationById);
 

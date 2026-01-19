@@ -9,11 +9,20 @@ const { cloudinaryConnect } = require('./config/cloudinary');
 const registrationRoutes = require('./routes/registration');
 const paymentRoutes = require('./routes/payment');
 const visitsRoutes = require('./routes/visits');
+const matchesRoutes = require('./routes/matches');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 const allowedOrigins = ["https://www.aagaaz.online", "https://aagaaz.online", "http://localhost:5173"]
+const isLocalhostOrigin = (origin) => {
+    try {
+        const url = new URL(origin);
+        return url.hostname === 'localhost' || url.hostname === '127.0.0.1';
+    } catch {
+        return false;
+    }
+};
 
 // Middleware
 app.use(cors({
@@ -21,7 +30,7 @@ app.use(cors({
         // allow server-to-server or Postman requests
         if (!origin) return callback(null, true);
 
-        if (allowedOrigins.includes(origin)) {
+        if (allowedOrigins.includes(origin) || isLocalhostOrigin(origin)) {
             callback(null, true);
         } else {
             callback(new Error("Not allowed by CORS"));
@@ -38,6 +47,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api', registrationRoutes);
 app.use('/api/payment', paymentRoutes);
 app.use('/api/visits', visitsRoutes);
+app.use('/api/matches', matchesRoutes);
 
 // Serve frontend (Vite build) in production
 // This prevents 404s when refreshing on client-side routes (React Router).
