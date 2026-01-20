@@ -49,12 +49,6 @@ export default function NotFound({ variant = "notfound" }) {
               7081832092
             </a>
           </div>
-          <div className="nfHelpRow">
-            <span className="nfHelpName">Aman Singh Nishad</span>
-            <a className="nfHelpLink" href="tel:7340981852">
-              7340981852
-            </a>
-          </div>
         </div>
       </section>
     </main>
