@@ -90,7 +90,7 @@ export const committeeData = {
         name: "Om Gupta",
         role: "Event & Management co-head",
         department: "EE, 3rd Year",
-        image: memberImage.omGupta,
+        image: memberImage.om,
       },
       {
         name: "Anup Kumar",
@@ -114,7 +114,7 @@ export const committeeData = {
         name: "Rishabh Panday",
         role: "social media co-head",
         department: "ME, 3rd Year",
-        image: null,
+        image: memberImage.rishabh,
       },
       // {
       //   name: "Aman Chaurasiya",

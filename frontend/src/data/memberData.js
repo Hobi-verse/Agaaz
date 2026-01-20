@@ -9,7 +9,7 @@ import ayushman from "../assets/member-image/ayushman.jpg"
 import devansh from "../assets/member-image/devansh.jpg"
 import harshGupta from "../assets/member-image/harsh-gupta.jpg"
 import himanshu from "../assets/member-image/himanshu2.jpeg"
-import omGupta from "../assets/member-image/om-gupta.jpg"
+import om from "../assets/member-image/om.jpeg"
 import priyanshu from "../assets/member-image/priyanshu.jpg"
 import tushar from "../assets/member-image/tushar1.jpeg"
 import vishwas from "../assets/member-image/vishwas.jpg"
@@ -25,6 +25,7 @@ import anup from "../assets/member-image/anup.jpeg"
 import nilesh from "../assets/member-image/nilesh.jpeg"
 import arshad from "../assets/member-image/arshad.jpeg"
 import utkarsh from "../assets/member-image/utkarsh.jpeg"
+import rishabh from "../assets/member-image/rishabh.jpeg"
 
 
 export const memberImage = {
@@ -40,7 +41,7 @@ export const memberImage = {
     , devansh
     , harshGupta
     , himanshu
-    , omGupta
+    , om
     , priyanshu
     , tushar
     , vishwas
@@ -55,4 +56,5 @@ export const memberImage = {
     ,nilesh
     ,arshad
     ,utkarsh
+    ,rishabh
 }
