@@ -74,6 +74,14 @@ export const sportsData = [
         fee: 100,
         description: 'Cycling Race - Individual participation',
       },
+      {
+        id: 'testing',
+        name: 'Testing (₹1 Only)',
+        type: SPORT_TYPES.INDIVIDUAL,
+        teamSize: 1,
+        fee: 1,
+        description: 'For testing payment flow - ₹1 only',
+      },
     ],
   },
 
