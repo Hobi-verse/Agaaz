@@ -8,14 +8,10 @@ export default function DashboardHeader({ count, total }) {
           Aagaaz Admin
         </h1>
         <p className="mt-1 text-sm text-slate-600">
-          Registrations:{" "}
-          <span className="font-medium text-slate-900">{count}</span> shown of{" "}
+          Registrations:
+          <span className="font-medium text-slate-900">{count}</span> shown of
           <span className="font-medium text-slate-900">{total}</span>
         </p>
-      </div>
-
-      <div className="text-xs text-slate-500">
-        API: <span className="font-mono text-slate-700">{getApiBaseUrl()}</span>
       </div>
     </header>
   );
