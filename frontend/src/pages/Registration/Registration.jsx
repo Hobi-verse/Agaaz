@@ -7,17 +7,16 @@ import FormInput from "../../components/FormInput";
 import FileUpload from "../../components/FileUpload";
 import { isTeamSport, getSportTypeLabel } from "../../data/sportsData";
 import {
-  createPaymentOrder,
-  verifyPaymentAndRegister,
   loadRazorpayScript,
   warmupBackend,
 } from "../../services/api";
+import PaymentProcessingOverlay from "./payment/PaymentProcessingOverlay";
+import { useRegistrationPaymentFlow } from "./payment/useRegistrationPaymentFlow";
 import "./Registration.css";
 
 export default function Registration() {
   const navigate = useNavigate();
   const [selectedSport, setSelectedSport] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
   const [razorpayLoaded, setRazorpayLoaded] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -127,111 +126,28 @@ export default function Registration() {
     return Object.keys(newErrors).length === 0;
   };
 
+  const {
+    isLoading,
+    paymentStage,
+    paymentError,
+    isPaymentInProgress,
+    startPaymentFlow,
+    resetPayment,
+    retryMode,
+    retryVerification,
+  } = useRegistrationPaymentFlow({
+    selectedSport,
+    formData,
+    validateForm,
+    razorpayLoaded,
+    navigate,
+    setSelectedSport,
+  });
+
   const handlePayment = async (e) => {
     e.preventDefault();
 
-    if (!validateForm()) return;
-
-    if (!razorpayLoaded) {
-      toast.error("Payment gateway not loaded. Please refresh.");
-      return;
-    }
-
-    setIsLoading(true);
-
-    try {
-      // Create order (also checks if Aadhar already registered)
-      const orderResult = await createPaymentOrder({
-        amount: selectedSport.fee,
-        name: formData.name,
-        email: formData.email,
-        mobileNo: formData.mobileNo,
-        aadharNo: formData.aadharNo,
-        sportId: selectedSport.id,
-        sportName: selectedSport.name,
-      });
-
-      if (!orderResult.success) {
-        toast.error(orderResult.error || "Failed to create order");
-        setIsLoading(false);
-        return;
-      }
-
-      // Open Razorpay checkout
-      const options = {
-        key: orderResult.key,
-        amount: orderResult.order.amount,
-        currency: orderResult.order.currency,
-        name: "AAGAAZ 2026",
-        description: `Registration for ${selectedSport.name}`,
-        order_id: orderResult.order.id,
-        prefill: {
-          name: formData.name,
-          email: formData.email,
-          contact: formData.mobileNo,
-        },
-        theme: { color: "#ffb24a" },
-        handler: async function (response) {
-          // Verify payment and register
-          const verifyResult = await verifyPaymentAndRegister(
-            response,
-            {
-              ...formData,
-              sportCategory: selectedSport.category,
-              sportCategoryId: selectedSport.categoryId,
-              sportName: selectedSport.name,
-              sportId: selectedSport.id,
-              sportType: selectedSport.type,
-              teamSize: selectedSport.teamSize,
-              amount: selectedSport.fee,
-            },
-            formData.aadharPhoto
-          );
-
-          setIsLoading(false);
-
-          if (verifyResult.success) {
-            toast.success("Payment Successful! Registration Complete.", {
-              duration: 5000,
-              position: "top-center",
-            });
-            setSelectedSport(null);
-            // Redirect to home page after successful registration
-            setTimeout(() => {
-              navigate("/");
-            }, 2000);
-          } else {
-            if (verifyResult.error?.includes("already registered")) {
-              toast.error("This Aadhar is already registered!", {
-                duration: 5000,
-                position: "top-center",
-              });
-            } else {
-              toast.error(verifyResult.error || "Registration failed", {
-                duration: 5000,
-                position: "top-center",
-              });
-            }
-          }
-        },
-        modal: {
-          ondismiss: function () {
-            setIsLoading(false);
-            toast.error("Payment cancelled", {
-              duration: 3000,
-              position: "top-center",
-            });
-          },
-        },
-      };
-
-      const razorpay = new window.Razorpay(options);
-      razorpay.open();
-    } catch (error) {
-      console.error("Payment error:", error);
-      toast.error("Something went wrong. Please try again.");
-      setIsLoading(false);
-    }
+    await startPaymentFlow();
   };
 
   return (
@@ -265,6 +181,16 @@ export default function Registration() {
             }
           },
         }}
+      />
+
+      <PaymentProcessingOverlay
+        stage={paymentStage}
+        paymentError={paymentError}
+        isPaymentInProgress={isPaymentInProgress}
+        retryMode={retryMode}
+        onRetryPayment={startPaymentFlow}
+        onRetrySave={retryVerification}
+        onClose={resetPayment}
       />
 
       <header className="regHeader">

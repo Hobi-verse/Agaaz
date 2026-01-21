@@ -1,7 +1,29 @@
 // API Service - Axios with Razorpay payment integration
 import axios from 'axios';
 
-const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
+const RAW_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
+const normalizeBaseUrl = (url) => String(url || '').trim().replace(/\/+$/, '');
+
+// We want axios baseURL to always point to the backend API root: <server>/api
+const normalizedBackendUrl = normalizeBaseUrl(RAW_BACKEND_URL);
+const API_BASE_URL = normalizedBackendUrl
+    ? (normalizedBackendUrl.endsWith('/api')
+        ? normalizedBackendUrl
+        : `${normalizedBackendUrl}/api`)
+    : 'http://localhost:5000/api';
+
+const getApiErrorMessage = (error) => {
+    if (!error) return 'Unknown error';
+    if (typeof error === 'string') return error;
+    return (
+        error.message ||
+        error.error ||
+        error.msg ||
+        (Array.isArray(error.errors) ? error.errors.join(', ') : '') ||
+        'Request failed'
+    );
+};
 
 // Create axios instance with base config
 const api = axios.create({
@@ -11,6 +33,51 @@ const api = axios.create({
         'Accept': 'application/json',
     },
 });
+
+const getServerRootFromApiBaseUrl = () => {
+    const baseUrl = String(api.defaults.baseURL || '').replace(/\/+$/, '');
+    // axios baseURL is expected to end with /api; health lives on server root
+    return baseUrl.endsWith('/api') ? baseUrl.slice(0, -4) : baseUrl;
+};
+
+export const pingBackend = async () => {
+    const serverRoot = getServerRootFromApiBaseUrl();
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 8000);
+    try {
+        const response = await fetch(`${serverRoot}/health`, {
+            method: 'GET',
+            signal: controller.signal,
+            cache: 'no-store',
+        });
+        return response.ok;
+    } catch {
+        return false;
+    } finally {
+        clearTimeout(timeoutId);
+    }
+};
+
+export const ensureBackendReady = async ({
+    maxWaitMs = 65000,
+    initialDelayMs = 400,
+    maxDelayMs = 5000,
+} = {}) => {
+    const start = Date.now();
+    let delay = initialDelayMs;
+
+    while (Date.now() - start < maxWaitMs) {
+        // eslint-disable-next-line no-await-in-loop
+        const ok = await pingBackend();
+        if (ok) return true;
+
+        // eslint-disable-next-line no-await-in-loop
+        await new Promise((resolve) => setTimeout(resolve, delay));
+        delay = Math.min(maxDelayMs, Math.round(delay * 1.6));
+    }
+
+    return false;
+};
 
 // Response interceptor for error handling
 api.interceptors.response.use(
@@ -22,7 +89,8 @@ api.interceptors.response.use(
         if (error.code === 'ECONNABORTED') {
             return Promise.reject({ message: 'Request timeout. Please try again.' });
         }
-        return Promise.reject(error.response.data);
+        // Prefer backend JSON error shape when available
+        return Promise.reject(error.response.data || { message: 'Request failed' });
     }
 );
 
@@ -38,7 +106,7 @@ export const createPaymentOrder = async (orderData) => {
     } catch (error) {
         return {
             success: false,
-            error: error.message || 'Failed to create payment order',
+            error: getApiErrorMessage(error) || 'Failed to create payment order',
         };
     }
 };
@@ -73,7 +141,7 @@ export const verifyPaymentAndRegister = async (paymentData, formData, aadharPhot
     } catch (error) {
         return {
             success: false,
-            error: error.message || 'Payment verification failed',
+            error: getApiErrorMessage(error) || 'Payment verification failed',
         };
     }
 };
@@ -87,7 +155,7 @@ export const loadRazorpayScript = () => {
         }
         const script = document.createElement('script');
         script.src = 'https://checkout.razorpay.com/v1/checkout.js';
-        script.onload = () => resolve(true);
+        script.onload = () => resolve(Boolean(window.Razorpay));
         script.onerror = () => resolve(false);
         document.body.appendChild(script);
     });
@@ -106,14 +174,12 @@ export const getAllRegistrations = async () => {
 // Warm up backend server
 export const warmupBackend = async () => {
     try {
-        // Call health endpoint to wake up the server
-
-        const baseUrl = String(api.defaults.baseURL || '').replace(/\/+$/, '');
-        await fetch(`${baseUrl}/health`, { method: 'GET' });
-        console.log('Backend warm-up initiated');
+        // Silently wait for cold-start to finish.
+        // This runs in the background while the user fills the form.
+        await ensureBackendReady({ maxWaitMs: 65000 });
     } catch (error) {
         // Silently fail - this is just a warm-up call
-        console.log('Backend warm-up call sent');
+        // ignore
     }
 };
 

@@ -1,0 +1,153 @@
+/* Full-page Payment Processing Overlay */
+.paymentOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9990;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  background: rgba(10, 10, 25, 0.78);
+  backdrop-filter: blur(10px);
+}
+
+.paymentOverlayCard {
+  width: min(520px, 100%);
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 178, 74, 0.35);
+  border-radius: 18px;
+  box-shadow: 0 18px 55px rgba(0, 0, 0, 0.55);
+  padding: 22px 20px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.paymentOverlayTitle {
+  margin: 4px 0 8px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-size: 18px;
+  transform: skewX(-8deg);
+  text-shadow: 0 3px 0 rgba(0, 0, 0, 0.35);
+}
+
+.paymentOverlaySubtitle {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.paymentOverlayWarn {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(255, 178, 74, 0.12);
+  border: 1px solid rgba(255, 178, 74, 0.32);
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.paymentSpinner {
+  width: 52px;
+  height: 52px;
+  margin: 4px auto 14px;
+  border-radius: 50%;
+  border: 4px solid rgba(255, 255, 255, 0.16);
+  border-top-color: #ffb24a;
+  animation: regSpin 0.9s linear infinite;
+}
+
+@keyframes regSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.paymentSuccessMark,
+.paymentFailMark {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-weight: 1000;
+  font-size: 24px;
+  margin: 4px auto 14px;
+  border: 2px solid rgba(255, 255, 255, 0.24);
+}
+
+.paymentSuccessMark {
+  background: rgba(34, 197, 94, 0.2);
+  border-color: rgba(34, 197, 94, 0.45);
+  color: rgba(220, 252, 231, 0.96);
+}
+
+.paymentFailMark {
+  background: rgba(239, 68, 68, 0.18);
+  border-color: rgba(239, 68, 68, 0.5);
+  color: rgba(254, 226, 226, 0.96);
+}
+
+.paymentOverlayActions {
+  display: flex;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.paymentRetryBtn,
+.paymentCloseBtn {
+  flex: 1;
+  padding: 14px 14px;
+  border-radius: 14px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.9px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transform: skewX(-8deg);
+}
+
+.paymentRetryBtn {
+  background: linear-gradient(180deg, #ffb24a 0%, #ff8e2f 45%, #f1771f 100%);
+  color: #1c0f53;
+  border: 2px solid #d3651c;
+  box-shadow: 0 7px 0 rgba(140, 60, 15, 0.85), 0 14px 22px rgba(0, 0, 0, 0.35);
+}
+
+.paymentCloseBtn {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.92);
+  border: 2px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 7px 0 rgba(0, 0, 0, 0.35), 0 14px 22px rgba(0, 0, 0, 0.25);
+}
+
+.paymentRetryBtn:hover,
+.paymentCloseBtn:hover {
+  transform: skewX(-8deg) translateY(-2px);
+}
+
+.paymentRetryBtn:disabled,
+.paymentCloseBtn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+@media (max-width: 520px) {
+  .paymentOverlayCard {
+    padding: 18px 16px;
+  }
+
+  .paymentOverlayTitle {
+    font-size: 16px;
+  }
+
+  .paymentOverlayActions {
+    flex-direction: column;
+  }
+}
