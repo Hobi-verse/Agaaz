@@ -65,7 +65,9 @@ function App() {
       <Suspense fallback={<SportsLoader fullScreen label="Loading page…" />}>
         <Routes>
           {/* <Route path="/" element={<Home />} /> */}
-          <Route path="/register" element={<Registration />} />
+          <Route path="/register" />
+          {/* <Route path="/register" element={<Registration />} /> */}
+
           {/* <Route path="/sports" element={<AllSports />} />
           <Route path="/sport/:sportId" element={<SportDetail />} />
           <Route path="/fees-awards" element={<FeesAwards />} />
