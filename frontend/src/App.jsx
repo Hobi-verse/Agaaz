@@ -52,7 +52,7 @@ function App() {
     <main className="min-h-[100dvh] px-4 py-10 flex items-center justify-center">
       <div className="w-full max-w-3xl text-center">
         <h1 className="text-white/95 font-black tracking-wide drop-shadow-[0_14px_30px_rgba(0,0,0,0.35)] text-3xl sm:text-5xl">
-          We’re under development
+          We’re under Maintenance
         </h1>
 
         <p className="mt-4 text-white/80 text-sm sm:text-base leading-relaxed">
@@ -67,10 +67,6 @@ function App() {
 
         <div className="mt-6 inline-flex items-center justify-center gap-2 text-white/75 text-xs font-semibold">
           <span>Back soon</span>
-          <span
-            className="h-2.5 w-2.5 rounded-full bg-emerald-400 shadow-[0_0_0_4px_rgba(16,185,129,0.18),0_0_18px_rgba(16,185,129,0.55)] animate-pulse"
-            aria-hidden="true"
-          />
         </div>
       </div>
 
