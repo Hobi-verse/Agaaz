@@ -179,7 +179,7 @@ export const committeeData = {
       {
         name: "Akshat Shukla",
         role: "Event Coordinator",
-        department: "EE, 3rd Year",
+        department: "ECE, 3rd Year",
         image: memberImage.akshat,
       },
     ],
