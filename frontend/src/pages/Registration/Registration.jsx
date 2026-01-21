@@ -6,10 +6,7 @@ import SportSelector from "../../components/SportSelector";
 import FormInput from "../../components/FormInput";
 import FileUpload from "../../components/FileUpload";
 import { isTeamSport, getSportTypeLabel } from "../../data/sportsData";
-import {
-  loadRazorpayScript,
-  warmupBackend,
-} from "../../services/api";
+import { loadRazorpayScript, warmupBackend } from "../../services/api";
 import PaymentProcessingOverlay from "./payment/PaymentProcessingOverlay";
 import { useRegistrationPaymentFlow } from "./payment/useRegistrationPaymentFlow";
 import "./Registration.css";
@@ -160,25 +157,25 @@ export default function Registration() {
         toastOptions={{
           style: {
             zIndex: 99999,
-            padding: '16px 20px',
-            borderRadius: '12px',
-            fontSize: '14px',
-            fontWeight: '600',
-            boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
+            padding: "16px 20px",
+            borderRadius: "12px",
+            fontSize: "14px",
+            fontWeight: "600",
+            boxShadow: "0 10px 30px rgba(0,0,0,0.3)",
           },
           success: {
             style: {
-              background: 'linear-gradient(135deg, #ff8e2f 0%, #ffb24a 100%)',
-              color: '#1c0f53',
-              zIndex: 99999
-            }
+              background: "linear-gradient(135deg, #ff8e2f 0%, #ffb24a 100%)",
+              color: "#1c0f53",
+              zIndex: 99999,
+            },
           },
           error: {
             style: {
-              background: 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)',
-              color: 'white',
-              zIndex: 99999
-            }
+              background: "linear-gradient(135deg, #ef4444 0%, #dc2626 100%)",
+              color: "white",
+              zIndex: 99999,
+            },
           },
         }}
       />
@@ -324,45 +321,64 @@ export default function Registration() {
             />
 
             {/* Terms and Conditions Checkbox */}
-            <div className="termsCheckbox" style={{
-              margin: '20px 0',
-              padding: '16px',
-              background: 'rgba(255, 178, 74, 0.1)',
-              border: '1px solid rgba(255, 178, 74, 0.3)',
-              borderRadius: '10px',
-            }}>
-              <label style={{
-                display: 'flex',
-                alignItems: 'flex-start',
-                gap: '12px',
-                cursor: 'pointer',
-                color: 'rgba(255, 255, 255, 0.9)',
-                fontSize: '14px',
-                lineHeight: '1.5',
-              }}>
+            <div
+              className="termsCheckbox"
+              style={{
+                margin: "20px 0",
+                padding: "16px",
+                background: "rgba(255, 178, 74, 0.1)",
+                border: "1px solid rgba(255, 178, 74, 0.3)",
+                borderRadius: "10px",
+              }}
+            >
+              <label
+                style={{
+                  display: "flex",
+                  alignItems: "flex-start",
+                  gap: "12px",
+                  cursor: "pointer",
+                  color: "rgba(255, 255, 255, 0.9)",
+                  fontSize: "14px",
+                  lineHeight: "1.5",
+                }}
+              >
                 <input
                   type="checkbox"
                   checked={termsAccepted}
                   onChange={(e) => setTermsAccepted(e.target.checked)}
                   style={{
-                    width: '20px',
-                    height: '20px',
-                    marginTop: '2px',
-                    accentColor: '#ffb24a',
-                    cursor: 'pointer',
+                    width: "20px",
+                    height: "20px",
+                    marginTop: "2px",
+                    accentColor: "#ffb24a",
+                    cursor: "pointer",
                   }}
                 />
                 <span>
-                  I have read and agree to the{' '}
-                  <a href="/rules" target="_blank" style={{ color: '#ffb24a', textDecoration: 'underline' }}>
+                  I have read and agree to the{" "}
+                  <a
+                    href="/rules"
+                    target="_blank"
+                    style={{ color: "#ffb24a", textDecoration: "underline" }}
+                  >
                     Rules & Regulations
-                  </a>,{' '}
-                  <a href="/code-of-conduct" target="_blank" style={{ color: '#ffb24a', textDecoration: 'underline' }}>
+                  </a>
+                  ,{" "}
+                  <a
+                    href="/code-of-conduct"
+                    target="_blank"
+                    style={{ color: "#ffb24a", textDecoration: "underline" }}
+                  >
                     Code of Conduct
-                  </a>, and{' '}
-                  <a href="/refund-policy" target="_blank" style={{ color: '#ffb24a', textDecoration: 'underline' }}>
+                  </a>
+                  , and{" "}
+                  <a
+                    href="/refund-policy"
+                    target="_blank"
+                    style={{ color: "#ffb24a", textDecoration: "underline" }}
+                  >
                     Refund Policy
-                  </a>{' '}
+                  </a>{" "}
                   of AAGAAZ 2026.
                 </span>
               </label>
@@ -372,7 +388,7 @@ export default function Registration() {
               type="submit"
               className="regPayBtn"
               disabled={isLoading || !termsAccepted}
-              title={!termsAccepted ? 'Please accept terms and conditions' : ''}
+              title={!termsAccepted ? "Please accept terms and conditions" : ""}
             >
               {isLoading
                 ? "Processing..."

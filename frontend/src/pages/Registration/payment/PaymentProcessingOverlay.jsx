@@ -31,7 +31,8 @@ const stageCopy = (stage, paymentError) => {
       return {
         title: "Payment cancelled",
         subtitle:
-          paymentError || "You closed the payment window. You can retry anytime.",
+          paymentError ||
+          "You closed the payment window. You can retry anytime.",
       };
     default:
       return null;
@@ -53,11 +54,12 @@ export default function PaymentProcessingOverlay({
   if (!copy) return null;
 
   const showSpinner =
-    stage === "creatingOrder" || stage === "awaitingPayment" || stage === "verifying";
+    stage === "creatingOrder" ||
+    stage === "awaitingPayment" ||
+    stage === "verifying";
   const showWarn = showSpinner;
   const showActions = stage === "failed" || stage === "cancelled";
-  const primaryLabel =
-    retryMode === "verify" ? "Retry Save" : "Retry Payment";
+  const primaryLabel = retryMode === "verify" ? "Retry Save" : "Retry Payment";
   const handlePrimary = () => {
     if (retryMode === "verify") {
       onRetrySave?.();
