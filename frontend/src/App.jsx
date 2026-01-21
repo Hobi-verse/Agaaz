@@ -58,16 +58,6 @@ function App() {
         <p className="mt-4 text-white/80 text-sm sm:text-base leading-relaxed">
           We’ll be back soon. Please visit again after some time.
         </p>
-
-        <div className="mt-6 mx-auto rounded-2xl border border-white/15 bg-[#2a1677]/35 backdrop-blur-md shadow-[0_18px_40px_rgba(0,0,0,0.35)] px-5 py-4">
-          <p className="text-white/90 font-semibold">
-            Some features may not work as expected right now.
-          </p>
-        </div>
-
-        <div className="mt-6 inline-flex items-center justify-center gap-2 text-white/75 text-xs font-semibold">
-          <span>Back soon</span>
-        </div>
       </div>
 
       {/* <ScrollToHash />
