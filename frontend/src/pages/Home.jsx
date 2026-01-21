@@ -55,11 +55,14 @@ export default function Home() {
   const navigate = useNavigate();
 
   // Reduce animations on mobile for better performance
-  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+  const isMobile = typeof window !== "undefined" && window.innerWidth <= 768;
   const bubbleCount = isMobile ? 8 : 25;
   const emberCount = isMobile ? 5 : 15;
 
-  const fireBubbles = useMemo(() => generateFireBubbles(bubbleCount), [bubbleCount]);
+  const fireBubbles = useMemo(
+    () => generateFireBubbles(bubbleCount),
+    [bubbleCount],
+  );
   const embers = useMemo(
     () =>
       Array.from({ length: emberCount }, () => ({
@@ -170,18 +173,9 @@ export default function Home() {
             <span>{homeHero.statusPrefix}</span>
             <span className="heroLiveDot" aria-hidden="true" />
           </p>
-
-            <div className="heroCtaRow">
-              <div className="ctaButton" style={{ cursor: "default", pointerEvents: "none" }}>
-                <span className="ctaText" style={{ fontSize: 20, textTransform: "none" }}>
-                  Website is under mentainance. Some features may not work as expected.It will be back to normal soon.
-                </span>
-              </div>
-            </div>
         </div>
       </section>
 
-     
       {/* <SportsManagerCard
         manager={sportsManagers.chess}
         sportName="Chess"
@@ -201,7 +195,7 @@ export default function Home() {
         rootMargin="700px 0px"
         fallback={<SportsLoader label="Setting the stage…" />}
       />
-{/* Live Scores Ticker */}
+      {/* Live Scores Ticker */}
       <section className="liveScoresTicker" aria-label="Live Scores">
         <div className="liveScoresHeader">
           <span className="liveScoresLiveDot" aria-hidden="true" />
@@ -234,7 +228,6 @@ export default function Home() {
         rootMargin="700px 0px"
         fallback={<SportsLoader label="Loading sports…" />}
       />
- 
 
       <LazySection
         importer={() => import("../sections/ScheduleSection")}
