@@ -13,7 +13,6 @@ import LazySection from "../components/LazySection";
 import SportsLoader from "../components/SportsLoader";
 import { sponsorsData } from "../data/sponsorsData";
 
-
 // Generate fire bubbles data
 const generateFireBubbles = (count) => {
   return Array.from({ length: count }, (_, i) => ({
@@ -191,12 +190,17 @@ export default function Home() {
             <div className="sponsorsSet">
               {sponsorsData.map((sponsor) => (
                 <div key={sponsor.id} className="sponsorCard">
-                  <img
-                    src={sponsor.image}
-                    alt={sponsor.name}
-                    className="sponsorImage"
-                    loading="lazy"
-                  />
+                  <div className="sponsorImageWrapper">
+                    <img
+                      src={sponsor.image}
+                      alt={sponsor.name}
+                      className="sponsorImage"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="sponsorTextWrapper">
+                    <span className="sponsorTag">{sponsor.tag}</span>
+                  </div>
                 </div>
               ))}
             </div>
@@ -204,12 +208,18 @@ export default function Home() {
             <div className="sponsorsSet mobile-duplicate-set">
               {sponsorsData.map((sponsor) => (
                 <div key={`${sponsor.id}-dup`} className="sponsorCard">
-                  <img
-                    src={sponsor.image}
-                    alt={sponsor.name}
-                    className="sponsorImage"
-                    loading="lazy"
-                  />
+                  <div className="sponsorImageWrapper">
+                    <img
+                      src={sponsor.image}
+                      alt={sponsor.name}
+                      className="sponsorImage"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="sponsorTextWrapper">
+                    <span className="sponsorTag">{sponsor.tag}</span>
+                    <p className="sponsorName">{sponsor.name}</p>
+                  </div>
                 </div>
               ))}
             </div>
