@@ -1,5 +1,5 @@
 import bodyForge from "../assets/sponsers/BODYFORGELOGO.jpeg";
-import lcs from "../assets/sponsers/LCS-logo.png";
+import lcs from "../assets/sponsers/LCS-logo.jpeg";
 import zillinial from "../assets/sponsers/Zillinialcafe-logo.jpeg";
 import hungryHub from "../assets/sponsers/hungryHub.png";
 import studyIq from "../assets/sponsers/studyIQ-logo.jpeg";
