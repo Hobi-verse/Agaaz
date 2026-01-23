@@ -150,10 +150,10 @@ export const committeeData = {
         image: memberImage.yatharth,
       },
       {
-        name: "Saurabh Verma",
-        role: "Event Coordinator Co-Head",
-        department: "B.Pharma, 4th Year",
-        image: memberImage.saurabh,
+        name: "Shivraj Maurya",
+        role: "Event management Head",
+        department: "B.Tech CSE, 4th Year",
+        image: memberImage.shivraj,
       },
       {
         name: "Mohammad Arshad",
