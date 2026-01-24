@@ -177,6 +177,12 @@ export default function Home() {
           <div class="announcement">
             ⚡ Dribble. Dunk. Dominate. Basketball registrations are LIVE NOW!”
           </div>
+          <div class="announcement">
+            Time’s ticking! Register by the 27th Jan 2026 and save before prices increase.
+            No Registrations for Outdoor Sports after 27th Jan 2026.
+            Indoor Sports registrations will remain open until 29th Jan 2026.
+            
+          </div>
         </div>
       </section>
 
