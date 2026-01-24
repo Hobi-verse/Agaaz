@@ -132,7 +132,8 @@ export default function Footer() {
           <span className="footerLinkDivider">|</span>
           <span className="footerPolicyLink">
             For any technical issue contact:{" "}
-            <a href="tel:8127155421">8127155421</a>
+            <a href="tel:6389086437">6389086437</a>
+            <a href="tel:7007302928">7007302928</a>
           </span>
         </div>
 
