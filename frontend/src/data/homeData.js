@@ -6,6 +6,7 @@ export const homeHero = {
   title: "AAGAAZ 2026: THE ARENA CALLS.",
   subtitle: "Open Invitational Sports Fest. Whatever your college, bring your game.",
   eventDates: "31st Jan, 1st Feb & 2nd Feb 2026",
+  eventDates2:"Inauguration on 29th Jan 2026",
   ctaText: "REGISTER YOUR TEAM",
   statusPrefix: "Secure Payments via Razorpay | Registration LIVE",
 };

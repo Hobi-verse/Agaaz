@@ -9,7 +9,7 @@ export default function SportsSection() {
 
   // Map sport keys to sport IDs for navigation
   const sportKeyToId = {
-    basketball: "basketball",
+    // basketball: "basketball",
     cricket: "cricket",
     football: "football",
     badminton: "badminton_singles",

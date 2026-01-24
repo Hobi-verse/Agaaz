@@ -12,6 +12,7 @@ import { useMemo } from "react";
 import LazySection from "../components/LazySection";
 import SportsLoader from "../components/SportsLoader";
 import { sponsorsData } from "../data/sponsorsData";
+import NewsAnnouncements from "../sections/NewsAnnouncements";
 
 // Generate fire bubbles data
 const generateFireBubbles = (count) => {
@@ -155,6 +156,10 @@ export default function Home() {
           </p>
 
           <p className="heroEventDates">
+            <span>{homeHero.eventDates2}</span>
+          </p>
+
+          <p className="heroEventDates">
             <span>{homeHero.eventDates}</span>
           </p>
 
@@ -174,16 +179,11 @@ export default function Home() {
             <span>{homeHero.statusPrefix}</span>
             <span className="heroLiveDot" aria-hidden="true" />
           </p>
-          <div class="announcement">
-            ⚡ Dribble. Dunk. Dominate. Basketball registrations are LIVE NOW!”
-          </div>
-          <div class="announcement">
-            Time’s ticking! Register by the 27th Jan 2026 and save before prices increase.
-            No Registrations for Sports like Cricket, Football, Vollyball,Basketball after 27th Jan 2026.
-            Indoor Sports registrations will remain open until 29th Jan 2026.
-          </div>
         </div>
       </section>
+
+      {/* News & Announcements Section */}
+      <NewsAnnouncements />
 
       {/* <SportsManagerCard
         manager={sportsManagers.chess}

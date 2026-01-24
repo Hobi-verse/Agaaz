@@ -866,7 +866,7 @@ export const sportRules = {
         title: "Match Format",
         points: [
           "Only final match will be played in best of 3 games (first to win 2 games)",
-          "Each game played to 21 points",
+          "Each game played to 11 points",
           "Must win by 2 points (no cap at 29-all, next point wins)",
           "2-minute break between games",
         ]
@@ -926,7 +926,7 @@ export const sportRules = {
         title: "Match Format",
         points: [
           "Only final match will be played in best of 3 games (first to win 2 games)",
-          "Each game played to 21 points",
+          "Each game played to 11 points",
           "Must win by 2 points (no cap at 29-all, next point wins)",
           "2-minute break between games",
         ]
@@ -1294,7 +1294,7 @@ export const sportRules = {
       {
         title: "Match Format",
         points: [
-          "Tournament format: Matches will be played in the format specified by the organizing committee (8 over on knock out basis & final will be of 10 overs)",
+          "Tournament format: Matches will be played in the format specified by the organizing committee (6 - 8 over on knock out basis & final will be of 10 overs)",
           "Only registered players are allowed to play. No last-minute substitutions unless approved by the organizing committee.",
           "Matches will be played with hard Red Ball",
           "Each over consists of 6 legal deliveries",
@@ -1375,69 +1375,69 @@ export const sportRules = {
     support: "Himanshu Singh ( 8127155421 )",
     registrationFee: 1500,
   },
-  basketball: {
-  name: "Basketball",
-  category: "Team Sports",
-  overview:
-    "A fast-paced indoor team sport played between two teams of five players each. The objective is to score points by shooting the ball through the opponent’s hoop while preventing them from scoring.",
-  eligibility: {
-    teamSize: "5 players + 7 substitutes (12 total)",
-    gender: "Men's and Women's categories",
-    participants: "Team registration required",
-  },
-  rules: [
-    {
-      title: "Match Format",
-      points: [
-        "Matches will be played in 5 vs 5 format",
-        "Match duration will be 8 minute 2 rounds with 2 timeouts in each half",
-        "Only registered players are allowed to participate",
-        "Substitutions are allowed during stoppages of play",
-      ],
-    },
-    {
-      title: "Scoring Rules",
-      points: [
-        "Field goal inside the arc: 2 points",
-        "Field goal beyond the 3-point arc: 3 points",
-        "Free throw: 1 point",
-      ],
-    },
-    {
-      title: "Playing Rules",
-      points: [
-        "Each team must have 5 players on court at all times",
-        "Players must dribble the ball while moving",
-        "Double dribble and traveling are violations",
-        "Shot clock rules will apply as per tournament guidelines",
-      ],
-    },
-    {
-      title: "Fouls & Violations",
-      points: [
-        "Personal fouls include blocking, charging, pushing, and holding",
-        "Technical fouls may be awarded for unsportsmanlike conduct",
-        "Accumulation of fouls may result in free throws for the opponent",
-      ],
-    },
-    {
-      title: "Winning Conditions",
-      points: [
-        "Team with the highest score at the end of regulation time wins",
-        "If scores are tied: Extra time (overtime) will be played",
-      ],
-    },
-  ],
-  penalties: [
-    "Personal foul: Free throws or possession awarded",
-    "Technical foul: Free throws + possession to opponent",
-    "Unsportsmanlike behavior: Warning or disqualification",
-    "Deliberate time wasting: Technical foul",
-  ],
-  format: "Knockout rounds",
-  support: "Devansh Dwivedi ( 9389604174 )",
-  registrationFee: 1000,
-},
+//   basketball: {
+//   name: "Basketball",
+//   category: "Team Sports",
+//   overview:
+//     "A fast-paced indoor team sport played between two teams of five players each. The objective is to score points by shooting the ball through the opponent’s hoop while preventing them from scoring.",
+//   eligibility: {
+//     teamSize: "5 players + 7 substitutes (12 total)",
+//     gender: "Men's and Women's categories",
+//     participants: "Team registration required",
+//   },
+//   rules: [
+//     {
+//       title: "Match Format",
+//       points: [
+//         "Matches will be played in 5 vs 5 format",
+//         "Match duration will be 8 minute 2 rounds with 2 timeouts in each half",
+//         "Only registered players are allowed to participate",
+//         "Substitutions are allowed during stoppages of play",
+//       ],
+//     },
+//     {
+//       title: "Scoring Rules",
+//       points: [
+//         "Field goal inside the arc: 2 points",
+//         "Field goal beyond the 3-point arc: 3 points",
+//         "Free throw: 1 point",
+//       ],
+//     },
+//     {
+//       title: "Playing Rules",
+//       points: [
+//         "Each team must have 5 players on court at all times",
+//         "Players must dribble the ball while moving",
+//         "Double dribble and traveling are violations",
+//         "Shot clock rules will apply as per tournament guidelines",
+//       ],
+//     },
+//     {
+//       title: "Fouls & Violations",
+//       points: [
+//         "Personal fouls include blocking, charging, pushing, and holding",
+//         "Technical fouls may be awarded for unsportsmanlike conduct",
+//         "Accumulation of fouls may result in free throws for the opponent",
+//       ],
+//     },
+//     {
+//       title: "Winning Conditions",
+//       points: [
+//         "Team with the highest score at the end of regulation time wins",
+//         "If scores are tied: Extra time (overtime) will be played",
+//       ],
+//     },
+//   ],
+//   penalties: [
+//     "Personal foul: Free throws or possession awarded",
+//     "Technical foul: Free throws + possession to opponent",
+//     "Unsportsmanlike behavior: Warning or disqualification",
+//     "Deliberate time wasting: Technical foul",
+//   ],
+//   format: "Knockout rounds",
+//   support: "Devansh Dwivedi ( 9389604174 )",
+//   registrationFee: 1000,
+// },
 };
 
 // Helper function to get rules by sport ID

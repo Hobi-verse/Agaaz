@@ -1,13 +1,13 @@
 import "./sportsCard.css";
 import Button from "./Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBasketball } from "@fortawesome/free-solid-svg-icons";
+// import { faBasketball } from "@fortawesome/free-solid-svg-icons";
 
 export default function SportsCard({
   title = "Cricket",
   meta = "Open Category",
   cta = "VIEW RULES & REGISTER",
-  icon = faBasketball,
+  icon, // = faBasketball,
   iconSrc,
   iconAlt,
   onCtaClick,
