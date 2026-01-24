@@ -3,12 +3,13 @@ import "./ScheduleSection.css";
 import { schedulePage } from "../data/scheduleData";
 import Button from "../components/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendarAlt, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faCalendarAlt, faTimes, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { schedule } from "../data/eventSchedule.js";
 
 export default function ScheduleSection() {
   const [showPopup, setShowPopup] = useState(false);
   const [selectedSport, setSelectedSport] = useState("All");
+  const [selectedDay, setSelectedDay] = useState("All Days");
   const hasSchedule = schedule && schedule.length > 0;
 
   // Extract unique sports from schedule
@@ -19,15 +20,25 @@ export default function ScheduleSection() {
     if (game.includes("Badminton")) return "Badminton";
     if (game.includes("Chess") || game.includes("Carrom") || game.includes("E-Sports")) return "Indoor Games";
     if (game.includes("Buffer")) return "Buffer";
+    if (game.includes("Closing Ceremony")) return "Closing Ceremony";
     return game;
   };
 
-  const sports = ["All", ...new Set(schedule.map(item => getSportName(item.game)).filter(sport => sport !== "Buffer"))];
+  const sports =['All', ...new Set(schedule.map(item => getSportName(item.game)).filter(sport => sport !== "Buffer"))];
+  const days = ["All Days", "31st Jan", "1st Feb", "2nd Feb"];
   
-  // Filter schedule by selected sport (exclude buffer times from individual sports)
-  const filteredSchedule = selectedSport === "All" 
-    ? schedule 
-    : schedule.filter(item => getSportName(item.game) === selectedSport);
+  // Filter schedule by selected day and sport
+  let filteredSchedule = schedule;
+  
+  // Apply day filter
+  if (selectedDay !== "All Days") {
+    filteredSchedule = filteredSchedule.filter(item => item.day === selectedDay);
+  }
+  
+  // Apply sport filter (exclude buffer times from individual sports)
+  if (selectedSport !== "All") {
+    filteredSchedule = filteredSchedule.filter(item => getSportName(item.game) === selectedSport);
+  }
 
   return (
     <section id="schedule" className="scheduleSection" aria-label="Schedule">
@@ -67,8 +78,22 @@ export default function ScheduleSection() {
                     {schedulePage.eventDates}
                   </p>
 
-                  {/* Sports Filter Tabs */}
+                  {/* Sports Filter Tabs with Day Dropdown */}
                   <div className="scheduleSportsTabs">
+                    {/* Day Dropdown integrated in tabs */}
+                    <div className="scheduleDropdownWrapper">
+                      <select 
+                        value={selectedDay} 
+                        onChange={(e) => setSelectedDay(e.target.value)}
+                        className="scheduleSportsTab scheduleDayDropdown"
+                      >
+                        {days.map(day => (
+                          <option key={day} value={day}>{day}</option>
+                        ))}
+                      </select>
+                      <FontAwesomeIcon icon={faChevronDown} className="scheduleDropdownIcon" />
+                    </div>
+
                     {sports.map(sport => (
                       <button
                         key={sport}
