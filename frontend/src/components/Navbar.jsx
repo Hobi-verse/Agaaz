@@ -2,6 +2,7 @@ import "./Navbar.css";
 import { Link } from "react-router-dom";
 import { useEffect, useId, useRef, useState } from "react";
 const logo = "/aagaaz-logo.png";
+import Banner from "./Banner";
 
 const defaultLinks = [
   { label: "About", href: "#about" },
@@ -47,7 +48,6 @@ export default function Navbar({ links = defaultLinks }) {
               </span>
               <span className="tagLine">Play, Progress, Prosper</span>
             </div>
-            
           </Link>
 
           <button
@@ -101,7 +101,7 @@ export default function Navbar({ links = defaultLinks }) {
                 <a key={item.label} className="navLink" href={item.href}>
                   {item.label}
                 </a>
-              )
+              ),
             )}
           </div>
         </div>
@@ -133,11 +133,12 @@ export default function Navbar({ links = defaultLinks }) {
                 >
                   {item.label}
                 </a>
-              )
+              ),
             )}
           </div>
         </div>
-      </nav>
+      </nav>{" "}
+      <Banner />
     </header>
   );
 }

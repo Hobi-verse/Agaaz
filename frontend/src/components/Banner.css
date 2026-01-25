@@ -1,0 +1,61 @@
+:root {
+  --orange: #e77a32d2;
+}
+
+.banner {
+  height: 44px;
+  background: var(--orange);
+  color: #fff;
+
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+/* text */
+.banner-text {
+  white-space: nowrap;
+  font-size: 16px;
+  font-weight: 500;
+  padding-left: 100%;
+}
+
+/* subtle hover for desktop */
+.banner:hover {
+  background: #dd6f28;
+}
+
+/* ===== MOBILE NEWS-TICKER EFFECT ===== */
+@keyframes ticker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@media (max-width: 768px) {
+  .banner-text {
+    animation: ticker 14s linear infinite;
+    font-size: 15px;
+  }
+}
+
+/* ===== DESKTOP: STATIC ===== */
+@media (min-width: 769px) {
+  .banner {
+    justify-content: center;
+  }
+
+  .banner-text {
+    padding-left: 0;
+  }
+}
