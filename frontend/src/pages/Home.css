@@ -223,7 +223,16 @@
 .sponsorsTitle {
   margin-bottom: 40px;
   font-size: clamp(30px, 6vw, 52px);
+  color: rgba(255, 255, 255, 0.96);
   font-weight: 900;
+  line-height: 1.02;
+  letter-spacing: 1px;
+  transform: skewX(-10deg);
+  text-shadow:
+    0 5px 0 rgba(0, 0, 0, 0.35),
+    0 20px 42px rgba(0, 0, 0, 0.3);
+  -webkit-text-stroke: 1.5px rgba(0, 0, 0, 0.28);
+  white-space: nowrap;
 }
 
 .sponsorsGridWrapper {
@@ -274,7 +283,34 @@
   color: #ff9f1c;
 }
 
+.sponsorName {
+  margin: 4px 0 0;
+  font-size: 11px;
+  color: white;
+  font-weight: 500;
+}
+
 /* ==================== RESPONSIVE ==================== */
+@media (max-width: 768px) {
+  .sponsorsSet {
+    flex-wrap: nowrap;
+    animation: sponsorTicker 20s linear infinite;
+  }
+
+  .mobile-duplicate-set {
+    display: flex;
+  }
+}
+
+@keyframes sponsorTicker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 @media (max-width: 520px) {
   .heroTitleDesktop,
   .heroSubtitleDesktop {
