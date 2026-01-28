@@ -3,6 +3,7 @@ import lcs from "../assets/sponsers/LCS-logo.jpeg";
 import zillinial from "../assets/sponsers/Zillinialcafe-logo.jpeg";
 import hungryHub from "../assets/sponsers/hungryHub.png";
 import studyIq from "../assets/sponsers/studyIQ-logo.jpeg";
+import royalimression from '../assets/sponsers/royalImpression.png'
 
 export const sponsorsData = [
     {
@@ -34,5 +35,11 @@ export const sponsorsData = [
         name: "Study IQ",
         image: studyIq,
         tag: "Education Partner",
+    },
+    {
+        id: 6,
+        name: "Royal Impression",
+        image: royalimression,
+        tag: "Printing Partner",
     },
 ];
