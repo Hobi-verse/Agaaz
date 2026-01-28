@@ -11,8 +11,12 @@ const SportSelector = ({ onSportSelect, selectedSport }) => {
   const [selectedSportId, setSelectedSportId] = useState("");
   const [selectedSubType, setSelectedSubType] = useState("");
 
+  // Sports to exclude from registration (registration closed for these)
+  const excludedSportIds = ['cricket'];
+
   const availableSports = selectedCategory
-    ? sportsData.find((cat) => cat.id === selectedCategory)?.sports || []
+    ? (sportsData.find((cat) => cat.id === selectedCategory)?.sports || [])
+      .filter((sport) => !excludedSportIds.includes(sport.id))
     : [];
 
   const currentSport = availableSports.find((s) => s.id === selectedSportId);
