@@ -24,16 +24,21 @@ const getRelativeTime = (date) => {
 const newsData = [
   {
     id: 1,
+    text: "Registrations for Cricket has been closed.",
+    timestamp: new Date("2026-01-28T07:00:00"),
+  },
+  {
+    id: 2,
     text: "Inauguration on 29 Jan 2026 by Hon'ble VC,University of Lucknow",
     timestamp: new Date("2026-01-25T12:00:00"),
   },
   {
-    id: 2,
+    id: 3,
     text: "Register by the 27th-lock in today's price before it goes up.",
     timestamp: new Date("2026-01-25T10:00:00"),
   },
   {
-    id: 3,
+    id: 4,
     text: "No Registrations for Cricket after 27 Jan 2026",
     timestamp: new Date("2026-01-25T07:00:00"),
   },
@@ -49,7 +54,9 @@ export default function NewsAnnouncements() {
             <div key={news.id} className="newsItem">
               <span className="newsTagNew">New</span>
               <p className="newsItemText">{news.text}</p>
-              <span className="newsTime">{getRelativeTime(news.timestamp)}</span>
+              <span className="newsTime">
+                {getRelativeTime(news.timestamp)}
+              </span>
             </div>
           ))}
         </div>
