@@ -24,21 +24,26 @@ const getRelativeTime = (date) => {
 const newsData = [
   {
     id: 1,
+    text: "Registrations for Badminton has been closed.",
+    timestamp: new Date("2026-01-29T24:00:00"),
+  },
+  {
+    id: 2,
     text: "Registrations for Cricket has been closed.",
     timestamp: new Date("2026-01-28T07:00:00"),
   },
   {
-    id: 2,
+    id: 3,
     text: "Inauguration on 29 Jan 2026 by Hon'ble VC,University of Lucknow",
     timestamp: new Date("2026-01-25T12:00:00"),
   },
   {
-    id: 3,
+    id: 4,
     text: "Register by the 27th-lock in today's price before it goes up.",
     timestamp: new Date("2026-01-25T10:00:00"),
   },
   {
-    id: 4,
+    id: 5,
     text: "No Registrations for Cricket after 27 Jan 2026",
     timestamp: new Date("2026-01-25T07:00:00"),
   },
