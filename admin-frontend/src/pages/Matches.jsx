@@ -99,7 +99,15 @@ export default function Matches({ user }) {
           { sportId: listSportId, page: 1, limit: 200 },
           { signal: controller.signal },
         );
-        if (!cancelled) setMatches(json.data || []);
+        if (!cancelled) {
+          let filtered = json.data || [];
+          if (!listSportId) {
+            filtered = filtered.filter((m) =>
+              assignedSports.includes(m.sportId),
+            );
+          }
+          setMatches(filtered);
+        }
       } catch (e) {
         if (e?.name === "AbortError") return;
         if (!cancelled) setMatchesError(e?.message || "Failed to load matches");
@@ -239,7 +247,11 @@ export default function Matches({ user }) {
         page: 1,
         limit: 200,
       });
-      setMatches(json.data || []);
+      let filtered = json.data || [];
+      if (!listSportId) {
+        filtered = filtered.filter((m) => assignedSports.includes(m.sportId));
+      }
+      setMatches(filtered);
       // Clear scores
       setScoreA((prev) => ({ ...prev, [matchId]: undefined }));
       setScoreB((prev) => ({ ...prev, [matchId]: undefined }));
@@ -259,7 +271,11 @@ export default function Matches({ user }) {
         page: 1,
         limit: 200,
       });
-      setMatches(json.data || []);
+      let filtered = json.data || [];
+      if (!listSportId) {
+        filtered = filtered.filter((m) => assignedSports.includes(m.sportId));
+      }
+      setMatches(filtered);
     } catch (e) {
       setMatchesError(e?.message || "Failed to start match");
     } finally {
