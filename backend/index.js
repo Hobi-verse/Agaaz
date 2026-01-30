@@ -27,7 +27,18 @@ const isLocalhostOrigin = (origin) => {
 
 // Middleware
 app.use(cors({
-    origin: true, // Temporarily allow all origins for debugging
+    origin: function (origin, callback) {
+        console.log('CORS origin:', origin);
+        // allow server-to-server or Postman requests
+        if (!origin) return callback(null, true);
+
+        if (allowedOrigins.includes(origin) || isLocalhostOrigin(origin)) {
+            callback(null, true);
+        } else {
+            console.log('CORS blocked for origin:', origin);
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
     credentials: true, // IMPORTANT if using cookies / auth
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
