@@ -6,7 +6,9 @@ import SportsLoader from "./components/SportsLoader";
 
 const Home = lazy(() => import("./pages/Home"));
 // const Registration = lazy(() => import("./pages/Registration/Registration"));
-const CloseRegistration = lazy(() => import("./pages/Registration/CloseRegistration"));
+const CloseRegistration = lazy(
+  () => import("./pages/Registration/CloseRegistration"),
+);
 const SportDetail = lazy(() => import("./pages/SportDetail/SportDetail"));
 const AllSports = lazy(() => import("./pages/AllSports/AllSports"));
 const FeesAwards = lazy(() => import("./pages/FeesAwards/FeesAwards"));
@@ -16,6 +18,7 @@ const CodeOfConduct = lazy(() => import("./pages/CodeOfConduct/CodeOfConduct"));
 const RefundPolicy = lazy(() => import("./pages/RefundPolicy/RefundPolicy"));
 const NotFound = lazy(() => import("./pages/NotFound/NotFound"));
 const CrashTest = lazy(() => import("./pages/CrashTest/CrashTest"));
+const Schedule = lazy(() => import("./pages/Schedule/Schedule"));
 import Footer from "./components/Footer";
 
 function ScrollToHash() {
@@ -73,6 +76,7 @@ function App() {
           <Route path="/sport/:sportId" element={<SportDetail />} />
           <Route path="/fees-awards" element={<FeesAwards />} />
           <Route path="/committee" element={<Committee />} />
+          <Route path="/schedule" element={<Schedule />} />
           <Route path="/rules" element={<Rules />} />
           <Route path="/code-of-conduct" element={<CodeOfConduct />} />
           <Route path="/refund-policy" element={<RefundPolicy />} />

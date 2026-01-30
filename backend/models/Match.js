@@ -30,6 +30,8 @@ const matchSchema = new mongoose.Schema(
       index: true,
     },
 
+    scheduledAt: { type: Date, default: null },
+
     winnerRegistrationId: { type: String, default: null },
     winnerName: { type: String, default: null },
     loserRegistrationId: { type: String, default: null },

@@ -59,7 +59,7 @@ export async function fetchMatches(
 }
 
 export async function createMatch(
-  { sportId, sportName, sportCategory, registrationIdA, nameA, registrationIdB, nameB },
+  { sportId, sportName, sportCategory, registrationIdA, nameA, registrationIdB, nameB, scheduledAt },
   { signal } = {},
 ) {
   const token = localStorage.getItem('token');
@@ -68,7 +68,7 @@ export async function createMatch(
   const res = await fetch(`${API_BASE_URL}/api/matches`, {
     method: 'POST',
     headers,
-    body: JSON.stringify({ sportId, sportName, sportCategory, registrationIdA, nameA, registrationIdB, nameB }),
+    body: JSON.stringify({ sportId, sportName, sportCategory, registrationIdA, nameA, registrationIdB, nameB, scheduledAt }),
     signal,
   });
   const json = await res.json().catch(() => null);

@@ -51,6 +51,8 @@ export default function Matches({ user }) {
   const [customNameA, setCustomNameA] = useState("");
   const [customNameB, setCustomNameB] = useState("");
 
+  const [scheduledAt, setScheduledAt] = useState("");
+
   const [resultSavingId, setResultSavingId] = useState(null);
   const [statusUpdatingId, setStatusUpdatingId] = useState(null);
 
@@ -208,6 +210,7 @@ export default function Matches({ user }) {
         nameA: participantA.name || "",
         registrationIdB: participantB.registrationId || "",
         nameB: participantB.name || "",
+        scheduledAt: scheduledAt || null,
       });
 
       // Refresh match list (across all sports)
@@ -223,6 +226,7 @@ export default function Matches({ user }) {
       setRegistrationIdB("");
       setCustomNameA("");
       setCustomNameB("");
+      setScheduledAt("");
     } catch (e) {
       setCreateError(e?.message || "Failed to create match");
     } finally {
@@ -306,7 +310,7 @@ export default function Matches({ user }) {
         </div>
 
         <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-12">
-          <div className="md:col-span-4">
+          <div className="md:col-span-3">
             <label className="block text-sm font-medium text-slate-700">
               Sport
             </label>
@@ -326,7 +330,7 @@ export default function Matches({ user }) {
             </select>
           </div>
 
-          <div className="md:col-span-3">
+          <div className="md:col-span-2">
             <label className="block text-sm font-medium text-slate-700">
               Student A
             </label>
@@ -356,7 +360,7 @@ export default function Matches({ user }) {
             )}
           </div>
 
-          <div className="md:col-span-3">
+          <div className="md:col-span-2">
             <label className="block text-sm font-medium text-slate-700">
               Student B
             </label>
@@ -384,6 +388,19 @@ export default function Matches({ user }) {
                 className="mt-1 h-11 w-full rounded-xl border border-slate-300 bg-white px-3 text-sm text-slate-900 outline-none focus:border-slate-900"
               />
             )}
+          </div>
+
+          <div className="md:col-span-3">
+            <label className="block text-sm font-medium text-slate-700">
+              Scheduled Time (optional)
+            </label>
+            <input
+              type="datetime-local"
+              value={scheduledAt}
+              onChange={(e) => setScheduledAt(e.target.value)}
+              disabled={createLoading}
+              className="mt-1 h-11 w-full rounded-xl border border-slate-300 bg-white px-3 text-sm text-slate-900 outline-none focus:border-slate-900"
+            />
           </div>
 
           <div className="md:col-span-2">
@@ -453,6 +470,9 @@ export default function Matches({ user }) {
                   Status
                 </th>
                 <th className="px-4 py-3 text-xs font-semibold uppercase tracking-wide">
+                  Scheduled
+                </th>
+                <th className="px-4 py-3 text-xs font-semibold uppercase tracking-wide">
                   Result
                 </th>
               </tr>
@@ -461,13 +481,13 @@ export default function Matches({ user }) {
             <tbody className="divide-y divide-slate-100">
               {matchesLoading ? (
                 <tr>
-                  <td className="px-4 py-6 text-slate-600" colSpan={4}>
+                  <td className="px-4 py-6 text-slate-600" colSpan={5}>
                     Loading matches…
                   </td>
                 </tr>
               ) : matches.length === 0 ? (
                 <tr>
-                  <td className="px-4 py-6 text-slate-600" colSpan={4}>
+                  <td className="px-4 py-6 text-slate-600" colSpan={5}>
                     No matches yet.
                   </td>
                 </tr>
@@ -508,6 +528,21 @@ export default function Matches({ user }) {
                         >
                           {formatStatus(m.status)}
                         </span>
+                      </td>
+
+                      <td className="px-4 py-3 text-slate-600">
+                        {m.scheduledAt ? (
+                          <div>
+                            <div className="text-sm">
+                              {new Date(m.scheduledAt).toLocaleDateString()}
+                            </div>
+                            <div className="text-xs text-slate-500">
+                              {new Date(m.scheduledAt).toLocaleTimeString()}
+                            </div>
+                          </div>
+                        ) : (
+                          <span className="text-slate-400">-</span>
+                        )}
                       </td>
 
                       <td className="px-4 py-3">

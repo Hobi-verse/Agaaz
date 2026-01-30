@@ -42,7 +42,7 @@ async function listMatches(req, res) {
 
     const [matches, total] = await Promise.all([
       Match.find(filter)
-        .sort({ createdAt: -1 })
+        .sort({ scheduledAt: -1, createdAt: -1 })
         .skip((pageNumber - 1) * limitNumber)
         .limit(limitNumber),
       Match.countDocuments(filter),
@@ -62,10 +62,10 @@ async function listMatches(req, res) {
 }
 
 // POST /api/matches
-// body: { sportId, sportName, sportCategory, registrationIdA, nameA, registrationIdB, nameB }
+// body: { sportId, sportName, sportCategory, registrationIdA, nameA, registrationIdB, nameB, scheduledAt }
 async function createMatch(req, res) {
   try {
-    const { sportId, sportName, sportCategory, registrationIdA, nameA, registrationIdB, nameB } = req.body;
+    const { sportId, sportName, sportCategory, registrationIdA, nameA, registrationIdB, nameB, scheduledAt } = req.body;
 
     if (!sportId || !sportName) {
       return res.status(400).json({
@@ -106,6 +106,7 @@ async function createMatch(req, res) {
         { registrationId: registrationIdB || null, name: registrationIdB ? (await Registration.findOne({ registrationId: registrationIdB })).name : nameB },
       ],
       status: 'scheduled',
+      scheduledAt: scheduledAt ? new Date(scheduledAt) : null,
     });
 
     return res.status(201).json({ success: true, data: match });
