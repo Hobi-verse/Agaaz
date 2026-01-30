@@ -15,7 +15,7 @@ const authRoutes = require('./routes/auth');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-const allowedOrigins = ["https://www.aagaaz.online", "https://aagaaz.online", "http://localhost:5173"]
+const allowedOrigins = ["https://www.aagaaz.online", "https://aagaaz.online", "http://localhost:5173", "https://arambhadmin.vercel.app/"]
 const isLocalhostOrigin = (origin) => {
     try {
         const url = new URL(origin);
