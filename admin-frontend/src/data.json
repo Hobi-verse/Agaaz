@@ -1,0 +1,122 @@
+[
+  {
+    "username": "athletics_100m",
+    "password": "$2b$12$hMBw0SZvGegJZx94qFlHhuUBz1vBE2U9VQ1gDILC7/E0UnPA/e7mm",
+    "role": "sport-admin",
+    "assignedSports": ["athletics_100m"]
+  },
+  {
+    "username": "athletics_200m",
+    "password": "$2b$12$hMBw0SZvGegJZx94qFlHhuUBz1vBE2U9VQ1gDILC7/E0UnPA/e7mm",
+    "role": "sport-admin",
+    "assignedSports": ["athletics_200m"]
+  },
+  {
+    "username": "athletics_400m",
+    "password": "$2b$12$hMBw0SZvGegJZx94qFlHhuUBz1vBE2U9VQ1gDILC7/E0UnPA/e7mm",
+    "role": "sport-admin",
+    "assignedSports": ["athletics_400m"]
+  },
+  {
+    "username": "athletics_4x100m_relay",
+    "password": "$2b$12$hMBw0SZvGegJZx94qFlHhuUBz1vBE2U9VQ1gDILC7/E0UnPA/e7mm",
+    "role": "sport-admin",
+    "assignedSports": ["athletics_4x100m_relay"]
+  },
+  {
+    "username": "athletics_longjump",
+    "password": "$2b$12$hMBw0SZvGegJZx94qFlHhuUBz1vBE2U9VQ1gDILC7/E0UnPA/e7mm",
+    "role": "sport-admin",
+    "assignedSports": ["athletics_longjump"]
+  },
+  {
+    "username": "cycling",
+    "password": "$2b$12$hMBw0SZvGegJZx94qFlHhuUBz1vBE2U9VQ1gDILC7/E0UnPA/e7mm",
+    "role": "sport-admin",
+    "assignedSports": ["cycling"]
+  },
+  {
+    "username": "weightlifting",
+    "password": "$2b$12$hMBw0SZvGegJZx94qFlHhuUBz1vBE2U9VQ1gDILC7/E0UnPA/e7mm",
+    "role": "sport-admin",
+    "assignedSports": ["weightlifting"]
+  },
+  {
+    "username": "cricket",
+    "password": "$2b$12$hMBw0SZvGegJZx94qFlHhuUBz1vBE2U9VQ1gDILC7/E0UnPA/e7mm",
+    "role": "sport-admin",
+    "assignedSports": ["cricket"]
+  },
+  {
+    "username": "tug_of_war",
+    "password": "$2b$12$hMBw0SZvGegJZx94qFlHhuUBz1vBE2U9VQ1gDILC7/E0UnPA/e7mm",
+    "role": "sport-admin",
+    "assignedSports": ["tug_of_war"]
+  },
+  {
+    "username": "kho_kho",
+    "password": "$2b$12$hMBw0SZvGegJZx94qFlHhuUBz1vBE2U9VQ1gDILC7/E0UnPA/e7mm",
+    "role": "sport-admin",
+    "assignedSports": ["kho_kho"]
+  },
+  {
+    "username": "volleyball",
+    "password": "$2b$12$hMBw0SZvGegJZx94qFlHhuUBz1vBE2U9VQ1gDILC7/E0UnPA/e7mm",
+    "role": "sport-admin",
+    "assignedSports": ["volleyball"]
+  },
+  {
+    "username": "football",
+    "password": "$2b$12$hMBw0SZvGegJZx94qFlHhuUBz1vBE2U9VQ1gDILC7/E0UnPA/e7mm",
+    "role": "sport-admin",
+    "assignedSports": ["football"]
+  },
+  {
+    "username": "chess",
+    "password": "$2b$12$hMBw0SZvGegJZx94qFlHhuUBz1vBE2U9VQ1gDILC7/E0UnPA/e7mm",
+    "role": "sport-admin",
+    "assignedSports": ["chess"]
+  },
+  {
+    "username": "carrom",
+    "password": "$2b$12$hMBw0SZvGegJZx94qFlHhuUBz1vBE2U9VQ1gDILC7/E0UnPA/e7mm",
+    "role": "sport-admin",
+    "assignedSports": ["carrom"]
+  },
+  {
+    "username": "tt_singles",
+    "password": "$2b$12$hMBw0SZvGegJZx94qFlHhuUBz1vBE2U9VQ1gDILC7/E0UnPA/e7mm",
+    "role": "sport-admin",
+    "assignedSports": ["tt_singles"]
+  },
+  {
+    "username": "tt_doubles",
+    "password": "$2b$12$hMBw0SZvGegJZx94qFlHhuUBz1vBE2U9VQ1gDILC7/E0UnPA/e7mm",
+    "role": "sport-admin",
+    "assignedSports": ["tt_doubles"]
+  },
+  {
+    "username": "tt_mixed",
+    "password": "$2b$12$hMBw0SZvGegJZx94qFlHhuUBz1vBE2U9VQ1gDILC7/E0UnPA/e7mm",
+    "role": "sport-admin",
+    "assignedSports": ["tt_mixed"]
+  },
+  {
+    "username": "bgmi",
+    "password": "$2b$12$hMBw0SZvGegJZx94qFlHhuUBz1vBE2U9VQ1gDILC7/E0UnPA/e7mm",
+    "role": "sport-admin",
+    "assignedSports": ["bgmi"]
+  },
+  {
+    "username": "free_fire",
+    "password": "$2b$12$hMBw0SZvGegJZx94qFlHhuUBz1vBE2U9VQ1gDILC7/E0UnPA/e7mm",
+    "role": "sport-admin",
+    "assignedSports": ["free_fire"]
+  },
+  {
+    "username": "clash_royale",
+    "password": "$2b$12$hMBw0SZvGegJZx94qFlHhuUBz1vBE2U9VQ1gDILC7/E0UnPA/e7mm",
+    "role": "sport-admin",
+    "assignedSports": ["clash_royale"]
+  }
+]
