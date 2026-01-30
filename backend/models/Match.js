@@ -25,7 +25,7 @@ const matchSchema = new mongoose.Schema(
 
     status: {
       type: String,
-      enum: ['scheduled', 'completed'],
+      enum: ['scheduled', 'ongoing', 'finished'],
       default: 'scheduled',
       index: true,
     },
@@ -33,6 +33,9 @@ const matchSchema = new mongoose.Schema(
     winnerRegistrationId: { type: String, default: null },
     winnerName: { type: String, default: null },
     loserRegistrationId: { type: String, default: null },
+
+    scoreA: { type: String, default: null },
+    scoreB: { type: String, default: null },
 
     notes: { type: String, trim: true, maxlength: 500 },
   },

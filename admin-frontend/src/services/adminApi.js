@@ -93,7 +93,7 @@ export async function login({ username, password }, { signal } = {}) {
 }
 
 export async function setMatchResult(
-  { matchId, winnerRegistrationId, winnerName },
+  { matchId, winnerRegistrationId, winnerName, scoreA, scoreB },
   { signal } = {},
 ) {
   const token = localStorage.getItem('token');
@@ -102,7 +102,27 @@ export async function setMatchResult(
   const res = await fetch(`${API_BASE_URL}/api/matches/${matchId}/result`, {
     method: 'PUT',
     headers,
-    body: JSON.stringify({ winnerRegistrationId, winnerName }),
+    body: JSON.stringify({ winnerRegistrationId, winnerName, scoreA, scoreB }),
+    signal,
+  });
+  const json = await res.json().catch(() => null);
+  if (!res.ok || !json?.success) {
+    throw new Error(json?.message || `Request failed (${res.status})`);
+  }
+  return json;
+}
+
+export async function updateMatchStatus(
+  { matchId, status },
+  { signal } = {},
+) {
+  const token = localStorage.getItem('token');
+  const headers = { 'Content-Type': 'application/json' };
+  if (token) headers['Authorization'] = `Bearer ${token}`;
+  const res = await fetch(`${API_BASE_URL}/api/matches/${matchId}/status`, {
+    method: 'PUT',
+    headers,
+    body: JSON.stringify({ status }),
     signal,
   });
   const json = await res.json().catch(() => null);

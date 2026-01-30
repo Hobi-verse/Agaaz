@@ -7,6 +7,7 @@ import {
   fetchMatches,
   fetchSportsList,
   setMatchResult,
+  updateMatchStatus,
 } from "../services/adminApi";
 
 function normalizeSports(sportsMeta) {
@@ -22,6 +23,12 @@ function normalizeSports(sportsMeta) {
 function participantLabel(p) {
   if (!p) return "-";
   return p.name || "-";
+}
+
+function formatStatus(status) {
+  return status
+    ? status.charAt(0).toUpperCase() + status.slice(1)
+    : "Scheduled";
 }
 
 export default function Matches({ user }) {
@@ -45,6 +52,10 @@ export default function Matches({ user }) {
   const [customNameB, setCustomNameB] = useState("");
 
   const [resultSavingId, setResultSavingId] = useState(null);
+  const [statusUpdatingId, setStatusUpdatingId] = useState(null);
+
+  const [scoreA, setScoreA] = useState({});
+  const [scoreB, setScoreB] = useState({});
 
   const assignedSports = user?.assignedSports || [];
   const sports = useMemo(
@@ -212,9 +223,37 @@ export default function Matches({ user }) {
   }
 
   async function onSetWinner(matchId, winnerRegistrationId, winnerName) {
+    const matchScoreA = scoreA[matchId] || null;
+    const matchScoreB = scoreB[matchId] || null;
     setResultSavingId(matchId);
     try {
-      await setMatchResult({ matchId, winnerRegistrationId, winnerName });
+      await setMatchResult({
+        matchId,
+        winnerRegistrationId,
+        winnerName,
+        scoreA: matchScoreA,
+        scoreB: matchScoreB,
+      });
+      const json = await fetchMatches({
+        sportId: listSportId,
+        page: 1,
+        limit: 200,
+      });
+      setMatches(json.data || []);
+      // Clear scores
+      setScoreA((prev) => ({ ...prev, [matchId]: undefined }));
+      setScoreB((prev) => ({ ...prev, [matchId]: undefined }));
+    } catch (e) {
+      setMatchesError(e?.message || "Failed to set result");
+    } finally {
+      setResultSavingId(null);
+    }
+  }
+
+  async function onStartMatch(matchId) {
+    setStatusUpdatingId(matchId);
+    try {
+      await updateMatchStatus({ matchId, status: "ongoing" });
       const json = await fetchMatches({
         sportId: listSportId,
         page: 1,
@@ -222,9 +261,9 @@ export default function Matches({ user }) {
       });
       setMatches(json.data || []);
     } catch (e) {
-      setMatchesError(e?.message || "Failed to set result");
+      setMatchesError(e?.message || "Failed to start match");
     } finally {
-      setResultSavingId(null);
+      setStatusUpdatingId(null);
     }
   }
 
@@ -444,25 +483,79 @@ export default function Matches({ user }) {
                         <span
                           className={
                             "inline-flex rounded-full px-2.5 py-1 text-xs font-semibold " +
-                            (m.status === "completed"
+                            (m.status === "finished"
                               ? "bg-emerald-50 text-emerald-700"
-                              : "bg-slate-100 text-slate-700")
+                              : m.status === "ongoing"
+                                ? "bg-yellow-50 text-yellow-700"
+                                : "bg-slate-100 text-slate-700")
                           }
                         >
-                          {m.status || "scheduled"}
+                          {formatStatus(m.status)}
                         </span>
                       </td>
 
                       <td className="px-4 py-3">
-                        {m.status === "completed" ? (
+                        {m.status === "finished" ? (
                           <div className="text-slate-900">
                             Winner:{" "}
                             <span className="font-medium">
                               {winnerName || "-"}
                             </span>
+                            {m.scoreA !== null && m.scoreB !== null && (
+                              <span className="ml-2 text-sm text-slate-500">
+                                ({m.scoreA} - {m.scoreB})
+                              </span>
+                            )}
                           </div>
+                        ) : m.status === "scheduled" ? (
+                          <button
+                            type="button"
+                            onClick={() => onStartMatch(m._id)}
+                            disabled={statusUpdatingId === m._id}
+                            className="h-10 rounded-xl bg-blue-600 px-4 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 disabled:opacity-60"
+                          >
+                            {statusUpdatingId === m._id
+                              ? "Starting…"
+                              : "Start Match"}
+                          </button>
                         ) : (
                           <div className="flex items-center gap-2">
+                            <div className="flex flex-col gap-1">
+                              <label className="text-xs text-slate-600">
+                                {a?.name || "A"} Score
+                              </label>
+                              <input
+                                type="text"
+                                value={scoreA[m._id] || ""}
+                                onChange={(e) =>
+                                  setScoreA((prev) => ({
+                                    ...prev,
+                                    [m._id]: e.target.value || undefined,
+                                  }))
+                                }
+                                placeholder="Score"
+                                disabled={resultSavingId === m._id}
+                                className="h-8 w-20 rounded border border-slate-300 bg-white px-2 text-sm text-slate-900 outline-none focus:border-slate-900"
+                              />
+                            </div>
+                            <div className="flex flex-col gap-1">
+                              <label className="text-xs text-slate-600">
+                                {b?.name || "B"} Score
+                              </label>
+                              <input
+                                type="text"
+                                value={scoreB[m._id] || ""}
+                                onChange={(e) =>
+                                  setScoreB((prev) => ({
+                                    ...prev,
+                                    [m._id]: e.target.value || undefined,
+                                  }))
+                                }
+                                placeholder="Score"
+                                disabled={resultSavingId === m._id}
+                                className="h-8 w-20 rounded border border-slate-300 bg-white px-2 text-sm text-slate-900 outline-none focus:border-slate-900"
+                              />
+                            </div>
                             <select
                               defaultValue={""}
                               onChange={(e) => {

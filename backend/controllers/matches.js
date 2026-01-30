@@ -12,7 +12,7 @@ async function getParticipants(req, res) {
     }
 
     // Get loser registrationIds from completed matches
-    const losers = await Match.find({ sportId, status: 'completed' }).select('loserRegistrationId').lean();
+    const losers = await Match.find({ sportId, status: 'finished' }).select('loserRegistrationId').lean();
     const loserIds = losers.map(m => m.loserRegistrationId).filter(id => id !== null);
 
     const participants = await Registration.find({ sportId, registrationId: { $nin: loserIds } })
@@ -115,11 +115,11 @@ async function createMatch(req, res) {
 }
 
 // PUT /api/matches/:id/result
-// body: { winnerRegistrationId } or { winnerName }
+// body: { winnerRegistrationId } or { winnerName }, scoreA, scoreB
 async function setMatchResult(req, res) {
   try {
     const { id } = req.params;
-    const { winnerRegistrationId, winnerName } = req.body;
+    const { winnerRegistrationId, winnerName, scoreA, scoreB } = req.body;
 
     const match = await Match.findById(id);
     if (!match) {
@@ -164,7 +164,9 @@ async function setMatchResult(req, res) {
     match.winnerRegistrationId = winnerId;
     match.winnerName = winnerName;
     match.loserRegistrationId = loserId;
-    match.status = 'completed';
+    match.scoreA = scoreA !== undefined ? scoreA : null;
+    match.scoreB = scoreB !== undefined ? scoreB : null;
+    match.status = 'finished';
 
     await match.save();
 
@@ -174,9 +176,35 @@ async function setMatchResult(req, res) {
   }
 }
 
+// PUT /api/matches/:id/status
+// body: { status: 'ongoing' | 'finished' }
+async function updateMatchStatus(req, res) {
+  try {
+    const { id } = req.params;
+    const { status } = req.body;
+
+    if (!['ongoing', 'finished'].includes(status)) {
+      return res.status(400).json({ success: false, message: 'Invalid status' });
+    }
+
+    const match = await Match.findById(id);
+    if (!match) {
+      return res.status(404).json({ success: false, message: 'Match not found' });
+    }
+
+    match.status = status;
+    await match.save();
+
+    return res.json({ success: true, data: match });
+  } catch (error) {
+    return res.status(500).json({ success: false, message: 'Failed to update match status' });
+  }
+}
+
 module.exports = {
   getParticipants,
   listMatches,
   createMatch,
   setMatchResult,
+  updateMatchStatus,
 };
