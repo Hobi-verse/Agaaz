@@ -124,14 +124,14 @@ export const sportsData = [
         fee: 900,
         description: '6 Players + 3 Substitutes',
       },
-      // {
-      //   id: 'basketball',
-      //   name: 'Basketball',
-      //   type: SPORT_TYPES.TEAM,
-      //   teamSize: 12,
-      //   fee: 1000,
-      //   description: '5 Players + 7 Substitutes (12 total)',
-      // },
+      {
+        id: 'basketball',
+        name: 'Basketball',
+        type: SPORT_TYPES.TEAM,
+        teamSize: 12,
+        fee: 1000,
+        description: '5 Players + 7 Substitutes (12 total)',
+      },
       {
         id: 'football',
         name: 'Football',
@@ -175,38 +175,38 @@ export const sportsData = [
   },
 
   // Badminton
-  // {
-  //   id: 'badminton',
-  //   name: 'Badminton',
-  //   icon: '🏸',
-  //   description: 'Singles, Doubles & Mixed Doubles',
-  //   sports: [
-  //     {
-  //       id: 'badminton_singles',
-  //       name: 'Badminton Singles',
-  //       type: SPORT_TYPES.SINGLES,
-  //       teamSize: 1,
-  //       fee: 100,
-  //       description: 'Singles - Individual participation',
-  //     },
-  //     {
-  //       id: 'badminton_doubles',
-  //       name: 'Badminton Doubles',
-  //       type: SPORT_TYPES.DOUBLES,
-  //       teamSize: 2,
-  //       fee: 200,
-  //       description: 'Doubles - 2 Players',
-  //     },
-  //     {
-  //       id: 'badminton_mixed',
-  //       name: 'Badminton Mixed Doubles',
-  //       type: SPORT_TYPES.MIXED_DOUBLES,
-  //       teamSize: 2,
-  //       fee: 200,
-  //       description: 'Mixed Doubles - 1 Boy + 1 Girl',
-  //     },
-  //   ],
-  // },
+  {
+    id: 'badminton',
+    name: 'Badminton',
+    icon: '🏸',
+    description: 'Singles, Doubles & Mixed Doubles',
+    sports: [
+      {
+        id: 'badminton_singles',
+        name: 'Badminton Singles',
+        type: SPORT_TYPES.SINGLES,
+        teamSize: 1,
+        fee: 100,
+        description: 'Singles - Individual participation',
+      },
+      {
+        id: 'badminton_doubles',
+        name: 'Badminton Doubles',
+        type: SPORT_TYPES.DOUBLES,
+        teamSize: 2,
+        fee: 200,
+        description: 'Doubles - 2 Players',
+      },
+      {
+        id: 'badminton_mixed',
+        name: 'Badminton Mixed Doubles',
+        type: SPORT_TYPES.MIXED_DOUBLES,
+        teamSize: 2,
+        fee: 200,
+        description: 'Mixed Doubles - 1 Boy + 1 Girl',
+      },
+    ],
+  },
 
   // Table Tennis
   {

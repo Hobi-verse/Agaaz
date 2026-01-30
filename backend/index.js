@@ -15,7 +15,7 @@ const authRoutes = require('./routes/auth');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-const allowedOrigins = ["https://www.aagaaz.online", "https://aagaaz.online", "http://localhost:5173"]
+const allowedOrigins = ["https://www.aagaaz.online", "https://aagaaz.online", "http://localhost:5173", "https://arambhadmin.vercel.app"]
 const isLocalhostOrigin = (origin) => {
     try {
         const url = new URL(origin);
@@ -28,12 +28,14 @@ const isLocalhostOrigin = (origin) => {
 // Middleware
 app.use(cors({
     origin: function (origin, callback) {
+        console.log('CORS origin:', origin);
         // allow server-to-server or Postman requests
         if (!origin) return callback(null, true);
 
         if (allowedOrigins.includes(origin) || isLocalhostOrigin(origin)) {
             callback(null, true);
         } else {
+            console.log('CORS blocked for origin:', origin);
             callback(new Error("Not allowed by CORS"));
         }
     },

@@ -136,4 +136,15 @@ export const incrementVisitCount = async () => {
     }
 };
 
+// Get matches
+export const getMatches = async (sportId = null) => {
+    try {
+        const params = sportId ? { sportId } : {};
+        const response = await api.get('/matches', { params });
+        return { success: true, data: response.data.data, count: response.data.count };
+    } catch (error) {
+        return { success: false, error: error.message || 'Failed to fetch matches' };
+    }
+};
+
 export default api;
