@@ -25,22 +25,23 @@
 
 .scheduleSubtitle {
   font-size: 1.1rem;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.6);
   margin: 0;
 }
 
-.scheduleTabs {
+.scheduleFilter {
   display: flex;
   justify-content: center;
-  gap: 0.75rem;
-  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
   margin-bottom: 2rem;
+  flex-wrap: wrap;
 }
 
 .scheduleTab {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.7);
   padding: 0.75rem 1.5rem;
   border-radius: 8px;
   font-size: 0.95rem;
@@ -50,7 +51,7 @@
 }
 
 .scheduleTab:hover {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.08);
   color: #fff;
 }
 
@@ -63,8 +64,8 @@
 .scheduleTableWrap {
   overflow-x: auto;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .scheduleTable {
@@ -77,12 +78,12 @@
 .scheduleTable td {
   padding: 1rem 1.25rem;
   text-align: left;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .scheduleTable th {
-  background: rgba(255, 255, 255, 0.05);
-  color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(255, 255, 255, 0.5);
   font-size: 0.85rem;
   font-weight: 600;
   letter-spacing: 0.05em;
@@ -94,7 +95,7 @@
 }
 
 .scheduleTable tbody tr:hover {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.03);
 }
 
 .scheduleTime {
@@ -114,8 +115,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #ffb24a, #ff8e2f);
-  border-radius: 8px;
   font-size: 0.9rem;
 }
 
@@ -136,5 +135,16 @@
   .scheduleTable th,
   .scheduleTable td {
     padding: 0.75rem 1rem;
+  }
+
+  .scheduleFilter {
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+
+  .scheduleFilter select {
+    width: 100%;
+    max-width: 300px;
   }
 }
