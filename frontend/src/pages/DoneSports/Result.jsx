@@ -4,8 +4,8 @@ import "./Result.css";
 
 const Result = () => {
   const [selectedSport, setSelectedSport] = useState("all");
-  const [selectedDate, setSelectedDate] = useState("2026-01-30");
-  const [selectedStatus, setSelectedStatus] = useState("completed");
+  const [selectedDate, setSelectedDate] = useState("all");
+  const [selectedStatus, setSelectedStatus] = useState("all");
 
   // Get all matches from all team sports
   const allTeamMatches = useMemo(() => {
@@ -87,8 +87,8 @@ const Result = () => {
   // Reset filters
   const resetFilters = () => {
     setSelectedSport("all");
-    setSelectedDate("2026-01-30");
-    setSelectedStatus("completed");
+    setSelectedDate("all");
+    setSelectedStatus("all");
   };
 
   // Calculate stats
