@@ -63,26 +63,7 @@ export default function FeesAwards() {
                   <th>WINNER</th>
                 </tr>
               </thead>
-              <tbody>
-                {Object.entries(groupedFees).map(([category, sports]) =>
-                  sports.map((item, idx) => (
-                    <tr key={`${category}-${item.sport}-${idx}`}>
-                      {idx === 0 ? (
-                        <td className="category-name" rowSpan={sports.length}>
-                          {category.toUpperCase()}
-                        </td>
-                      ) : null}
-                      <td className="sport-name">{item.sport.toUpperCase()}</td>
-                      <td className="entry-fee">
-                        {formatAmount(item.entryFee)}
-                      </td>
-                      <td className="winner-prize">
-                        {formatAmount(item.winner)}
-                      </td>
-                    </tr>
-                  )),
-                )}
-              </tbody>
+              
             </table>
           </div>
 

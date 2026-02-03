@@ -1,19 +1,19 @@
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faExclamationTriangle,
-  faMapMarkerAlt,
+  faCheckCircle,
   faCalendarCheck,
   faFutbol,
-  faTableTennis,
-  faVolleyballBall,
   faHome,
+  faTrophy,
 } from "@fortawesome/free-solid-svg-icons";
 import "./CloseRegistration.css";
 
 const CloseRegistration = () => {
-  const onlineSports = ["Cricket", "Football", "Badminton"];
-  const offlineSports = [
+  const allSports = [
+    "Cricket",
+    "Football",
+    "Badminton",
     "Volleyball",
     "Kho-Kho",
     "Athletics",
@@ -30,31 +30,32 @@ const CloseRegistration = () => {
         <div className="closeRegHeader">
           <div className="closeRegIconWrap">
             <FontAwesomeIcon
-              icon={faExclamationTriangle}
+              icon={faTrophy}
               className="closeRegIcon"
+              style={{ color: "#ffd700" }}
             />
           </div>
-          <h1 className="closeRegTitle">Online Registration Closed</h1>
+          <h1 className="closeRegTitle">Event Concluded! 🎉</h1>
           <p className="closeRegSubtitle">
-            Online registration for most sports has ended. But don't worry — you
-            can still register on-site!
+            Arambh has successfully concluded! Thank you to all participants,
+            volunteers, and supporters for making this event a grand success.
           </p>
         </div>
 
-        {/* Online Sports Section */}
+        {/* Event Ended Section */}
         <div className="closeRegSection">
           <div className="closeRegSectionHeader">
-            <FontAwesomeIcon icon={faCalendarCheck} className="sectionIcon" />
+            <FontAwesomeIcon icon={faCheckCircle} className="sectionIcon" style={{ color: "#10b981" }} />
             <h2 className="closeRegSectionTitle">
-              Registration are permanently closed
+              All Registrations Permanently Closed
             </h2>
           </div>
           <p className="closeRegSectionDesc">
-            The following sports registrations Are Closed!!:
+            The following sports events have been completed:
           </p>
           <div className="sportsTagsWrap">
-            {onlineSports.map((sport) => (
-              <span key={sport} className="sportTag sportTagOnline">
+            {allSports.map((sport) => (
+              <span key={sport} className="sportTag sportTagOnline" style={{ opacity: 0.8 }}>
                 <FontAwesomeIcon icon={faFutbol} className="sportTagIcon" />
                 {sport}
               </span>
@@ -62,46 +63,20 @@ const CloseRegistration = () => {
           </div>
         </div>
 
-        {/* Divider */}
-        <div className="closeRegDivider">
-          <span className="closeRegDividerText">OR</span>
-        </div>
-
-        {/* Offline Registration Section */}
+        {/* Thank You Message */}
         <div className="closeRegSection closeRegSectionOffline">
           <div className="closeRegSectionHeader">
-            <FontAwesomeIcon icon={faMapMarkerAlt} className="sectionIcon" />
-            <h2 className="closeRegSectionTitle">On-Site Registration</h2>
+            <FontAwesomeIcon icon={faCalendarCheck} className="sectionIcon" />
+            <h2 className="closeRegSectionTitle">Thank You for Participating!</h2>
           </div>
           <div className="venueCard">
             <div className="venueInfo">
-              <h3 className="venueName">📍 Kreeda Sthal</h3>
+              <h3 className="venueName">🏆 See You Next Year!</h3>
               <p className="venueDesc">
-                Visit the registration desk at <strong>Kreeda Sthal</strong> to
-                register for the following sports:
+                We hope you had an amazing experience at Arambh. Stay tuned for
+                the next edition of our sports fest!
               </p>
             </div>
-          </div>
-          <div className="sportsTagsWrap">
-            {offlineSports.map((sport) => (
-              <span key={sport} className="sportTag sportTagOffline">
-                <FontAwesomeIcon
-                  icon={faVolleyballBall}
-                  className="sportTagIcon"
-                />
-                {sport}
-              </span>
-            ))}
-          </div>
-          <div className="offlineNote">
-            <FontAwesomeIcon
-              icon={faExclamationTriangle}
-              className="noteIcon"
-            />
-            <span>
-              Please carry your <strong>College ID</strong> and{" "}
-              <strong>Aadhar Card</strong> for on-site registration.
-            </span>
           </div>
         </div>
 
@@ -113,22 +88,12 @@ const CloseRegistration = () => {
           </Link>
         </div>
 
-        {/* Help Section */}
+        {/* Footer Note */}
         <div className="closeRegHelp">
-          <div className="closeRegHelpTitle">Need Help? Contact Us:</div>
+          <div className="closeRegHelpTitle">Event Status</div>
           <div className="closeRegHelpRow">
-            <span className="closeRegHelpName">No more Direct Support as you guys make to many phone calls</span>
-             😅📵
-            {/* <a className="closeRegHelpLink" href="tel:7081832092">
-              7081832092
-            </a> */}
+            <span className="closeRegHelpName">✅ Event Successfully Completed</span>
           </div>
-          {/* <div className="closeRegHelpRow">
-            <span className="closeRegHelpName">Aman Singh Nishad</span>
-            <a className="closeRegHelpLink" href="tel:7340981852">
-              7340981852
-            </a>
-          </div> */}
         </div>
       </section>
     </main>
