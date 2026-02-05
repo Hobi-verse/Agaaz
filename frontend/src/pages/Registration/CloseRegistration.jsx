@@ -73,7 +73,7 @@ const CloseRegistration = () => {
             <div className="venueInfo">
               <h3 className="venueName">🏆 See You Next Year!</h3>
               <p className="venueDesc">
-                We hope you had an amazing experience at Arambh. Stay tuned for
+                We hope you had an amazing experience at Aagaaz. Stay tuned for
                 the next edition of our sports fest!
               </p>
             </div>
