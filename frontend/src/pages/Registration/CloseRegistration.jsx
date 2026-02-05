@@ -37,7 +37,7 @@ const CloseRegistration = () => {
           </div>
           <h1 className="closeRegTitle">Event Concluded! 🎉</h1>
           <p className="closeRegSubtitle">
-            Arambh has successfully concluded! Thank you to all participants,
+            AAGAAZ has successfully concluded! Thank you to all participants,
             volunteers, and supporters for making this event a grand success.
           </p>
         </div>
