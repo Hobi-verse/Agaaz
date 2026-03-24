@@ -56,7 +56,7 @@ export default function Matches({ user }) {
     [sportsMeta, assignedSports],
   );
 
-  const loadMatches = useCallback(
+  const fetchVisibleMatches = useCallback(
     async (activeSportId, { signal } = {}) => {
       const json = await fetchMatches(
         { sportId: activeSportId, page: 1, limit: 200 },
@@ -99,11 +99,11 @@ export default function Matches({ user }) {
     let cancelled = false;
     const controller = new AbortController();
 
-    async function loadMatches() {
+    async function syncMatches() {
       setMatchesLoading(true);
       setMatchesError("");
       try {
-        const filteredMatches = await loadMatches(listSportId, {
+        const filteredMatches = await fetchVisibleMatches(listSportId, {
           signal: controller.signal,
         });
         if (!cancelled) {
@@ -117,12 +117,12 @@ export default function Matches({ user }) {
       }
     }
 
-    loadMatches();
+    syncMatches();
     return () => {
       cancelled = true;
       controller.abort();
     };
-  }, [listSportId, loadMatches]);
+  }, [fetchVisibleMatches, listSportId]);
 
   useEffect(() => {
     let cancelled = false;
@@ -158,10 +158,10 @@ export default function Matches({ user }) {
 
   const reloadMatches = useCallback(
     async (activeSportId = listSportId) => {
-      const filteredMatches = await loadMatches(activeSportId);
+      const filteredMatches = await fetchVisibleMatches(activeSportId);
       setMatches(filteredMatches);
     },
-    [listSportId, loadMatches],
+    [fetchVisibleMatches, listSportId],
   );
 
   async function onCreateMatch() {
