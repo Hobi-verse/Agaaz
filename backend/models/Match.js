@@ -31,6 +31,7 @@ const matchSchema = new mongoose.Schema(
     },
 
     scheduledAt: { type: Date, default: null },
+    liveScoreUpdatedAt: { type: Date, default: null },
 
     winnerRegistrationId: { type: String, default: null },
     winnerName: { type: String, default: null },

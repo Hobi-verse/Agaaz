@@ -1,5 +1,6 @@
-// FileUpload - Aadhar photo upload component with preview and validation
-import { useState, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+
+import "./FormFields.css";
 
 const ALLOWED_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
 const MAX_FILE_SIZE = 1 * 1024 * 1024; // 1MB
@@ -8,6 +9,14 @@ const FileUpload = ({ label, name, onChange, required = false, error }) => {
   const [preview, setPreview] = useState(null);
   const [localError, setLocalError] = useState("");
   const fileInputRef = useRef(null);
+
+  useEffect(() => {
+    return () => {
+      if (preview) {
+        URL.revokeObjectURL(preview);
+      }
+    };
+  }, [preview]);
 
   const validateFile = (file) => {
     if (!ALLOWED_TYPES.includes(file.type)) {
@@ -26,16 +35,27 @@ const FileUpload = ({ label, name, onChange, required = false, error }) => {
     const validationError = validateFile(file);
     if (validationError) {
       setLocalError(validationError);
+      if (fileInputRef.current) fileInputRef.current.value = "";
       return;
     }
 
     setLocalError("");
-    setPreview(URL.createObjectURL(file));
+    setPreview((currentPreview) => {
+      if (currentPreview) {
+        URL.revokeObjectURL(currentPreview);
+      }
+      return URL.createObjectURL(file);
+    });
     onChange({ target: { name, files: [file] } });
   };
 
   const handleRemove = () => {
-    setPreview(null);
+    setPreview((currentPreview) => {
+      if (currentPreview) {
+        URL.revokeObjectURL(currentPreview);
+      }
+      return null;
+    });
     setLocalError("");
     if (fileInputRef.current) fileInputRef.current.value = "";
     onChange({ target: { name, files: [] } });
@@ -44,61 +64,39 @@ const FileUpload = ({ label, name, onChange, required = false, error }) => {
   const displayError = error || localError;
 
   return (
-    <div style={{ marginBottom: "15px" }}>
-      <label
-        style={{
-          display: "block",
-          marginBottom: "5px",
-          fontWeight: "500",
-          color: "rgba(255, 255, 255, 0.9)",
-        }}
-      >
+    <div className="formField">
+      <label htmlFor={name} className="formFieldLabel">
         {label}
-        {required && <span style={{ color: "#ff6b6b" }}> *</span>}
+        {required && <span className="formFieldRequired"> *</span>}
       </label>
 
       {!preview ? (
         <div>
           <input
+            id={name}
             ref={fileInputRef}
             type="file"
             name={name}
             accept={ALLOWED_TYPES.join(",")}
             onChange={handleFileChange}
+            className="fileUploadInput"
           />
-          <small
-            style={{
-              display: "block",
-              marginTop: "4px",
-              color: "rgba(255, 255, 255, 0.6)",
-            }}
-          >
-            JPG, PNG, WEBP (Max 1MB)
-          </small>
+          <small className="formFieldHint">JPG, PNG, WEBP (Max 1MB)</small>
         </div>
       ) : (
-        <div>
-          <img
-            src={preview}
-            alt="Preview"
-            style={{
-              maxWidth: "200px",
-              maxHeight: "150px",
-              display: "block",
-              marginBottom: "10px",
-            }}
-          />
-          <button type="button" onClick={handleRemove}>
+        <div className="fileUploadPreview">
+          <img src={preview} alt="Preview" className="fileUploadImage" />
+          <button
+            type="button"
+            onClick={handleRemove}
+            className="fileUploadRemove"
+          >
             Remove
           </button>
         </div>
       )}
 
-      {displayError && (
-        <small style={{ color: "#ff6b6b", display: "block", marginTop: "4px" }}>
-          {displayError}
-        </small>
-      )}
+      {displayError && <small className="formFieldError">{displayError}</small>}
     </div>
   );
 };

@@ -329,6 +329,16 @@ export const sportsPage = {
   subtitle: "Explore the sports and register for your event.",
 };
 
+export const REGISTRATION_DISABLED_SPORT_IDS = ["cricket"];
+
+export const SPORT_CARD_ROUTE_MAP = {
+  cricket: "cricket",
+  football: "football",
+  badminton: "badminton_singles",
+  athletics: "athletics_100m",
+  "athletics-5v5": "athletics_longjump",
+};
+
 export const sportsCards = [
   {
     key: "cricket",
@@ -370,4 +380,3 @@ export const sportsCards = [
 ];
 
 export default sportsData;
-

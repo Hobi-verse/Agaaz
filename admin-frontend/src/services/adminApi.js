@@ -112,6 +112,26 @@ export async function setMatchResult(
   return json;
 }
 
+export async function updateLiveMatchScore(
+  { matchId, scoreA, scoreB },
+  { signal } = {},
+) {
+  const token = localStorage.getItem('token');
+  const headers = { 'Content-Type': 'application/json' };
+  if (token) headers['Authorization'] = `Bearer ${token}`;
+  const res = await fetch(`${API_BASE_URL}/api/matches/${matchId}/live-score`, {
+    method: 'PUT',
+    headers,
+    body: JSON.stringify({ scoreA, scoreB }),
+    signal,
+  });
+  const json = await res.json().catch(() => null);
+  if (!res.ok || !json?.success) {
+    throw new Error(json?.message || `Request failed (${res.status})`);
+  }
+  return json;
+}
+
 export async function updateMatchStatus(
   { matchId, status },
   { signal } = {},
@@ -130,4 +150,41 @@ export async function updateMatchStatus(
     throw new Error(json?.message || `Request failed (${res.status})`);
   }
   return json;
+}
+
+export async function fetchAdminNotices(
+  { status = '' } = {},
+  { signal } = {},
+) {
+  const params = new URLSearchParams();
+  if (status) params.set('status', status);
+
+  const query = params.toString();
+  return fetchJson(`/api/notices/admin${query ? `?${query}` : ''}`, { signal });
+}
+
+export async function createNotice(
+  { text, status = 'draft' },
+  { signal } = {},
+) {
+  return fetchJson('/api/notices', {
+    method: 'POST',
+    body: { text, status },
+    signal,
+  });
+}
+
+export async function updateNotice(
+  { noticeId, text, status },
+  { signal } = {},
+) {
+  const body = {};
+  if (text !== undefined) body.text = text;
+  if (status !== undefined) body.status = status;
+
+  return fetchJson(`/api/notices/${noticeId}`, {
+    method: 'PUT',
+    body,
+    signal,
+  });
 }

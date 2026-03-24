@@ -5,17 +5,7 @@ import PaginationControls from "../components/PaginationControls";
 import RegistrationsFilters from "../components/RegistrationsFilters";
 import RegistrationsTable from "../components/RegistrationsTable";
 import { fetchRegistrations, fetchSportsList } from "../services/adminApi";
-
-function normalizeSports(sportsMeta) {
-  return (sportsMeta || [])
-    .filter((s) => s && s.sportId && s.sportName)
-    .map((s) => ({
-      sportId: s.sportId,
-      sportName: s.sportName,
-      sportCategory: s.sportCategory,
-      sportType: s.sportType,
-    }));
-}
+import { normalizeSports } from "../utils/sports";
 
 export default function Dashboard() {
   const [registrations, setRegistrations] = useState([]);

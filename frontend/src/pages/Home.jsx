@@ -1,38 +1,14 @@
 import "./Home.css";
 import Button from "../components/Button";
 import { homeHero, homeSponsors } from "../data/homeData";
+import { homeGuests } from "../constants/homeGuests";
 import { useNavigate } from "react-router-dom";
-import vcSir from "../assets/chief-guest/vc-image.jpeg";
-import deanSir from "../assets/chief-guest/dean-sir.jpeg";
-import financeOfficer from "../assets/chief-guest/financeOfficer.PNG";
 import LazySection from "../components/LazySection";
 import SportsLoader from "../components/SportsLoader";
 import { sponsorsData } from "../data/sponsorsData";
 import NewsAnnouncements from "../sections/NewsAnnouncements";
 import FireBackground from "../components/FireBackground";
 import Result from "./DoneSports/Result";
-
-// Static members data (keep outside component)
-const members = [
-  {
-    name: "Prof. Jai Prakash Saini",
-    designation: "Hon’ble Vice Chancellor",
-    role: "University of Lucknow",
-    image: vcSir,
-  },
-  {
-    name: "Prof. S. P. Singh",
-    designation: "Dean FoET",
-    role: "University of Lucknow",
-    image: deanSir,
-  },
-  {
-    name: "Ms. Himani Chaudhary",
-    designation: "Finance Officer",
-    role: "University of Lucknow",
-    image: financeOfficer,
-  },
-];
 
 export default function Home() {
   const navigate = useNavigate();
@@ -165,7 +141,7 @@ export default function Home() {
       {/* LAZY SECTIONS */}
       <LazySection
         importer={() => import("../sections/ChiefGuest")}
-        componentProps={{ members }}
+        componentProps={{ members: homeGuests }}
         minHeight={280}
         rootMargin="600px 0px"
         fallback={<SportsLoader label="Warming up…" />}

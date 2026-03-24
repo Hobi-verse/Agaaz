@@ -1,15 +1,27 @@
-import { useMemo } from "react";
 import useIsMobile from "../hooks/useIsMobile";
 import "./FireBackground.css";
+
+function getSeededValue(seed) {
+  const value = Math.sin(seed) * 10000;
+  return value - Math.floor(value);
+}
 
 const generateFireBubbles = (count) =>
   Array.from({ length: count }, (_, i) => ({
     id: i,
-    size: Math.random() * 20 + 8,
-    left: Math.random() * 100,
-    delay: Math.random() * 5,
-    duration: Math.random() * 3 + 4,
-    hue: Math.random() * 40 + 10,
+    size: getSeededValue((i + 1) * 1.11) * 20 + 8,
+    left: getSeededValue((i + 1) * 2.21) * 100,
+    delay: getSeededValue((i + 1) * 3.31) * 5,
+    duration: getSeededValue((i + 1) * 4.41) * 3 + 4,
+    hue: getSeededValue((i + 1) * 5.51) * 40 + 10,
+  }));
+
+const generateEmbers = (count) =>
+  Array.from({ length: count }, (_, i) => ({
+    id: i,
+    left: getSeededValue((i + 1) * 6.61) * 100,
+    delay: getSeededValue((i + 1) * 7.71) * 8,
+    duration: getSeededValue((i + 1) * 8.81) * 4 + 6,
   }));
 
 export default function FireBackground() {
@@ -17,21 +29,8 @@ export default function FireBackground() {
 
   const bubbleCount = isMobile ? 8 : 25;
   const emberCount = isMobile ? 5 : 15;
-
-  const fireBubbles = useMemo(
-    () => generateFireBubbles(bubbleCount),
-    [bubbleCount],
-  );
-
-  const embers = useMemo(
-    () =>
-      Array.from({ length: emberCount }, () => ({
-        left: Math.random() * 100,
-        delay: Math.random() * 8,
-        duration: Math.random() * 4 + 6,
-      })),
-    [emberCount],
-  );
+  const fireBubbles = generateFireBubbles(bubbleCount);
+  const embers = generateEmbers(emberCount);
 
   return (
     <>
@@ -52,14 +51,14 @@ export default function FireBackground() {
       </div>
 
       <div className="embersContainer" aria-hidden="true">
-        {embers.map((e, i) => (
+        {embers.map((ember) => (
           <div
-            key={i}
+            key={ember.id}
             className="ember"
             style={{
-              "--left": `${e.left}%`,
-              "--delay": `${e.delay}s`,
-              "--duration": `${e.duration}s`,
+              "--left": `${ember.left}%`,
+              "--delay": `${ember.delay}s`,
+              "--duration": `${ember.duration}s`,
             }}
           />
         ))}

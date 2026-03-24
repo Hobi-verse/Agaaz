@@ -1,23 +1,24 @@
-// SportSelector - Dropdown component to select sport category and event
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import { getSportTypeLabel, sportsData } from "../data/sportsData";
 import {
-  sportsData,
-  getSportById,
-  getSportTypeLabel,
-} from "../data/sportsData";
+  getAvailableSports,
+  resolveSelectedSport,
+  resolveSelectedSubType,
+} from "./SportSelector.utils";
 
-const SportSelector = ({ onSportSelect, selectedSport }) => {
+const SportSelector = ({
+  excludedSportIds = [],
+  onSportSelect,
+  selectedSport,
+}) => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedSportId, setSelectedSportId] = useState("");
   const [selectedSubType, setSelectedSubType] = useState("");
 
-  // Sports to exclude from registration (registration closed for these)
-  const excludedSportIds = ['cricket'];
-
-  const availableSports = selectedCategory
-    ? (sportsData.find((cat) => cat.id === selectedCategory)?.sports || [])
-      .filter((sport) => !excludedSportIds.includes(sport.id))
-    : [];
+  const availableSports = useMemo(
+    () => getAvailableSports(selectedCategory, excludedSportIds),
+    [selectedCategory, excludedSportIds],
+  );
 
   const currentSport = availableSports.find((s) => s.id === selectedSportId);
   const hasSubTypes =
@@ -37,24 +38,14 @@ const SportSelector = ({ onSportSelect, selectedSport }) => {
     setSelectedSubType("");
 
     const sport = availableSports.find((s) => s.id === sportId);
-    if (!sport?.hasSubTypes) {
-      const fullSport = getSportById(sportId);
-      onSportSelect(fullSport);
-    } else {
-      onSportSelect(null);
-    }
+    onSportSelect(resolveSelectedSport(sportId, sport?.hasSubTypes));
   };
 
   const handleSubTypeChange = (e) => {
     const subTypeId = e.target.value;
     setSelectedSubType(subTypeId);
 
-    if (subTypeId) {
-      const fullSport = getSportById(subTypeId);
-      onSportSelect(fullSport);
-    } else {
-      onSportSelect(null);
-    }
+    onSportSelect(resolveSelectedSubType(subTypeId));
   };
 
   return (

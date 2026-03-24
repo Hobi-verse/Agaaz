@@ -31,6 +31,18 @@
   line-height: 1.4;
 }
 
+.resultMessageBanner {
+  width: fit-content;
+  max-width: 100%;
+  margin: 16px auto 0;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(248, 113, 113, 0.35);
+  background: rgba(127, 29, 29, 0.28);
+  color: #fecaca;
+  font-size: 14px;
+}
+
 /* Filters */
 .resultFilters {
   width: min(1200px, 100%);
@@ -159,7 +171,6 @@
 .teamNameWrapper {
   position: relative;
   display: inline-block;
-  cursor: pointer;
 }
 
 .teamName {
@@ -180,6 +191,12 @@
   background: rgba(255, 142, 47, 0.15);
   border-color: rgba(255, 142, 47, 0.3);
   transform: translateY(-1px);
+}
+
+.participantMeta {
+  margin-top: 6px;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.58);
 }
 
 .winnerTeam {
@@ -257,6 +274,19 @@
   border: 1px solid rgba(255, 215, 0, 0.3);
 }
 
+.ongoingBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 20px;
+  background: rgba(251, 146, 60, 0.16);
+  color: #fdba74;
+  font-weight: 700;
+  font-size: 12px;
+  border: 1px solid rgba(251, 146, 60, 0.32);
+}
+
 .toBePlayedBadge {
   display: inline-flex;
   align-items: center;
@@ -268,6 +298,17 @@
   font-weight: 600;
   font-size: 12px;
   border: 1px solid rgba(100, 150, 255, 0.3);
+}
+
+.resultOutcome {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.resultScore {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.65);
 }
 
 /* Individual Results */

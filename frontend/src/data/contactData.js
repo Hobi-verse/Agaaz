@@ -3,13 +3,13 @@ import RakeshDiwedi from "../assets/faculty-cordinator/Dr-RakeshDiwedi.jpeg";
 import RakeshKumarSingh from "../assets/faculty-cordinator/Dr-RakeshSingh.jpeg";
 import AnuragShrivastava from "../assets/faculty-cordinator/prof-Anurag.jpeg";
 import Ahmad from "../assets/faculty-cordinator/ahmad.PNG";
-import rohitYadav from "../assets/chief-guest/rohitYadavSir.jpeg"
-import avinashJavank from "../assets/chief-guest/avanishJayank.PNG"
-import CseHod from "../assets/chief-guest/cseHod.PNG"
-import CeHod from "../assets/chief-guest/ceHod.jpeg"
-import eceHod from "../assets/chief-guest/eceHod.PNG"
-import electricalHod from "../assets/chief-guest/electricalHod.PNG"
-import meHod from "../assets/chief-guest/meHod.PNG"
+import rohitYadav from "../assets/chief-guest/rohitYadavSir.jpeg";
+import avinashJavank from "../assets/chief-guest/avanishJayank.PNG";
+import CseHod from "../assets/chief-guest/cseHod.PNG";
+import CeHod from "../assets/chief-guest/ceHod.jpeg";
+import eceHod from "../assets/chief-guest/eceHod.PNG";
+import electricalHod from "../assets/chief-guest/electricalHod.PNG";
+import meHod from "../assets/chief-guest/meHod.PNG";
 
 export const contactPage = {
   title: "Chief Discipline & Coordination Officers",
@@ -120,5 +120,20 @@ export const contactCards2 = [
     name: "Dr. Kamlesh Tiwari",
     role: "Coordinator-Mechanical Engineering",
     imageSrc: meHod,
+  },
+];
+
+export const contactSections = [
+  {
+    key: "chief-discipline",
+    title: contactPage.title,
+    subtitle: contactPage.subtitle,
+    cards: contactCards,
+  },
+  {
+    key: "faculty-coordinators",
+    title: contactPage2.title,
+    subtitle: contactPage2.subtitle,
+    cards: contactCards2,
   },
 ];

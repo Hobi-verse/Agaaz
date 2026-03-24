@@ -1,6 +1,6 @@
 import React from "react";
 import "./ChiefGuest.css";
-import ProfileCard from "../components/profileCard";
+import ProfileCard from "../components/ProfileCard";
 
 const ChiefGuest = ({ members }) => {
   return (

@@ -167,6 +167,7 @@ async function setMatchResult(req, res) {
     match.loserRegistrationId = loserId;
     match.scoreA = scoreA !== undefined ? scoreA : null;
     match.scoreB = scoreB !== undefined ? scoreB : null;
+    match.liveScoreUpdatedAt = new Date();
     match.status = 'finished';
 
     await match.save();
@@ -174,6 +175,37 @@ async function setMatchResult(req, res) {
     return res.json({ success: true, data: match });
   } catch (error) {
     return res.status(500).json({ success: false, message: 'Failed to update match result' });
+  }
+}
+
+// PUT /api/matches/:id/live-score
+// body: { scoreA, scoreB }
+async function updateLiveScore(req, res) {
+  try {
+    const { id } = req.params;
+    const { scoreA, scoreB } = req.body;
+
+    const match = await Match.findById(id);
+    if (!match) {
+      return res.status(404).json({ success: false, message: 'Match not found' });
+    }
+
+    if (match.status !== 'ongoing') {
+      return res.status(400).json({
+        success: false,
+        message: 'Live score can only be updated for ongoing matches',
+      });
+    }
+
+    match.scoreA = scoreA !== undefined ? String(scoreA).trim() || null : match.scoreA;
+    match.scoreB = scoreB !== undefined ? String(scoreB).trim() || null : match.scoreB;
+    match.liveScoreUpdatedAt = new Date();
+
+    await match.save();
+
+    return res.json({ success: true, data: match });
+  } catch (error) {
+    return res.status(500).json({ success: false, message: 'Failed to update live score' });
   }
 }
 
@@ -206,6 +238,7 @@ module.exports = {
   getParticipants,
   listMatches,
   createMatch,
+  updateLiveScore,
   setMatchResult,
   updateMatchStatus,
 };

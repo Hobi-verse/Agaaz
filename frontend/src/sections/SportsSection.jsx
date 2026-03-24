@@ -1,24 +1,18 @@
 import "./SportsSection.css";
-import SportsCard from "../components/sportsCard";
-import { sportsCards, sportsPage } from "../data/sportsData";
+import SportsCard from "../components/SportsCard";
+import {
+  sportsCards,
+  SPORT_CARD_ROUTE_MAP,
+  sportsPage,
+} from "../data/sportsData";
 import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
 
 export default function SportsSection() {
   const navigate = useNavigate();
 
-  // Map sport keys to sport IDs for navigation
-  const sportKeyToId = {
-    // basketball: "basketball",
-    cricket: "cricket",
-    football: "football",
-    badminton: "badminton_singles",
-    athletics: "athletics_100m",
-    "athletics-5v5": "athletics_longjump",
-  };
-
   const handleSportClick = (sportKey) => {
-    const sportId = sportKeyToId[sportKey];
+    const sportId = SPORT_CARD_ROUTE_MAP[sportKey];
     if (sportId) {
       navigate(`/sport/${sportId}`);
     }
@@ -53,7 +47,7 @@ export default function SportsSection() {
               <h3 className="sportsTitle">SEE MORE SPORTS</h3>
               <p className="sportsMeta">Browse the full list of events</p>
 
-              <div style={{ display: "flex", justifyContent: "center" }}>
+              <div className="sportsCardAction">
                 <Button
                   className="sportsCardCta"
                   onClick={() => navigate("/sports")}

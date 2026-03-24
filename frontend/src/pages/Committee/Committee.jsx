@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./Committee.css";
 import { committeeData } from "../../data/committeeData";
-import ProfileCard from "../../components/profileCard";
+import ProfileCard from "../../components/ProfileCard";
 
 function ImageModal({ isOpen, imageSrc, name, onClose }) {
   if (!isOpen) return null;

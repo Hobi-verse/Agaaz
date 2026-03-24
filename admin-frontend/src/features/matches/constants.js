@@ -1,0 +1,16 @@
+export const LIVE_SCORE_SPORTS = new Set([
+  "cricket",
+  "football",
+  "volleyball",
+  "basketball",
+  "kho_kho",
+  "tug_of_war",
+  "badminton_singles",
+  "badminton_doubles",
+  "badminton_mixed",
+  "tt_singles",
+  "tt_doubles",
+  "tt_mixed",
+  "carrom",
+  "carrom_singles",
+]);

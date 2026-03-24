@@ -1,29 +1,23 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import Tabs from "./components/Tabs";
+import { ADMIN_TABS } from "./constants/adminTabs";
 import Dashboard from "./pages/Dashboard";
 import Matches from "./pages/Matches";
 import Login from "./pages/Login";
+import Notices from "./pages/Notices";
+import { clearStoredAuth, readStoredUser } from "./utils/authSession";
 
 export default function App() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(() => readStoredUser());
   const [tab, setTab] = useState("registrations");
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    const userData = localStorage.getItem("user");
-    if (token && userData) {
-      setUser(JSON.parse(userData));
-    }
-  }, []);
 
   function handleLogin(userData) {
     setUser(userData);
   }
 
   function handleLogout() {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
+    clearStoredAuth();
     setUser(null);
   }
 
@@ -48,14 +42,13 @@ export default function App() {
         <Tabs
           activeKey={tab}
           onChange={setTab}
-          tabs={[
-            { key: "registrations", label: "Registrations" },
-            { key: "matches", label: "Matches" },
-          ]}
+          tabs={ADMIN_TABS}
         />
 
         <div className="mt-6">
-          {tab === "registrations" ? <Dashboard /> : <Matches user={user} />}
+          {tab === "registrations" ? <Dashboard /> : null}
+          {tab === "matches" ? <Matches user={user} /> : null}
+          {tab === "notices" ? <Notices /> : null}
         </div>
       </div>
     </div>

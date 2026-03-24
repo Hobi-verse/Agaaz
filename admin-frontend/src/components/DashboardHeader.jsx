@@ -1,5 +1,3 @@
-import { getApiBaseUrl } from "../services/adminApi";
-
 export default function DashboardHeader({ count, total }) {
   return (
     <header className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">

@@ -11,6 +11,7 @@ const paymentRoutes = require('./routes/payment');
 const visitsRoutes = require('./routes/visits');
 const matchesRoutes = require('./routes/matches');
 const authRoutes = require('./routes/auth');
+const noticesRoutes = require('./routes/notices');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -52,6 +53,7 @@ app.use('/api/payment', paymentRoutes);
 app.use('/api/visits', visitsRoutes);
 app.use('/api/matches', matchesRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/notices', noticesRoutes);
 
 // Serve frontend (Vite build) in production
 // This prevents 404s when refreshing on client-side routes (React Router).

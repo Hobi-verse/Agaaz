@@ -1,13 +1,13 @@
 import "./sportsCard.css";
 import Button from "./Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faBasketball } from "@fortawesome/free-solid-svg-icons";
+import "./FormFields.css";
 
 export default function SportsCard({
   title = "Cricket",
   meta = "Open Category",
   cta = "VIEW RULES & REGISTER",
-  icon, // = faBasketball,
+  icon,
   iconSrc,
   iconAlt,
   onCtaClick,
@@ -30,7 +30,7 @@ export default function SportsCard({
         <h3 className="sportsTitle">{title}</h3>
         <p className="sportsMeta">{meta}</p>
 
-        <div style={{ display: "flex", justifyContent: "center" }}>
+        <div className="sportsCardAction">
           <Button className="sportsCardCta" onClick={onCtaClick}>
             {cta}
           </Button>

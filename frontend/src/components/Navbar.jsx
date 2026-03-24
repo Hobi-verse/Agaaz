@@ -7,7 +7,7 @@ import Banner from "./Banner";
 const defaultLinks = [
   { label: "About", href: "#about" },
   { label: "Sports", href: "#sports" },
-  { label: "Schedule", href: "#schedule" },
+  { label: "Live Match Score", to: "/live-match-score" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -137,7 +137,7 @@ export default function Navbar({ links = defaultLinks }) {
             )}
           </div>
         </div>
-      </nav>{" "}
+      </nav>
       <Banner />
     </header>
   );

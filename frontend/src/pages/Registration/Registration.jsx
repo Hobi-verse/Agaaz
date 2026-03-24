@@ -5,7 +5,16 @@ import toast, { Toaster } from "react-hot-toast";
 import SportSelector from "../../components/SportSelector";
 import FormInput from "../../components/FormInput";
 import FileUpload from "../../components/FileUpload";
-import { isTeamSport, getSportTypeLabel } from "../../data/sportsData";
+import {
+  getSportTypeLabel,
+  isTeamSport,
+  REGISTRATION_DISABLED_SPORT_IDS,
+} from "../../data/sportsData";
+import {
+  createInitialRegistrationFormData,
+  registrationToastOptions,
+} from "./registrationConfig";
+import RegistrationTerms from "./RegistrationTerms";
 import {
   createPaymentOrder,
   verifyPaymentAndRegister,
@@ -19,17 +28,7 @@ export default function Registration() {
   const [selectedSport, setSelectedSport] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [razorpayLoaded, setRazorpayLoaded] = useState(false);
-
-  const [formData, setFormData] = useState({
-    name: "",
-    universityName: "",
-    branch: "",
-    teamName: "",
-    mobileNo: "",
-    email: "",
-    aadharNo: "",
-    aadharPhoto: null,
-  });
+  const [formData, setFormData] = useState(createInitialRegistrationFormData);
 
   const [errors, setErrors] = useState({});
   const [termsAccepted, setTermsAccepted] = useState(false);
@@ -49,23 +48,11 @@ export default function Registration() {
     });
   }, []);
 
-  // Reset form when sport changes
-  useEffect(() => {
-    setFormData({
-      name: "",
-      universityName: "",
-      branch: "",
-      teamName: "",
-      mobileNo: "",
-      email: "",
-      aadharNo: "",
-      aadharPhoto: null,
-    });
-    setErrors({});
-  }, [selectedSport?.id]);
-
   const handleSportSelect = (sport) => {
     setSelectedSport(sport);
+    setFormData(createInitialRegistrationFormData());
+    setErrors({});
+    setTermsAccepted(false);
   };
 
   const handleChange = (e) => {
@@ -196,6 +183,9 @@ export default function Registration() {
               position: "top-center",
             });
             setSelectedSport(null);
+            setFormData(createInitialRegistrationFormData());
+            setErrors({});
+            setTermsAccepted(false);
             // Redirect to home page after successful registration
             setTimeout(() => {
               navigate("/");
@@ -242,28 +232,7 @@ export default function Registration() {
           top: 100,
         }}
         toastOptions={{
-          style: {
-            zIndex: 99999,
-            padding: '16px 20px',
-            borderRadius: '12px',
-            fontSize: '14px',
-            fontWeight: '600',
-            boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
-          },
-          success: {
-            style: {
-              background: 'linear-gradient(135deg, #ff8e2f 0%, #ffb24a 100%)',
-              color: '#1c0f53',
-              zIndex: 99999
-            }
-          },
-          error: {
-            style: {
-              background: 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)',
-              color: 'white',
-              zIndex: 99999
-            }
-          },
+          ...registrationToastOptions,
         }}
       />
 
@@ -274,6 +243,7 @@ export default function Registration() {
 
       <section className="regCard">
         <SportSelector
+          excludedSportIds={REGISTRATION_DISABLED_SPORT_IDS}
           onSportSelect={handleSportSelect}
           selectedSport={selectedSport}
         />
@@ -398,55 +368,16 @@ export default function Registration() {
             />
 
             {/* Terms and Conditions Checkbox */}
-            <div className="termsCheckbox" style={{
-              margin: '20px 0',
-              padding: '16px',
-              background: 'rgba(255, 178, 74, 0.1)',
-              border: '1px solid rgba(255, 178, 74, 0.3)',
-              borderRadius: '10px',
-            }}>
-              <label style={{
-                display: 'flex',
-                alignItems: 'flex-start',
-                gap: '12px',
-                cursor: 'pointer',
-                color: 'rgba(255, 255, 255, 0.9)',
-                fontSize: '14px',
-                lineHeight: '1.5',
-              }}>
-                <input
-                  type="checkbox"
-                  checked={termsAccepted}
-                  onChange={(e) => setTermsAccepted(e.target.checked)}
-                  style={{
-                    width: '20px',
-                    height: '20px',
-                    marginTop: '2px',
-                    accentColor: '#ffb24a',
-                    cursor: 'pointer',
-                  }}
-                />
-                <span>
-                  I have read and agree to the{' '}
-                  <a href="/rules" target="_blank" style={{ color: '#ffb24a', textDecoration: 'underline' }}>
-                    Rules & Regulations
-                  </a>,{' '}
-                  <a href="/code-of-conduct" target="_blank" style={{ color: '#ffb24a', textDecoration: 'underline' }}>
-                    Code of Conduct
-                  </a>, and{' '}
-                  <a href="/refund-policy" target="_blank" style={{ color: '#ffb24a', textDecoration: 'underline' }}>
-                    Refund Policy
-                  </a>{' '}
-                  of AAGAAZ 2026.
-                </span>
-              </label>
-            </div>
+            <RegistrationTerms
+              checked={termsAccepted}
+              onChange={setTermsAccepted}
+            />
 
             <button
               type="submit"
               className="regPayBtn"
               disabled={isLoading || !termsAccepted}
-              title={!termsAccepted ? 'Please accept terms and conditions' : ''}
+              title={!termsAccepted ? "Please accept terms and conditions" : ""}
             >
               {isLoading
                 ? "Processing..."

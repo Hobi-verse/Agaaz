@@ -1,44 +1,38 @@
 import "./FeesAwards.css";
 import { sportsData } from "../../data/sportsData";
 
-export default function FeesAwards() {
-  const formatAmount = (amount) => {
-    if (typeof amount === "string") return amount;
-    return `₹${amount.toLocaleString("en-IN")}`;
-  };
+function formatAmount(amount) {
+  return typeof amount === "string" ? amount : `₹${amount.toLocaleString("en-IN")}`;
+}
 
-  //data from sportsData (Data file)
-  const feesAndAwards = [];
-  sportsData.forEach((category) => {
-    category.sports.forEach((sport) => {
+function buildFeesAndAwards() {
+  return sportsData.flatMap((category) =>
+    category.sports.flatMap((sport) => {
       if (sport.subTypes) {
-        sport.subTypes.forEach((sub) => {
-          feesAndAwards.push({
-            sport: `${sport.name} (${sub.name})`,
-            category: category.name,
-            entryFee: sub.fee,
-            winner: "Will be Announced Soon",
-          });
-        });
-      } else {
-        feesAndAwards.push({
+        return sport.subTypes.map((subType) => ({
+          key: `${sport.id}-${subType.id}`,
+          sport: `${sport.name} (${subType.name})`,
+          category: category.name,
+          entryFee: formatAmount(subType.fee),
+          winner: "Will be Announced Soon",
+        }));
+      }
+
+      return [
+        {
+          key: sport.id,
           sport: sport.name,
           category: category.name,
-          entryFee: sport.fee,
+          entryFee: formatAmount(sport.fee),
           winner: "Will be Announced Soon",
-        });
-      }
-    });
-  });
+        },
+      ];
+    }),
+  );
+}
 
-  // Group fees by category for better table display
-  const groupedFees = feesAndAwards.reduce((acc, item) => {
-    if (!acc[item.category]) {
-      acc[item.category] = [];
-    }
-    acc[item.category].push(item);
-    return acc;
-  }, {});
+export default function FeesAwards() {
+  const feesAndAwards = buildFeesAndAwards();
 
   return (
     <main className="fees-page">
@@ -63,7 +57,16 @@ export default function FeesAwards() {
                   <th>WINNER</th>
                 </tr>
               </thead>
-              
+              <tbody>
+                {feesAndAwards.map((item) => (
+                  <tr key={item.key}>
+                    <td>{item.category}</td>
+                    <td>{item.sport}</td>
+                    <td>{item.entryFee}</td>
+                    <td>{item.winner}</td>
+                  </tr>
+                ))}
+              </tbody>
             </table>
           </div>
 
