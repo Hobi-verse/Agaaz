@@ -1,5 +1,13 @@
 const Match = require('../models/Match');
 const Registration = require('../models/Registration');
+const Event = require('../models/Event');
+const { notifyMatchesChanged, streamMatches } = require('../services/matchStream');
+
+const legacyPointSports = new Set([
+  'cricket', 'football', 'volleyball', 'basketball', 'kho_kho', 'tug_of_war',
+  'badminton_singles', 'badminton_doubles', 'badminton_mixed',
+  'tt_singles', 'tt_doubles', 'tt_mixed', 'carrom', 'carrom_singles',
+]);
 
 // GET /api/matches/participants?sportId=...
 // Returns only registrationId + name (minimal for match making)
@@ -65,16 +73,28 @@ async function listMatches(req, res) {
 // body: { sportId, sportName, sportCategory, registrationIdA, nameA, registrationIdB, nameB, scheduledAt }
 async function createMatch(req, res) {
   try {
-    const { sportId, sportName, sportCategory, registrationIdA, nameA, registrationIdB, nameB, scheduledAt } = req.body;
+    const {
+      sportId,
+      sportName: requestedSportName,
+      sportCategory: requestedSportCategory,
+      eventId,
+      registrationIdA,
+      nameA,
+      registrationIdB,
+      nameB,
+      scheduledAt,
+    } = req.body;
 
-    if (!sportId || !sportName) {
+    if (!sportId) {
       return res.status(400).json({
         success: false,
-        message: 'sportId and sportName are required',
+        message: 'sportId is required',
       });
     }
 
-    if ((!registrationIdA && !nameA) || (!registrationIdB && !nameB)) {
+    const cleanNameA = String(nameA || '').trim();
+    const cleanNameB = String(nameB || '').trim();
+    if ((!registrationIdA && !cleanNameA) || (!registrationIdB && !cleanNameB)) {
       return res.status(400).json({ success: false, message: 'Both participants are required' });
     }
 
@@ -82,33 +102,58 @@ async function createMatch(req, res) {
       return res.status(400).json({ success: false, message: 'Participants must be different' });
     }
 
-    // Validate registered participants
-    if (registrationIdA) {
-      const regA = await Registration.findOne({ registrationId: registrationIdA, sportId });
-      if (!regA) {
-        return res.status(400).json({ success: false, message: 'Participant A not found for this sport' });
-      }
+    if (!registrationIdA && !registrationIdB && cleanNameA.toLowerCase() === cleanNameB.toLowerCase()) {
+      return res.status(400).json({ success: false, message: 'Participants must be different' });
     }
 
-    if (registrationIdB) {
-      const regB = await Registration.findOne({ registrationId: registrationIdB, sportId });
-      if (!regB) {
-        return res.status(400).json({ success: false, message: 'Participant B not found for this sport' });
+    let selectedSport = null;
+    let eventName = null;
+    if (eventId) {
+      const event = await Event.findOne({ eventId });
+      selectedSport = event?.sports.find((sport) => sport.sportId === sportId);
+      if (!event || !selectedSport) {
+        return res.status(400).json({ success: false, message: 'Sport was not found in this event' });
       }
+      eventName = event.eventName;
+    }
+
+    const resolvedSportName = selectedSport?.sportName || requestedSportName;
+    const resolvedSportCategory = selectedSport?.sportCategory || requestedSportCategory;
+    const scoringMode = selectedSport?.scoringMode || req.body.scoringMode ||
+      (legacyPointSports.has(sportId) ? 'points' : 'result');
+    if (!resolvedSportName || !['points', 'result'].includes(scoringMode)) {
+      return res.status(400).json({ success: false, message: 'A valid sport and scoring mode are required' });
+    }
+
+    // Validate registered participants
+    const registrationIds = [registrationIdA, registrationIdB].filter(Boolean);
+    const registrations = registrationIds.length
+      ? await Registration.find({ registrationId: { $in: registrationIds }, sportId }).select('registrationId name').lean()
+      : [];
+    const registrationsById = new Map(registrations.map((registration) => [registration.registrationId, registration]));
+    if (registrationIdA && !registrationsById.has(registrationIdA)) {
+      return res.status(400).json({ success: false, message: 'Participant A not found for this sport' });
+    }
+    if (registrationIdB && !registrationsById.has(registrationIdB)) {
+      return res.status(400).json({ success: false, message: 'Participant B not found for this sport' });
     }
 
     const match = await Match.create({
       sportId,
-      sportName,
-      sportCategory,
+      sportName: resolvedSportName,
+      sportCategory: resolvedSportCategory,
+      eventId: eventId || null,
+      eventName,
+      scoringMode,
       participants: [
-        { registrationId: registrationIdA || null, name: registrationIdA ? (await Registration.findOne({ registrationId: registrationIdA })).name : nameA },
-        { registrationId: registrationIdB || null, name: registrationIdB ? (await Registration.findOne({ registrationId: registrationIdB })).name : nameB },
+        { registrationId: registrationIdA || null, name: registrationsById.get(registrationIdA)?.name || cleanNameA },
+        { registrationId: registrationIdB || null, name: registrationsById.get(registrationIdB)?.name || cleanNameB },
       ],
       status: 'scheduled',
       scheduledAt: scheduledAt ? new Date(scheduledAt) : null,
     });
 
+    notifyMatchesChanged();
     return res.status(201).json({ success: true, data: match });
   } catch (error) {
     return res.status(500).json({ success: false, message: 'Failed to create match' });
@@ -159,11 +204,21 @@ async function setMatchResult(req, res) {
       });
     }
 
-    const loserId = participantIds.find((pid) => pid !== winnerId) || null;
-    const loserName = participantNames.find((name) => name !== winnerName) || null;
+    if (winnerId && winnerName) {
+      const winnerById = match.participants.find((participant) => participant.registrationId === winnerId);
+      if (winnerById?.name !== winnerName) {
+        return res.status(400).json({ success: false, message: 'Winner ID and name must refer to the same participant' });
+      }
+    }
+
+    const winnerIndex = match.participants.findIndex((participant) =>
+      winnerId ? participant.registrationId === winnerId : participant.name === winnerName,
+    );
+    const resolvedWinnerName = match.participants[winnerIndex]?.name || winnerName;
+    const loserId = match.participants[1 - winnerIndex]?.registrationId || null;
 
     match.winnerRegistrationId = winnerId;
-    match.winnerName = winnerName;
+    match.winnerName = resolvedWinnerName;
     match.loserRegistrationId = loserId;
     match.scoreA = scoreA !== undefined ? scoreA : null;
     match.scoreB = scoreB !== undefined ? scoreB : null;
@@ -171,6 +226,7 @@ async function setMatchResult(req, res) {
     match.status = 'finished';
 
     await match.save();
+    notifyMatchesChanged();
 
     return res.json({ success: true, data: match });
   } catch (error) {
@@ -197,11 +253,17 @@ async function updateLiveScore(req, res) {
       });
     }
 
+    if (match.scoringMode === 'result' ||
+        (!match.scoringMode && !legacyPointSports.has(match.sportId))) {
+      return res.status(400).json({ success: false, message: 'This event is configured as result-only' });
+    }
+
     match.scoreA = scoreA !== undefined ? String(scoreA).trim() || null : match.scoreA;
     match.scoreB = scoreB !== undefined ? String(scoreB).trim() || null : match.scoreB;
     match.liveScoreUpdatedAt = new Date();
 
     await match.save();
+    notifyMatchesChanged();
 
     return res.json({ success: true, data: match });
   } catch (error) {
@@ -227,6 +289,7 @@ async function updateMatchStatus(req, res) {
 
     match.status = status;
     await match.save();
+    notifyMatchesChanged();
 
     return res.json({ success: true, data: match });
   } catch (error) {
@@ -235,6 +298,7 @@ async function updateMatchStatus(req, res) {
 }
 
 module.exports = {
+  streamMatches,
   getParticipants,
   listMatches,
   createMatch,

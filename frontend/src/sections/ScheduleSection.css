@@ -1,10 +1,10 @@
 .scheduleSection {
   width: 100%;
-  padding: 56px 18px 80px;
+  padding: var(--ui-section-space) var(--ui-page-gutter);
 }
 
 .scheduleHeader {
-  width: min(1180px, 100%);
+  width: min(var(--ui-content-width), 100%);
   margin: 0 auto 16px;
   text-align: center;
 }
@@ -29,7 +29,7 @@
 }
 
 .scheduleTabs {
-  width: min(1180px, 100%);
+  width: min(var(--ui-content-width), 100%);
   margin: 18px auto 10px;
   position: relative;
   display: flex;
@@ -89,7 +89,7 @@
 }
 
 .scheduleTabActive {
-  background: #ff8e2f;
+  background: var(--brand-amber-500);
   color: rgba(255, 255, 255, 0.98);
   text-shadow: 0 2px 0 rgba(0, 0, 0, 0.35);
   box-shadow: 0 10px 22px rgba(0, 0, 0, 0.28);
@@ -102,7 +102,7 @@
 }
 
 .scheduleTableWrap {
-  width: min(1180px, 100%);
+  width: min(var(--ui-content-width), 100%);
   margin: 12px auto 0;
   border-radius: 8px;
   overflow-x: auto;
@@ -118,7 +118,7 @@
 }
 
 .scheduleTable thead th {
-  background: #ff8e2f;
+  background: var(--brand-amber-500);
   color: rgba(255, 255, 255, 0.96);
   font-weight: 900;
   font-size: 14px;
@@ -198,7 +198,7 @@
   background: rgba(255, 142, 47, 0.15);
   border: 2px solid rgba(255, 142, 47, 0.5);
   border-radius: 50px;
-  color: #ff8e2f;
+  color: var(--brand-amber-500);
   font-weight: 700;
   font-size: clamp(14px, 2vw, 18px);
 }
@@ -209,7 +209,7 @@
 
 /* Coming Soon Section */
 .scheduleComingSoon {
-  width: min(1180px, 100%);
+  width: min(var(--ui-content-width), 100%);
   margin: 32px auto 0;
   text-align: center;
 }
@@ -220,7 +220,7 @@
   font-weight: 800;
   letter-spacing: 1px;
   text-transform: uppercase;
-  background: #ff8e2f;
+  background: var(--brand-amber-500);
   color: white;
   border: none;
   border-radius: 8px;
@@ -256,7 +256,7 @@
 }
 
 .scheduleTable thead th {
-  background: #ff8e2f;
+  background: var(--brand-amber-500);
   color: rgba(255, 255, 255, 0.96);
   font-weight: 900;
   font-size: 14px;
@@ -351,7 +351,7 @@
   font-weight: 800;
   letter-spacing: 1px;
   text-transform: uppercase;
-  background: #ff8e2f;
+  background: var(--brand-amber-500);
   color: white;
   border: none;
   border-radius: 8px;
@@ -480,7 +480,7 @@
 
 .schedulePopupIcon {
   font-size: 56px;
-  color: #ff8e2f;
+  color: var(--brand-amber-500);
   animation: pulse 2s infinite;
 }
 
@@ -499,7 +499,7 @@
   background: rgba(255, 142, 47, 0.15);
   border: 2px solid rgba(255, 142, 47, 0.4);
   border-radius: 50px;
-  color: #ff8e2f !important;
+  color: var(--brand-amber-500) !important;
   font-weight: 700 !important;
   display: inline-block;
   font-size: 14px !important;
@@ -554,7 +554,7 @@
 }
 
 .scheduleDayDropdown:focus {
-  border-color: #ff8e2f;
+  border-color: var(--brand-amber-500);
   box-shadow: 0 0 0 3px rgba(255, 142, 47, 0.2);
 }
 
@@ -605,14 +605,14 @@
 }
 
 .scheduleSportsTabActive {
-  background: #ff8e2f;
-  border-color: #ff8e2f;
+  background: var(--brand-amber-500);
+  border-color: var(--brand-amber-500);
   color: white;
   box-shadow: 0 8px 20px rgba(255, 142, 47, 0.4);
 }
 
 .scheduleSportsTabActive:hover {
-  background: #ff8e2f;
+  background: var(--brand-amber-500);
   transform: translateY(-2px);
   box-shadow: 0 10px 24px rgba(255, 142, 47, 0.5);
 }
@@ -622,7 +622,7 @@
   margin: 0 0 20px;
   padding: 14px 20px;
   background: rgba(255, 142, 47, 0.1);
-  border-left: 4px solid #ff8e2f;
+  border-left: 4px solid var(--brand-amber-500);
   border-radius: 6px;
   text-align: left;
 }
@@ -635,7 +635,7 @@
 }
 
 .scheduleNotes strong {
-  color: #ff8e2f;
+  color: var(--brand-amber-500);
   font-weight: 800;
 }
 

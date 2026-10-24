@@ -162,7 +162,7 @@ export default function Notices() {
               <button
                 type="submit"
                 disabled={saving}
-                className="h-11 w-full rounded-xl bg-slate-900 px-4 text-sm font-semibold text-white shadow-sm disabled:opacity-60"
+                className="h-11 w-full rounded-xl bg-brand-700 px-4 text-sm font-semibold text-white shadow-sm hover:bg-brand-800 disabled:opacity-60"
               >
                 {saving
                   ? "Saving…"
@@ -252,7 +252,7 @@ export default function Notices() {
                           type="button"
                           onClick={() => handlePublish(notice._id)}
                           disabled={publishingId === notice._id}
-                          className="rounded-xl bg-slate-900 px-3 py-2 text-xs font-semibold text-white shadow-sm disabled:opacity-60"
+                          className="rounded-xl bg-brand-700 px-3 py-2 text-xs font-semibold text-white shadow-sm hover:bg-brand-800 disabled:opacity-60"
                         >
                           {publishingId === notice._id
                             ? "Publishing…"

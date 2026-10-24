@@ -11,7 +11,7 @@ export default function Tabs({ tabs, activeKey, onChange }) {
             className={
               "h-10 rounded-lg px-4 text-sm font-medium transition " +
               (active
-                ? "bg-slate-900 text-white"
+                ? "bg-brand-700 text-white"
                 : "text-slate-700 hover:bg-slate-100")
             }
           >

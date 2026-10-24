@@ -1,6 +1,36 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: "Inter", "Aptos", "Segoe UI", sans-serif;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 0.875rem;
+  --radius-2xl: 1.125rem;
+}
+
 :root {
+  --ui-font: "Inter", "Aptos", "Segoe UI", system-ui, sans-serif;
+  --ui-content-width: 1200px;
+  --ui-page-gutter: clamp(1rem, 3.5vw, 2rem);
+  --ui-section-space: clamp(3rem, 6.5vw, 5rem);
+  --ui-control-height: 44px;
+  --ui-control-radius: 12px;
+  --ui-card-radius: 18px;
+  --ui-card-padding: clamp(1rem, 2vw, 1.5rem);
+  --ui-shadow-card: 0 16px 40px rgba(8, 5, 28, 0.28);
+  --ui-border: rgba(255, 255, 255, 0.14);
+  --brand-violet-950: #1c0f53;
+  --brand-violet-900: #221060;
+  --brand-violet-800: #2a1677;
+  --brand-violet-700: #43218a;
+  --brand-primary: #6741c8;
+  --brand-primary-hover: #5634a9;
+  --brand-amber-300: #ffb24a;
+  --brand-amber-400: #ff9f1c;
+  --brand-amber-500: #ff8e2f;
+  --brand-amber-600: #f1771f;
+  --brand-amber-700: #d3651c;
   --app-bg: url("./assets/bg.png");
 }
 
@@ -10,24 +40,95 @@
   }
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 html,
 body {
-  height: 100%;
+  min-height: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
+  min-width: 320px;
   margin: 0;
   background-image: var(--app-bg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
+  color: rgba(255, 255, 255, 0.94);
+  font-family: var(--ui-font);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-/* Mobile Performance Optimizations */
-@media (max-width: 768px) {
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}
 
-  /* GPU acceleration for animated elements */
+button {
+  cursor: pointer;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+  touch-action: manipulation;
+}
+
+button:not(.ctaButton)[class] {
+  min-height: var(--ui-control-height);
+  border-radius: var(--ui-control-radius);
+  font-weight: 650;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.58;
+}
+
+input:not([type="checkbox"]):not([type="radio"]),
+select,
+textarea {
+  min-height: var(--ui-control-height);
+  border-radius: var(--ui-control-radius);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    background-color 160ms ease;
+}
+
+input:not([type="checkbox"]):not([type="radio"]):focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid rgba(155, 126, 240, 0.75);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: rgba(255, 178, 74, 0.35);
+  color: #fff;
+}
+
+/* Mobile performance optimizations for decorative effects. */
+@media (max-width: 768px) {
   .fireBubble,
   .ember {
     transform: translateZ(0);
@@ -35,26 +136,33 @@ body {
     backface-visibility: hidden;
   }
 
-  /* Reduce blur for better performance */
   .fireBubble {
     filter: none !important;
     box-shadow: 0 0 5px rgba(255, 100, 0, 0.4) !important;
   }
 
-  /* Simplify ember shadows */
   .ember {
     box-shadow: 0 0 4px #ff6600 !important;
   }
 
-  /* Reduce glow animations intensity */
   .heroTitle,
   .heroEventDates {
     animation: none !important;
     text-shadow: 0 5px 0 rgba(0, 0, 0, 0.35) !important;
   }
 
-  /* Speed up scrolling animations */
   .liveScoresScroll {
     animation-duration: 15s !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

@@ -2,7 +2,7 @@
 
 .rules-page {
   min-height: 100vh;
-  background: linear-gradient(180deg, #1c0f53 0%, #221060 100%);
+  background: linear-gradient(180deg, var(--brand-violet-950) 0%, var(--brand-violet-900) 100%);
 }
 
 /* Hero Section */
@@ -94,7 +94,7 @@
 }
 
 .rules-intro-text strong {
-  color: #ff9933;
+  color: var(--brand-amber-500);
 }
 
 /* Rules Grid */
@@ -135,7 +135,7 @@
 }
 
 .rule-number {
-  color: #ff9933;
+  color: var(--brand-amber-500);
   font-weight: 900;
 }
 
@@ -156,7 +156,7 @@
 }
 
 .rule-bullet {
-  color: #ff9933;
+  color: var(--brand-amber-500);
   font-size: 18px;
   font-weight: 700;
   flex-shrink: 0;

@@ -8,10 +8,12 @@ const {
   updateLiveScore,
   setMatchResult,
   updateMatchStatus,
+  streamMatches,
 } = require('../controllers/matches');
 const { authenticateToken } = require('../middleware/auth');
 
 router.get('/participants', authenticateToken, getParticipants);
+router.get('/live', streamMatches);
 router.get('/', listMatches);
 router.post('/', authenticateToken, createMatch);
 router.put('/:id/live-score', authenticateToken, updateLiveScore);

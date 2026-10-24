@@ -9,17 +9,21 @@ import {
 } from "../features/matches/utils";
 import {
   createMatch,
+  fetchEvents,
   fetchMatchParticipants,
   fetchMatches,
   fetchSportsList,
   setMatchResult,
+  subscribeToMatchUpdates,
   updateLiveMatchScore,
   updateMatchStatus,
 } from "../services/adminApi";
 import { normalizeSports } from "../utils/sports";
+import { supportsLiveScore } from "../features/matches/utils";
 
 export default function Matches({ user }) {
   const [sportsMeta, setSportsMeta] = useState([]);
+  const [events, setEvents] = useState([]);
 
   const [listSportId, setListSportId] = useState("");
   const [matches, setMatches] = useState([]);
@@ -49,11 +53,30 @@ export default function Matches({ user }) {
 
   const assignedSports = useMemo(() => user?.assignedSports ?? [], [user]);
   const sports = useMemo(
-    () =>
-      normalizeSports(sportsMeta).filter((s) =>
-        assignedSports.includes(s.sportId),
-      ),
-    [sportsMeta, assignedSports],
+    () => {
+      const registeredSports = normalizeSports(sportsMeta)
+        .filter((sport) => assignedSports.includes(sport.sportId))
+        .map((sport) => ({
+          ...sport,
+          scoringMode: sport.scoringMode || (supportsLiveScore(sport.sportId) ? "points" : "result"),
+          eventName: "Existing sports",
+        }));
+      const eventSports = events.flatMap((event) =>
+        (event.sports || []).map((sport) => ({
+          ...sport,
+          eventId: event.eventId,
+          eventName: event.eventName,
+          sportType: "custom",
+        })),
+      );
+      return [...registeredSports, ...eventSports];
+    },
+    [sportsMeta, events, assignedSports],
+  );
+
+  const visibleSportIds = useMemo(
+    () => new Set([...assignedSports, ...sports.filter((sport) => sport.eventId).map((sport) => sport.sportId)]),
+    [assignedSports, sports],
   );
 
   const fetchVisibleMatches = useCallback(
@@ -69,10 +92,10 @@ export default function Matches({ user }) {
       }
 
       return fetchedMatches.filter((match) =>
-        assignedSports.includes(match.sportId),
+        visibleSportIds.has(match.sportId),
       );
     },
-    [assignedSports],
+    [visibleSportIds],
   );
 
   useEffect(() => {
@@ -81,8 +104,14 @@ export default function Matches({ user }) {
 
     async function loadSports() {
       try {
-        const json = await fetchSportsList({ signal: controller.signal });
-        if (!cancelled) setSportsMeta(json.data || []);
+        const [sportsResponse, eventsResponse] = await Promise.all([
+          fetchSportsList({ signal: controller.signal }),
+          fetchEvents({ signal: controller.signal }),
+        ]);
+        if (!cancelled) {
+          setSportsMeta(sportsResponse.data || []);
+          setEvents(eventsResponse.data || []);
+        }
       } catch (e) {
         if (e?.name === "AbortError") return;
       }
@@ -126,12 +155,34 @@ export default function Matches({ user }) {
 
   useEffect(() => {
     let cancelled = false;
+    const unsubscribe = subscribeToMatchUpdates((updatedMatches) => {
+      if (cancelled) return;
+
+      const visibleMatches = (updatedMatches || []).filter((match) =>
+        listSportId
+          ? match.sportId === listSportId
+          : visibleSportIds.has(match.sportId),
+      );
+      setMatches(visibleMatches);
+      setMatchesError("");
+    });
+
+    return () => {
+      cancelled = true;
+      unsubscribe();
+    };
+  }, [listSportId, visibleSportIds]);
+
+  useEffect(() => {
+    let cancelled = false;
     const controller = new AbortController();
 
     async function loadParticipants() {
       setParticipants([]);
       setRegistrationIdA("");
       setRegistrationIdB("");
+      setCustomNameA("");
+      setCustomNameB("");
 
       if (!createSportId) return;
 
@@ -190,6 +241,8 @@ export default function Matches({ user }) {
         sportId: createSportId,
         sportName: selectedSport?.sportName || "",
         sportCategory: selectedSport?.sportCategory || "",
+        eventId: selectedSport?.eventId || "",
+        scoringMode: selectedSport?.scoringMode || "result",
         registrationIdA: participantA.registrationId || "",
         nameA: participantA.name || "",
         registrationIdB: participantB.registrationId || "",

@@ -11,7 +11,7 @@
 .sport-hero {
   position: relative;
   padding: 100px 18px 60px;
-  background: linear-gradient(180deg, #1c0f53 0%, #221060 100%);
+  background: linear-gradient(180deg, var(--brand-violet-950) 0%, var(--brand-violet-900) 100%);
   overflow: hidden;
 }
 
@@ -36,7 +36,7 @@
 }
 
 .sport-hero-content {
-  max-width: 1180px;
+  max-width: var(--ui-content-width);
   margin: 0 auto;
   position: relative;
   z-index: 1;
@@ -51,14 +51,14 @@
 }
 
 .breadcrumb-link {
-  color: #ffb24a;
+  color: var(--brand-amber-300);
   cursor: pointer;
   transition: all 0.3s ease;
   text-decoration: none;
 }
 
 .breadcrumb-link:hover {
-  color: #ff8e2f;
+  color: var(--brand-amber-500);
   text-decoration: underline;
 }
 
@@ -86,7 +86,7 @@
 
 .sport-category {
   font-size: clamp(14px, 2vw, 18px);
-  color: #ffb24a;
+  color: var(--brand-amber-300);
   margin-bottom: 20px;
   font-weight: 700;
   text-transform: uppercase;
@@ -104,12 +104,12 @@
 .sport-fee-badge {
   display: inline-block;
   padding: 14px 32px;
-  background: linear-gradient(180deg, #ffb24a 0%, #ff8e2f 45%, #f1771f 100%);
-  color: #1c0f53;
+  background: linear-gradient(180deg, var(--brand-amber-300) 0%, var(--brand-amber-500) 45%, var(--brand-amber-600) 100%);
+  color: var(--brand-violet-950);
   font-weight: 900;
   font-size: clamp(16px, 2vw, 20px);
   border-radius: 14px;
-  border: 2px solid #d3651c;
+  border: 2px solid var(--brand-amber-700);
   box-shadow: 0 8px 0 rgba(140, 60, 15, 0.95), 0 16px 24px rgba(0, 0, 0, 0.35);
   letter-spacing: 1px;
   transform: skewX(-8deg);
@@ -206,7 +206,7 @@
 
 .eligibility-label {
   font-size: 12px;
-  color: #ffb24a;
+  color: var(--brand-amber-300);
   text-transform: uppercase;
   letter-spacing: 3px;
   font-weight: 800;
@@ -258,7 +258,7 @@
   align-items: baseline;
   justify-content: center;
   min-width: 28px;
-  color: #ffb24a;
+  color: var(--brand-amber-300);
   font-weight: 900;
   font-size: 18px;
 }
@@ -387,24 +387,9 @@
   box-shadow: 0 10px 0 rgba(140, 60, 15, 0.95), 0 18px 22px rgba(0, 0, 0, 0.35);
 }
 
-.sportActionSecondary {
-  background: transparent;
-  color: #ffb24a;
-  border: 3px solid #ffb24a;
-  box-shadow: 0 8px 0 rgba(140, 60, 15, 0.6), 0 16px 24px rgba(0, 0, 0, 0.25);
-}
-
-.sportActionSecondary::before {
-  display: none;
-}
-
-.sportActionSecondary:hover {
-  background: rgba(255, 178, 74, 0.1);
-}
-
 /* CTA Section */
 .sport-cta-section {
-  max-width: 1180px;
+  max-width: var(--ui-content-width);
   margin: 50px auto 30px;
   padding: 40px 28px;
   background: rgba(0, 0, 0, 0.22);
@@ -452,8 +437,8 @@
 
 .sportCtaSecondary {
   background: transparent;
-  color: #ffb24a;
-  border: 3px solid #ffb24a;
+  color: var(--brand-amber-300);
+  border: 3px solid var(--brand-amber-300);
   box-shadow: 0 8px 0 rgba(140, 60, 15, 0.6), 0 16px 24px rgba(0, 0, 0, 0.25);
 }
 

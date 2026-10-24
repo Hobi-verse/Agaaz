@@ -20,7 +20,7 @@
 }
 
 .footerInner {
-  width: min(1180px, 100%);
+  width: min(var(--ui-content-width), 100%);
   margin: 0 auto;
   position: relative;
   z-index: 1;

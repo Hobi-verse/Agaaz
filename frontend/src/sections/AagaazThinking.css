@@ -1,11 +1,11 @@
 /* Aagaaz section - styled to match SportsSection patterns */
 .aagaazSection {
   width: 100%;
-  margin-top: 10%;
+  margin-top: var(--ui-section-space);
 }
 
 .aagaazHeader {
-  width: min(1180px, 100%);
+  width: min(var(--ui-content-width), 100%);
   margin: 0 auto;
   text-align: center;
   padding: 34px 18px 26px;
@@ -36,7 +36,7 @@
 .aagaazBodyWrap {
   margin: 26px 0 0;
   background: transparent;
-  padding: 70px 18px;
+  padding: var(--ui-section-space) var(--ui-page-gutter);
   position: relative;
   min-height: clamp(520px, 70vh, 780px);
   display: flex;
@@ -44,7 +44,7 @@
 }
 
 .aagaazBody {
-  width: min(1180px, 100%);
+  width: min(var(--ui-content-width), 100%);
   margin: 0 auto;
   position: relative;
   min-height: clamp(360px, 46vh, 560px);

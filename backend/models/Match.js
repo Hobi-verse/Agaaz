@@ -13,6 +13,9 @@ const matchSchema = new mongoose.Schema(
     sportId: { type: String, required: true, index: true },
     sportName: { type: String, required: true },
     sportCategory: { type: String },
+    eventId: { type: String, default: null, index: true },
+    eventName: { type: String, default: null },
+    scoringMode: { type: String, enum: ['points', 'result'] },
 
     participants: {
       type: [participantSchema],

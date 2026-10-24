@@ -11,11 +11,16 @@ export function formatMatchStatus(status) {
 }
 
 export function supportsLiveScore(sportId) {
+  if (sportId && typeof sportId === "object") {
+    return sportId.scoringMode
+      ? sportId.scoringMode === "points"
+      : LIVE_SCORE_SPORTS.has(sportId.sportId);
+  }
   return LIVE_SCORE_SPORTS.has(sportId);
 }
 
 export function getParticipantPayload(registrationId, customName) {
-  return registrationId === "others"
+  return !registrationId || registrationId === "others"
     ? { name: customName.trim() }
     : { registrationId };
 }

@@ -76,13 +76,25 @@
 
 /* reuse the main Button but scale it down for the card */
 .sportsCardCta {
-  transform: scale(0.62) skewX(-20deg);
-  transform-origin: center;
+  width: 100%;
+  justify-content: center;
+  gap: 10px;
+  padding: 8px 12px 8px 16px;
+  margin-top: 12px;
 }
 
 .sportsCardCta .ctaText {
-  font-size: 18px;
-  transform: skewX(-2deg);
+  font-size: 14px;
+}
+
+.sportsCardCta .ctaIconCircle {
+  width: 34px;
+  height: 34px;
+}
+
+.sportsCardCta .ctaIcon {
+  width: 16px;
+  height: 16px;
 }
 
 @media (max-width: 520px) {

@@ -1,1 +1,160 @@
 @import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", "Aptos", "Segoe UI", sans-serif;
+  --color-brand-600: #6741c8;
+  --color-brand-700: #5634a9;
+  --color-brand-800: #43218a;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 0.875rem;
+  --radius-2xl: 1.125rem;
+}
+
+:root {
+  --ui-font: "Inter", "Aptos", "Segoe UI", system-ui, sans-serif;
+  --ui-content-width: 1200px;
+  --ui-page-gutter: clamp(1rem, 3.5vw, 2rem);
+  --ui-section-space: clamp(3rem, 6.5vw, 5rem);
+  --ui-control-height: 44px;
+  --ui-control-radius: 12px;
+  --ui-card-radius: 18px;
+  --ui-card-padding: clamp(1rem, 2vw, 1.25rem);
+  --ui-page-bg: #f6f4fa;
+  --ui-surface: #fff;
+  --ui-ink: #241d35;
+  --ui-muted: #6c6678;
+  --ui-border: #e5e0ed;
+  --ui-shadow-card: 0 10px 28px rgba(36, 29, 53, 0.06);
+  --brand-primary: #6741c8;
+  --brand-primary-hover: #5634a9;
+  --brand-amber: #f39a38;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  min-width: 320px;
+  margin: 0;
+  background: var(--ui-page-bg);
+  color: var(--ui-ink);
+  font-family: var(--ui-font);
+  font-size: 15px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
+button {
+  cursor: pointer;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+  touch-action: manipulation;
+}
+
+button[class] {
+  min-height: var(--ui-control-height);
+  border-radius: var(--ui-control-radius);
+  font-weight: 650;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.58;
+}
+
+input:not([type="checkbox"]):not([type="radio"]),
+select,
+textarea {
+  min-height: var(--ui-control-height);
+  border-radius: var(--ui-control-radius);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    background-color 160ms ease;
+}
+
+input:not([type="checkbox"]):not([type="radio"]):focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid rgba(103, 65, 200, 0.28);
+  outline-offset: 2px;
+}
+
+.adminShell {
+  min-height: 100vh;
+  background: var(--ui-page-bg);
+  color: var(--ui-ink);
+}
+
+.adminContent {
+  width: min(var(--ui-content-width), 100%);
+  margin-inline: auto;
+  padding: 2rem var(--ui-page-gutter);
+}
+
+.adminLoginCard {
+  border-color: var(--ui-border);
+  border-radius: var(--ui-card-radius);
+  box-shadow: 0 20px 56px rgba(36, 29, 53, 0.12);
+  padding: clamp(1.5rem, 5vw, 2rem);
+}
+
+.adminShell section[class*="rounded-2xl"] {
+  padding: var(--ui-card-padding);
+  border-color: var(--ui-border);
+  border-radius: var(--ui-card-radius);
+  box-shadow: var(--ui-shadow-card);
+}
+
+.adminShell table th {
+  font-size: 0.72rem;
+  letter-spacing: 0.045em;
+}
+
+.adminShell table td {
+  padding-block: 0.85rem;
+}
+
+@media (max-width: 640px) {
+  .adminContent {
+    padding-block: 1.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

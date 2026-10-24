@@ -1,8 +1,8 @@
 /* Fees Section - Matching Main Site UI */
 
 .fees-section {
-  padding: 80px 18px;
-  background: linear-gradient(180deg, #1c0f53 0%, #221060 100%);
+  padding: var(--ui-section-space) var(--ui-page-gutter);
+  background: linear-gradient(180deg, var(--brand-violet-950) 0%, var(--brand-violet-900) 100%);
   position: relative;
   overflow: hidden;
 }
@@ -21,7 +21,7 @@
 }
 
 .fees-container {
-  max-width: 1180px;
+  max-width: var(--ui-content-width);
   margin: 0 auto;
   position: relative;
   z-index: 1;
@@ -67,7 +67,7 @@
 }
 
 .fees-table thead {
-  background: linear-gradient(180deg, #ffb24a 0%, #ff8e2f 45%, #f1771f 100%);
+  background: linear-gradient(180deg, var(--brand-amber-300) 0%, var(--brand-amber-500) 45%, var(--brand-amber-600) 100%);
 }
 
 .fees-table th {
@@ -77,8 +77,8 @@
   font-size: 14px;
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: #1c0f53;
-  border-bottom: 3px solid #d3651c;
+  color: var(--brand-violet-950);
+  border-bottom: 3px solid var(--brand-amber-700);
 }
 
 .fees-table th:first-child {
@@ -115,7 +115,7 @@
 }
 
 .fees-table .category-name {
-  color: #ffb24a;
+  color: var(--brand-amber-300);
   font-weight: 600;
   text-transform: uppercase;
   font-size: 13px;
@@ -145,7 +145,7 @@
   padding: 16px 24px;
   background: rgba(255, 150, 55, 0.08);
   border-radius: 12px;
-  border-left: 4px solid #ffb24a;
+  border-left: 4px solid var(--brand-amber-300);
 }
 
 .fees-note .note-icon {
@@ -160,7 +160,7 @@
 }
 
 .fees-note strong {
-  color: #ffb24a;
+  color: var(--brand-amber-300);
   font-weight: 800;
 }
 

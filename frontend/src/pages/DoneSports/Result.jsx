@@ -5,7 +5,7 @@ import {
   getMatchStatus,
   getResultSportId,
 } from "../../features/matches/utils";
-import { getMatches } from "../../services/api";
+import { getMatches, subscribeToMatchUpdates } from "../../services/api";
 import { eventDates, sportsConfig } from "./WinningData.js";
 import "./Result.css";
 
@@ -51,11 +51,9 @@ const Result = () => {
 
   useEffect(() => {
     let cancelled = false;
+    let unsubscribe = () => {};
 
     async function loadMatches() {
-      setLoading(true);
-      setError("");
-
       try {
         const result = await getMatches();
 
@@ -78,10 +76,21 @@ const Result = () => {
       }
     }
 
-    loadMatches();
+    setLoading(true);
+    setError("");
+    loadMatches().finally(() => {
+      if (cancelled) return;
+      unsubscribe = subscribeToMatchUpdates((updatedMatches) => {
+        setMatches(updatedMatches || []);
+        setError("");
+      });
+    });
+    const intervalId = window.setInterval(loadMatches, 15000);
 
     return () => {
       cancelled = true;
+      window.clearInterval(intervalId);
+      unsubscribe();
     };
   }, []);
 
@@ -384,7 +393,14 @@ const Result = () => {
                           ) : null}
                         </div>
                       ) : match.status === "ongoing" ? (
-                        <span className="ongoingBadge">🔥 Ongoing</span>
+                        <div className="resultOutcome">
+                          <span className="ongoingBadge">🔥 LIVE</span>
+                          {match.scoreA || match.scoreB ? (
+                            <div className="resultScore">
+                              Score: {match.scoreA || 0} - {match.scoreB || 0}
+                            </div>
+                          ) : null}
+                        </div>
                       ) : (
                         <span className="toBePlayedBadge">⏳ To Be Played</span>
                       )}

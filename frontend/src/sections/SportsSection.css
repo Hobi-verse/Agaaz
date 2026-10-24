@@ -1,11 +1,11 @@
 /* Sports section (scrolls after hero) */
 .sportsSection {
   width: 100%;
-  margin-top: 10%;
+  margin-top: var(--ui-section-space);
 }
 
 .sportsHeader {
-  width: min(1180px, 100%);
+  width: min(var(--ui-content-width), 100%);
   margin: 0 auto;
   text-align: center;
 
@@ -32,11 +32,11 @@
 }
 .sportsGridWrap {
   margin: 26px 0 0;
-  background: linear-gradient(180deg, #1c0f53 0%, #221060 100%);
-  padding: 100px;
+  background: linear-gradient(180deg, var(--brand-violet-950) 0%, var(--brand-violet-900) 100%);
+  padding: var(--ui-section-space) var(--ui-page-gutter);
 }
 .sportsGrid {
-  width: min(1180px, 100%);
+  width: min(var(--ui-content-width), 100%);
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
@@ -81,7 +81,7 @@
   }
 
   .sportsGridWrap {
-    padding: 14px;
+    padding: var(--ui-page-gutter);
   }
 
   .sportsMoreCard .sportsCardInner {

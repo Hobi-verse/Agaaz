@@ -26,7 +26,7 @@ export default function CreateMatchSection({
         <div>
           <h2 className="text-lg font-semibold text-slate-900">Create match</h2>
           <p className="mt-1 text-sm text-slate-600">
-            Pick a sport and select two student names.
+            Choose a sport from an event and add the two competitors or teams.
           </p>
         </div>
 
@@ -40,7 +40,7 @@ export default function CreateMatchSection({
       <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-12">
         <div className="md:col-span-3">
           <label className="block text-sm font-medium text-slate-700">
-            Sport
+            Sport / event
           </label>
           <select
             value={createSportId}
@@ -51,8 +51,9 @@ export default function CreateMatchSection({
             <option value="">Select sport</option>
             {sports.map((sport) => (
               <option key={sport.sportId} value={sport.sportId}>
-                {(sport.sportCategory ? `${sport.sportCategory} · ` : "") +
-                  sport.sportName}
+                {[sport.eventName, sport.sportCategory, sport.sportName]
+                  .filter(Boolean)
+                  .join(" · ")}
               </option>
             ))}
           </select>
@@ -60,69 +61,71 @@ export default function CreateMatchSection({
 
         <div className="md:col-span-2">
           <label className="block text-sm font-medium text-slate-700">
-            Student A
+            Participant / team A
           </label>
-          <select
-            value={registrationIdA}
-            onChange={(event) => onRegistrationAChange(event.target.value)}
-            disabled={!createSportId || participantsLoading || createLoading}
-            className="mt-1 h-11 w-full rounded-xl border border-slate-300 bg-white px-3 text-sm text-slate-900 outline-none focus:border-slate-900"
-          >
-            <option value="">Select</option>
-            {participants.map((participant) => (
-              <option
-                key={participant.registrationId}
-                value={participant.registrationId}
-              >
-                {participantLabel(participant)}
-              </option>
-            ))}
-            <option value="others">Others</option>
-          </select>
-
-          {registrationIdA === "others" ? (
+          {participants.length ? (
+            <select
+              value={registrationIdA}
+              onChange={(event) => onRegistrationAChange(event.target.value)}
+              disabled={!createSportId || participantsLoading || createLoading}
+              className="mt-1 h-11 w-full rounded-xl border border-slate-300 bg-white px-3 text-sm text-slate-900 outline-none focus:border-slate-900"
+            >
+              <option value="">Select participant</option>
+              {participants.map((participant) => (
+                <option key={participant.registrationId} value={participant.registrationId}>
+                  {participantLabel(participant)}
+                </option>
+              ))}
+              <option value="others">Enter a name</option>
+            </select>
+          ) : (
             <input
               type="text"
               value={customNameA}
               onChange={(event) => onCustomNameAChange(event.target.value)}
-              placeholder="Enter name"
-              disabled={createLoading}
+              placeholder="Enter team or participant"
+              disabled={!createSportId || createLoading}
               className="mt-1 h-11 w-full rounded-xl border border-slate-300 bg-white px-3 text-sm text-slate-900 outline-none focus:border-slate-900"
             />
+          )}
+
+          {participants.length && registrationIdA === "others" ? (
+            <input type="text" value={customNameA} onChange={(event) => onCustomNameAChange(event.target.value)} placeholder="Enter name" disabled={createLoading} className="mt-1 h-11 w-full rounded-xl border border-slate-300 bg-white px-3 text-sm text-slate-900 outline-none focus:border-slate-900" />
           ) : null}
         </div>
 
         <div className="md:col-span-2">
           <label className="block text-sm font-medium text-slate-700">
-            Student B
+            Participant / team B
           </label>
-          <select
-            value={registrationIdB}
-            onChange={(event) => onRegistrationBChange(event.target.value)}
-            disabled={!createSportId || participantsLoading || createLoading}
-            className="mt-1 h-11 w-full rounded-xl border border-slate-300 bg-white px-3 text-sm text-slate-900 outline-none focus:border-slate-900"
-          >
-            <option value="">Select</option>
-            {participants.map((participant) => (
-              <option
-                key={participant.registrationId}
-                value={participant.registrationId}
-              >
-                {participantLabel(participant)}
-              </option>
-            ))}
-            <option value="others">Others</option>
-          </select>
-
-          {registrationIdB === "others" ? (
+          {participants.length ? (
+            <select
+              value={registrationIdB}
+              onChange={(event) => onRegistrationBChange(event.target.value)}
+              disabled={!createSportId || participantsLoading || createLoading}
+              className="mt-1 h-11 w-full rounded-xl border border-slate-300 bg-white px-3 text-sm text-slate-900 outline-none focus:border-slate-900"
+            >
+              <option value="">Select participant</option>
+              {participants.map((participant) => (
+                <option key={participant.registrationId} value={participant.registrationId}>
+                  {participantLabel(participant)}
+                </option>
+              ))}
+              <option value="others">Enter a name</option>
+            </select>
+          ) : (
             <input
               type="text"
               value={customNameB}
               onChange={(event) => onCustomNameBChange(event.target.value)}
-              placeholder="Enter name"
-              disabled={createLoading}
+              placeholder="Enter team or participant"
+              disabled={!createSportId || createLoading}
               className="mt-1 h-11 w-full rounded-xl border border-slate-300 bg-white px-3 text-sm text-slate-900 outline-none focus:border-slate-900"
             />
+          )}
+
+          {participants.length && registrationIdB === "others" ? (
+            <input type="text" value={customNameB} onChange={(event) => onCustomNameBChange(event.target.value)} placeholder="Enter name" disabled={createLoading} className="mt-1 h-11 w-full rounded-xl border border-slate-300 bg-white px-3 text-sm text-slate-900 outline-none focus:border-slate-900" />
           ) : null}
         </div>
 
@@ -144,7 +147,7 @@ export default function CreateMatchSection({
             type="button"
             onClick={onCreateMatch}
             disabled={createLoading}
-            className="mt-6 h-11 w-full rounded-xl bg-slate-900 px-4 text-sm font-semibold text-white shadow-sm disabled:opacity-60"
+            className="mt-6 h-11 w-full rounded-xl bg-brand-700 px-4 text-sm font-semibold text-white shadow-sm hover:bg-brand-800 disabled:opacity-60"
           >
             {createLoading ? "Creating…" : "Create"}
           </button>
@@ -152,8 +155,11 @@ export default function CreateMatchSection({
       </div>
 
       {participantsLoading ? (
-        <p className="mt-3 text-sm text-slate-500">Loading students…</p>
+        <p className="mt-3 text-sm text-slate-500">Loading participants…</p>
       ) : null}
+      <p className="mt-3 text-xs text-slate-500">
+        Live-points sports accept scores, sets, or period values and publish each update to the public board.
+      </p>
     </section>
   );
 }

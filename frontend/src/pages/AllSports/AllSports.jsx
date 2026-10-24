@@ -2,7 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { sportsData } from "../../data/sportsData";
 import Button from "../../components/Button";
 import "./AllSports.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { getEvents } from "../../services/api";
 
 const buildCategoryRows = (category) =>
   category.sports.flatMap((sport) =>
@@ -15,9 +16,19 @@ const buildCategoryRows = (category) =>
 
 export default function AllSports() {
   const navigate = useNavigate();
+  const [eventCollections, setEventCollections] = useState([]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    let cancelled = false;
+    getEvents().then((response) => {
+      if (!cancelled && response.success) {
+        setEventCollections(response.data || []);
+      }
+    });
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   return (
@@ -100,6 +111,52 @@ export default function AllSports() {
             </section>
           );
         })}
+
+        {eventCollections.map((event) => (
+          <section key={event.eventId} className="allSportsCategory">
+            <div className="allSportsCategoryHeader">
+              <h2 className="allSportsCategoryName">{event.eventName}</h2>
+              <p className="allSportsCategoryDesc">
+                {event.description || "Sports and events in this collection"}
+              </p>
+            </div>
+            <div className="sportsTableWrap" role="region" aria-label={`${event.eventName} sports`}>
+              <table className="sportsTable">
+                <thead>
+                  <tr>
+                    <th scope="col">Sport / event</th>
+                    <th scope="col">Scoring</th>
+                    <th scope="col" className="sportsTableColAction">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {(event.sports || []).map((sport) => (
+                    <tr key={sport.sportId}>
+                      <td>
+                        <div className="sportsTableEventName">{sport.sportName}</div>
+                        {sport.sportCategory ? <div className="sportsTableEventMeta">{sport.sportCategory}</div> : null}
+                      </td>
+                      <td className="sportsTableType">
+                        {sport.scoringMode === "points" ? "Live points" : "Winner / result"}
+                      </td>
+                      <td className="sportsTableColAction">
+                        <Button
+                          className="sportsTableActionBtn"
+                          onClick={() => navigate(`/live-match-score?event=${encodeURIComponent(event.eventId)}`)}
+                        >
+                          View Matches
+                        </Button>
+                      </td>
+                    </tr>
+                  ))}
+                  {!(event.sports || []).length ? (
+                    <tr><td colSpan="3">No sports have been added to this event yet.</td></tr>
+                  ) : null}
+                </tbody>
+              </table>
+            </div>
+          </section>
+        ))}
 
         <div className="allSportsFooterActions">
           <Button

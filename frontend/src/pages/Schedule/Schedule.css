@@ -1,476 +1,1737 @@
 .schedulePage {
   min-height: 100vh;
-  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-  padding-top: 100px;
+  padding: clamp(34px, 5vw, 62px) 0 var(--ui-section-space);
+  background:
+    radial-gradient(ellipse at 12% 0%, rgba(103, 65, 200, 0.2), transparent 38%),
+    linear-gradient(155deg, #151039 0%, #252052 52%, #18143a 100%);
 }
 
 .scheduleSection {
-  max-width: 1200px;
+  width: min(1240px, 100%);
   margin: 0 auto;
-  padding: 2rem 1.5rem 4rem;
+  padding: 0 var(--ui-page-gutter);
 }
 
 .scheduleHeader {
-  text-align: center;
-  margin-bottom: 2rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 28px;
+  margin-bottom: 28px;
+}
+
+.scheduleTabLiveDot {
+  display: inline-block;
+  flex: 0 0 auto;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ff5c69;
+  box-shadow: 0 0 0 4px rgba(255, 92, 105, 0.12), 0 0 14px rgba(255, 92, 105, 0.55);
 }
 
 .scheduleTitle {
-  margin: 0 0 14px;
-  color: rgba(255, 255, 255, 0.96);
+  margin: 0 0 10px;
+  color: rgba(255, 255, 255, 0.98);
+  font-size: clamp(34px, 5vw, 50px);
   font-weight: 900;
-  font-size: clamp(30px, 9vw, 56px);
   line-height: 1.02;
-  letter-spacing: 1px;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  letter-spacing: -0.035em;
 }
 
 .scheduleSubtitle {
-  margin: 0 0 26px;
-  color: rgba(255, 255, 255, 0.78);
-  font-size: clamp(14px, 2vw, 18px);
-  line-height: 1.4;
+  max-width: 66ch;
+  margin: 0;
+  color: rgba(239, 237, 255, 0.68);
+  font-size: 15px;
+  line-height: 1.6;
 }
 
-.scheduleHeaderNote {
-  margin: -10px 0 0;
-  color: rgba(255, 255, 255, 0.55);
-  font-size: 0.9rem;
+.scheduleBoard {
+  padding: clamp(16px, 2.5vw, 26px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  background: linear-gradient(150deg, rgba(35, 29, 83, 0.88), rgba(17, 14, 48, 0.94));
+  box-shadow: 0 26px 70px rgba(5, 3, 24, 0.36), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(14px);
 }
 
 .scheduleTabs {
-  display: flex;
-  justify-content: center;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-  margin-bottom: 2rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 20px;
+  padding: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 15px;
+  background: rgba(5, 4, 24, 0.34);
 }
 
-.scheduleFilters {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 2rem;
-}
-
-.scheduleFilterDropdown {
-  position: relative;
-  min-width: 250px;
-}
-
-.scheduleFilterButton {
-  width: 100%;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: rgba(255, 255, 255, 0.8);
-  padding: 0.75rem 1rem;
-  border-radius: 8px;
-  font-size: 0.95rem;
-  font-weight: 600;
-  cursor: pointer;
+.scheduleTabs button.scheduleTab {
+  min-width: 0;
+  min-height: 62px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.5rem;
-}
-
-.scheduleFilterButton:hover {
-  background: rgba(255, 255, 255, 0.12);
-}
-
-.scheduleFilterArrow {
-  font-size: 0.8rem;
-}
-
-.scheduleFilterOptions {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 8px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  max-height: 300px;
-  overflow-y: auto;
-  z-index: 10;
-  margin-top: 0.25rem;
-}
-
-.scheduleFilterOption {
-  width: 100%;
-  padding: 0.75rem 1rem;
-  background: none;
-  border: none;
+  gap: 12px;
+  padding: 10px 14px;
+  border: 1px solid transparent;
+  border-radius: 11px;
+  background: transparent;
+  color: rgba(239, 237, 255, 0.65);
   text-align: left;
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 0.9rem;
-  font-weight: 500;
   cursor: pointer;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease;
 }
 
-.scheduleFilterOption:hover {
-  background: rgba(255, 255, 255, 0.08);
-  color: #fff;
-}
-
-.scheduleFilterOption:last-child {
-  border-bottom: none;
-}
-
-.scheduleFilterOptionActive {
-  background: rgba(255, 255, 255, 0.12);
-  color: #fff;
-}
-
-.scheduleFilterCategory {
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 0.8rem;
-}
-
-.scheduleFilterOptionActive .scheduleFilterCategory {
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.scheduleFilterIcon {
-  font-size: 1.1rem;
-  min-width: 20px;
-  text-align: center;
-}
-
-.scheduleTab {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: rgba(255, 255, 255, 0.8);
-  padding: 0.75rem 1.5rem;
-  border-radius: 8px;
-  font-size: 0.95rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  min-width: 120px;
-  text-align: center;
-}
-
-.scheduleTab:hover {
-  background: rgba(255, 255, 255, 0.12);
-  transform: translateY(-1px);
-}
-
-.scheduleTabActive {
-  background: linear-gradient(135deg, #ffb24a, #ff8e2f);
-  border-color: transparent;
-  color: #fff;
-  box-shadow: 0 4px 12px rgba(255, 178, 74, 0.3);
-}
-
-.scheduleTableWrap {
-  overflow-x: auto;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.scheduleTable {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: 700px;
-}
-
-.scheduleTable th,
-.scheduleTable td {
-  padding: 1rem 1.25rem;
-  text-align: left;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.scheduleTable th {
-  background: rgba(255, 255, 255, 0.05);
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-
-.scheduleTable td {
-  color: #fff;
-  font-size: 0.95rem;
-}
-
-.scheduleTable tbody tr:hover {
-  background: rgba(255, 255, 255, 0.08);
-}
-
-.scheduleSport {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.scheduleSportIcon {
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1rem;
-  font-weight: bold;
-  color: #fff;
-  flex-shrink: 0;
-}
-
-.scheduleSportName {
-  font-weight: 600;
-  color: #fff;
-}
-
-.scheduleSportCategory {
-  font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.6);
-}
-
-.scheduleParticipants {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.scheduleParticipant {
-  font-size: 0.9rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.scheduleParticipantId {
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 0.8rem;
-}
-
-.scheduleWinnerBadge {
-  background: rgba(255, 178, 74, 0.8);
-  color: #fff;
-  padding: 0.2rem 0.5rem;
-  border-radius: 12px;
-  font-size: 0.7rem;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-}
-
-.scheduleStatusBadge {
-  padding: 0.25rem 0.75rem;
-  border-radius: 20px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  display: inline-block;
-}
-
-.scheduleStatusBadge--ongoing {
-  background: #ff8e2f;
-  color: #fff;
-}
-
-.scheduleStatusBadge--finished {
-  background: #4caf50;
-  color: #fff;
-}
-
-.scheduleStatusBadge--scheduled {
-  background: rgba(255, 255, 255, 0.1);
-  color: rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.scheduleResult {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.scheduleResult--live {
-  gap: 0.75rem;
-}
-
-.scheduleLiveScore {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-}
-
-.scheduleLiveTeam {
-  min-width: 120px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-  padding: 0.55rem 0.8rem;
-  border-radius: 10px;
+.scheduleTabs button.scheduleTab:hover {
   background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.scheduleLiveTeamName {
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.82);
-  font-weight: 600;
-}
-
-.scheduleLiveTeamValue {
-  font-size: 1.25rem;
   color: #fff;
+}
+
+.scheduleTabs button.scheduleTabActive {
+  border-color: rgba(255, 178, 74, 0.25);
+  background: linear-gradient(135deg, rgba(255, 178, 74, 0.17), rgba(241, 119, 31, 0.1));
+  color: #fff;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.scheduleTabText {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.scheduleTabLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: inherit;
+  font-size: 14px;
   font-weight: 800;
 }
 
-.scheduleLiveSeparator {
-  color: rgba(255, 255, 255, 0.72);
-  font-size: 1.1rem;
+.scheduleTabLabel .scheduleTabLiveDot,
+.scheduleStatusBadge .scheduleTabLiveDot {
+  width: 7px;
+  height: 7px;
+}
+
+.scheduleTabHint {
+  color: rgba(239, 237, 255, 0.46);
+  font-size: 11px;
+  font-weight: 550;
+}
+
+.scheduleTabCount {
+  min-width: 30px;
+  height: 30px;
+  display: inline-grid;
+  place-items: center;
+  padding: 0 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.scheduleTabs .scheduleTabActive .scheduleTabCount {
+  border-color: rgba(255, 178, 74, 0.25);
+  background: rgba(255, 178, 74, 0.15);
+  color: #ffd38b;
+}
+
+.scheduleToolbar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 0.42fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.scheduleSearch {
+  min-width: 0;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 0 14px;
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: 12px;
+  background: rgba(5, 4, 24, 0.34);
+  color: rgba(239, 237, 255, 0.5);
+  transition: border-color 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
+}
+
+.scheduleSearch:focus-within {
+  border-color: rgba(255, 178, 74, 0.56);
+  background: rgba(5, 4, 24, 0.5);
+  box-shadow: 0 0 0 3px rgba(255, 178, 74, 0.1);
+}
+
+.scheduleSearch > svg {
+  flex: 0 0 auto;
+  font-size: 14px;
+}
+
+.scheduleSearch input {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #fff;
+  font-size: 13px;
+  box-shadow: none;
+}
+
+.scheduleSearch input::placeholder {
+  color: rgba(239, 237, 255, 0.42);
+}
+
+.scheduleSearch input::-webkit-search-cancel-button {
+  display: none;
+}
+
+.scheduleSearch button.scheduleSearchClear {
+  width: 30px;
+  height: 30px;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.76);
+}
+
+.scheduleSearch button.scheduleSearchClear:hover {
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+}
+
+.scheduleEventFilter {
+  min-width: 0;
+  display: grid;
+  gap: 5px;
+}
+
+.scheduleEventFilter > span {
+  color: rgba(239, 237, 255, 0.47);
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.scheduleEventFilter select {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 36px 0 13px;
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: 12px;
+  appearance: auto;
+  background: rgba(5, 4, 24, 0.34);
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.scheduleEventFilter option {
+  background: #17133d;
+  color: #fff;
+}
+
+.scheduleSportBrowser {
+  margin-bottom: 25px;
+  padding: 17px 17px 15px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 15px;
+  background: rgba(5, 4, 24, 0.22);
+}
+
+.scheduleSportBrowserHeading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.scheduleSportBrowserHeading h2,
+.scheduleResultsHeader h2 {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.93);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.scheduleSportBrowserHeading p,
+.scheduleResultsHeader p {
+  margin: 4px 0 0;
+  color: rgba(239, 237, 255, 0.48);
+  font-size: 11px;
+}
+
+.scheduleSportBrowserHeading > span {
+  color: rgba(239, 237, 255, 0.5);
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.scheduleSportChips {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 1px 1px 5px;
+  scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
+  scrollbar-width: thin;
+}
+
+.scheduleSportChips button.scheduleSportChip {
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex: 0 0 auto;
+  padding: 0 11px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.045);
+  color: rgba(239, 237, 255, 0.72);
+  font-size: 12px;
   font-weight: 700;
+  white-space: nowrap;
+  transition: border-color 150ms ease, background-color 150ms ease, color 150ms ease;
+}
+
+.scheduleSportChips button.scheduleSportChip:hover {
+  border-color: rgba(255, 178, 74, 0.35);
+  background: rgba(255, 178, 74, 0.08);
+  color: #fff;
+}
+
+.scheduleSportChips button.scheduleSportChipActive {
+  border-color: rgba(255, 178, 74, 0.55);
+  background: rgba(255, 178, 74, 0.15);
+  color: #ffe0ad;
+}
+
+.scheduleSportChipIcon {
+  font-size: 14px;
+}
+
+.scheduleSportChipCount {
+  min-width: 19px;
+  height: 19px;
+  display: inline-grid;
+  place-items: center;
+  padding: 0 4px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.scheduleSportChips .scheduleSportChipActive .scheduleSportChipCount {
+  background: rgba(255, 178, 74, 0.2);
+  color: #ffe0ad;
+}
+
+.scheduleNoSports {
+  align-self: center;
+  color: rgba(239, 237, 255, 0.48);
+  font-size: 12px;
+}
+
+.scheduleResultsHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 0 2px 14px;
+}
+
+.scheduleResultsHeader h2 {
+  font-size: 17px;
+}
+
+.scheduleResultsHeader p {
+  font-size: 12px;
+}
+
+.scheduleResultsCount {
+  color: rgba(239, 237, 255, 0.52);
+  font-size: 12px;
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+.scheduleMatchGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+  align-items: stretch;
+  gap: 13px;
+}
+
+.scheduleMatchCard {
+  min-width: 0;
+  padding: 17px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  background: linear-gradient(145deg, rgba(66, 59, 111, 0.5), rgba(34, 29, 77, 0.58));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
+  transition: transform 160ms ease, border-color 160ms ease, background-color 160ms ease;
+}
+
+.scheduleMatchCard:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 178, 74, 0.26);
+}
+
+.scheduleMatchCard--ongoing {
+  border-top: 2px solid rgba(255, 92, 105, 0.68);
+  background: linear-gradient(145deg, rgba(78, 51, 91, 0.62), rgba(34, 29, 77, 0.72));
+}
+
+.scheduleMatchCard--finished {
+  border-top: 2px solid rgba(103, 214, 154, 0.52);
+}
+
+.scheduleMatchCardTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.scheduleSportIdentity {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.scheduleMatchSportIcon {
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 178, 74, 0.2);
+  border-radius: 12px;
+  background: rgba(255, 178, 74, 0.1);
+  font-size: 19px;
+}
+
+.scheduleSportIdentity h3 {
+  overflow: hidden;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.96);
+  font-size: 14px;
+  font-weight: 850;
+  line-height: 1.3;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.scheduleSportIdentity div > span {
+  display: block;
+  margin-top: 3px;
+  color: rgba(239, 237, 255, 0.5);
+  font-size: 11px;
+}
+
+.scheduleStatusBadge {
+  min-height: 26px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  flex: 0 0 auto;
+  padding: 4px 9px;
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.scheduleStatusBadge--ongoing {
+  border-color: rgba(255, 92, 105, 0.25);
+  background: rgba(255, 92, 105, 0.1);
+  color: #ff9ba3;
+}
+
+.scheduleStatusBadge--scheduled {
+  border-color: rgba(255, 178, 74, 0.2);
+  background: rgba(255, 178, 74, 0.08);
+  color: #ffd38b;
+}
+
+.scheduleStatusBadge--finished {
+  border-color: rgba(103, 214, 154, 0.2);
+  background: rgba(103, 214, 154, 0.08);
+  color: #9be8bf;
+}
+
+.scheduleMatchEvent {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  overflow: hidden;
+  margin: 12px 0 0;
+  color: rgba(239, 237, 255, 0.5);
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.scheduleMatchEvent > span {
+  width: 5px;
+  height: 5px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--brand-amber-300);
+}
+
+.scheduleMatchScoreboard {
+  margin-top: 14px;
+}
+
+.scheduleResult {
+  display: grid;
+  gap: 11px;
+}
+
+.scheduleLiveScore {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+}
+
+.scheduleLiveTeam {
+  min-width: 0;
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 7px;
+  padding: 9px 11px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 11px;
+  background: rgba(7, 6, 31, 0.27);
+}
+
+.scheduleLiveTeamName {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  color: rgba(244, 243, 255, 0.8);
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1.35;
+}
+
+.scheduleLiveTeamValue {
+  flex: 0 0 auto;
+  color: #fff;
+  font-size: 25px;
+  font-weight: 900;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.scheduleLiveSeparator {
+  color: rgba(239, 237, 255, 0.45);
+  font-size: 14px;
+  font-weight: 800;
 }
 
 .scheduleLiveMeta {
+  min-height: 22px;
   display: flex;
   align-items: center;
-  gap: 0.65rem;
+  gap: 9px;
   flex-wrap: wrap;
-  font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(239, 237, 255, 0.48);
+  font-size: 10px;
 }
 
 .scheduleLiveIndicator {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  padding: 0.24rem 0.55rem;
-  border-radius: 999px;
-  background: rgba(239, 68, 68, 0.18);
-  border: 1px solid rgba(239, 68, 68, 0.28);
-  color: #fca5a5;
-  font-size: 0.72rem;
-  font-weight: 800;
+  gap: 6px;
+  color: #ff9ba3;
+  font-size: 10px;
+  font-weight: 850;
   letter-spacing: 0.08em;
 }
 
+.scheduleLiveIndicator span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ff5c69;
+  box-shadow: 0 0 8px rgba(255, 92, 105, 0.65);
+}
+
 .scheduleWinner {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #ffb24a;
+  color: #9be8bf;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.scheduleScheduledInfo {
+  min-height: 71px;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid rgba(255, 178, 74, 0.13);
+  border-radius: 12px;
+  background: rgba(255, 178, 74, 0.055);
 }
 
-.scheduleScore {
-  font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.7);
-  font-weight: 500;
+.scheduleScheduledIcon {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: rgba(255, 178, 74, 0.11);
+  color: var(--brand-amber-300);
+  font-size: 23px;
 }
 
-.scheduleDateTime {
+.scheduleScheduledInfo > div,
+.scheduleResultOnly {
+  display: grid;
+  gap: 4px;
+}
+
+.scheduleScheduledInfo strong,
+.scheduleResultOnly strong {
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.scheduleScheduledInfo > div > span:last-child {
+  color: rgba(239, 237, 255, 0.52);
+  font-size: 11px;
+}
+
+.scheduleScoreLabel {
+  color: rgba(239, 237, 255, 0.49);
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.scheduleResultOnly {
+  min-height: 71px;
+  align-content: center;
+  padding: 13px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  background: rgba(7, 6, 31, 0.26);
+}
+
+.scheduleEmptyState,
+.scheduleStateCard {
+  display: grid;
+  justify-items: center;
+  padding: 46px 22px;
+  border: 1px dashed rgba(255, 255, 255, 0.14);
+  border-radius: 16px;
+  background: rgba(5, 4, 24, 0.2);
+  text-align: center;
+}
+
+.scheduleEmptyIcon {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 14px;
+  border-radius: 14px;
+  background: rgba(255, 178, 74, 0.1);
+  color: var(--brand-amber-300);
+  font-size: 30px;
+  line-height: 1;
+}
+
+.scheduleEmptyState h3,
+.scheduleStateCard p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.scheduleEmptyState p,
+.scheduleStateCard > span {
+  margin: 7px 0 0;
+  color: rgba(239, 237, 255, 0.55);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.scheduleEmptyState button.scheduleClearFilters,
+.scheduleStateCard button.scheduleRetryButton {
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 17px;
+  padding: 0 13px;
+  border: 1px solid rgba(255, 178, 74, 0.3);
+  border-radius: 10px;
+  background: rgba(255, 178, 74, 0.1);
+  color: #ffd38b;
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.scheduleEmptyState button.scheduleClearFilters:hover,
+.scheduleStateCard button.scheduleRetryButton:hover {
+  background: rgba(255, 178, 74, 0.17);
+}
+
+.scheduleStateCard {
+  min-height: 230px;
+  margin: 30px 0;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.scheduleStateCard--error p {
+  color: #ffb6bd;
+}
+
+.scheduleStateCard--error > span {
+  max-width: 60ch;
+}
+
+.scheduleRetryButton {
+  cursor: pointer;
+}
+
+@media (max-width: 760px) {
+  .scheduleHeader {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .scheduleToolbar {
+    grid-template-columns: 1fr;
+  }
+
+  .scheduleEventFilter {
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    gap: 12px;
+  }
+
+  .scheduleEventFilter > span {
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 520px) {
+  .scheduleTabs button.scheduleTab {
+    min-height: 58px;
+    gap: 4px;
+    padding: 8px 7px;
+  }
+
+  .scheduleTabLabel {
+    font-size: 11px;
+  }
+
+  .scheduleTabHint {
+    font-size: 9px;
+  }
+
+  .scheduleTabCount {
+    min-width: 23px;
+    height: 23px;
+    padding: 0 5px;
+  }
+
+  .scheduleSportChips button.scheduleSportChip {
+    min-height: 38px;
+    padding: 0 9px;
+    font-size: 11px;
+  }
+}
+
+.scheduleSportBrowser {
+  margin-bottom: 24px;
+  padding: 9px;
+  border: 2px solid rgba(255, 150, 55, 0.72);
+  border-radius: 17px;
+  background: rgba(23, 12, 70, 0.88);
+  box-shadow: 0 0 0 2px rgba(255, 120, 40, 0.1) inset;
+}
+
+.scheduleSportChips {
+  align-items: stretch;
+  gap: 4px;
+  overflow-x: auto;
+  padding: 0;
+  scrollbar-width: none;
+}
+
+.scheduleSportChips::-webkit-scrollbar {
+  display: none;
+}
+
+.scheduleSportChips button.scheduleSportChip {
+  position: relative;
+  min-width: 72px;
+  min-height: 80px;
+  display: flex;
+  flex: 1 0 76px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  max-width: 108px;
+  padding: 8px 6px;
+  border: 1px solid transparent;
+  border-radius: 13px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.76);
+  text-align: center;
+  white-space: normal;
+}
+
+.scheduleSportChips button.scheduleSportChip:hover {
+  border-color: rgba(255, 178, 74, 0.18);
+  background: rgba(255, 142, 47, 0.09);
+  color: #fff;
+}
+
+.scheduleSportChips button.scheduleSportChipActive {
+  border-color: rgba(255, 178, 74, 0.16);
+  background: rgba(255, 142, 47, 0.16);
+  color: var(--brand-amber-300);
+  box-shadow: inset 0 0 0 1px rgba(255, 178, 74, 0.06);
+}
+
+.scheduleSportChips .scheduleSportChipIcon {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.scheduleSportChips .scheduleSportChipName {
+  max-width: 100%;
+  overflow: hidden;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.scheduleSportChips .scheduleSportChipEvent {
+  max-width: 100%;
+  overflow: hidden;
+  color: rgba(255, 255, 255, 0.52);
+  font-size: 8px;
+  line-height: 1.1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.scheduleSportChips .scheduleSportChipCount {
+  position: absolute;
+  top: 5px;
+  right: 6px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.74);
+  font-size: 9px;
+}
+
+.scheduleSportChips .scheduleSportChipActive .scheduleSportChipCount {
+  background: rgba(255, 178, 74, 0.18);
+  color: var(--brand-amber-300);
+}
+
+@media (max-width: 520px) {
+  .scheduleSportBrowser {
+    padding: 7px;
+    border-radius: 15px;
+  }
+
+  .scheduleSportChips button.scheduleSportChip {
+    min-width: 68px;
+    min-height: 74px;
+    flex-basis: 68px;
+    gap: 5px;
+    padding: 7px 5px;
+  }
+
+  .scheduleSportChips .scheduleSportChipIcon {
+    font-size: 18px;
+  }
+
+  .scheduleSportChips .scheduleSportChipName {
+    font-size: 9px;
+  }
+}
+
+/* Match rows keep the sport identity on the left and move the score panels right. */
+.scheduleMatchCard {
+  min-height: 132px;
+  display: grid;
+  grid-template-columns: 104px minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(14px, 3vw, 36px);
+  padding: 12px 15px;
+  border: 2px solid rgba(255, 150, 55, 0.72);
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(34, 20, 96, 0.94), rgba(23, 12, 70, 0.94));
+  box-shadow: 0 0 0 2px rgba(255, 120, 40, 0.12) inset, 0 12px 28px rgba(0, 0, 0, 0.24);
+}
+
+.scheduleMatchCard:hover {
+  border-color: rgba(255, 178, 74, 0.95);
+  box-shadow: 0 0 0 2px rgba(255, 120, 40, 0.18) inset, 0 14px 30px rgba(0, 0, 0, 0.3);
+}
+
+.scheduleMatchCard--ongoing {
+  border-top: 2px solid rgba(255, 178, 74, 0.95);
+  background: linear-gradient(180deg, rgba(48, 25, 98, 0.96), rgba(23, 12, 70, 0.96));
+}
+
+.scheduleMatchCard--finished {
+  border-top: 2px solid rgba(255, 150, 55, 0.6);
+}
+
+.scheduleMatchSportTile {
+  width: 100%;
+  min-height: 96px;
   display: flex;
   flex-direction: column;
-  gap: 0.1rem;
-}
-
-.scheduleDate {
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.8);
-  font-weight: 500;
-}
-
-.scheduleTime {
-  font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.6);
-}
-
-.scheduleEmptyState {
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 7px;
+  border: 1px solid rgba(255, 150, 55, 0.34);
+  border-top: 1px solid rgba(255, 150, 55, 0.34);
+  border-radius: 11px 11px 5px 5px;
+  background: rgba(23, 12, 70, 0.94);
   text-align: center;
+}
+
+.scheduleMatchSportIcon {
+  width: auto;
+  height: auto;
+  flex: 0 0 auto;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  font-size: 23px;
+  line-height: 1;
+}
+
+.scheduleMatchSportTile h3 {
+  max-width: 100%;
+  overflow: hidden;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.94);
+  font-size: 11px;
+  font-weight: 750;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.scheduleMatchSportCategory {
+  max-width: 100%;
+  overflow: hidden;
   color: rgba(255, 255, 255, 0.5);
-  font-style: italic;
-  padding: 2rem;
+  font-size: 9px;
+  line-height: 1.1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.scheduleLoading,
-.scheduleError {
+.scheduleMatchDetails {
+  min-width: 0;
+  display: grid;
+  align-content: center;
+  gap: 8px;
+}
+
+.scheduleMatchInfoRow {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.scheduleMatchInfoRow .scheduleMatchEvent {
+  min-width: 0;
+  margin: 0;
+}
+
+.scheduleMatchScoreboard {
+  min-width: 0;
+  margin: 0;
+}
+
+.scheduleResult {
+  justify-items: end;
+  gap: 6px;
+}
+
+.scheduleLiveScore {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.scheduleLiveTeam {
+  width: 92px;
+  min-height: 88px;
+  flex: 0 1 92px;
+  flex-direction: column-reverse;
+  justify-content: center;
+  gap: 2px;
+  padding: 7px 5px;
+  border: 2px solid rgba(255, 255, 255, 0.76);
+  border-radius: 17px;
+  background: rgba(23, 12, 70, 0.44);
   text-align: center;
-  padding: 3rem 2rem;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.scheduleLoading {
+.scheduleLiveTeamName {
+  width: 100%;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 11px;
+  line-height: 1.15;
+  text-align: center;
+}
+
+.scheduleLiveTeamValue {
   color: #fff;
-  font-size: 1.1rem;
+  font-size: 43px;
+  line-height: 0.95;
 }
 
-.scheduleError {
-  color: #ff6b6b;
-  font-size: 1rem;
-  font-weight: 500;
+.scheduleLiveSeparator {
+  align-self: center;
+  font-size: 13px;
 }
 
-@media (max-width: 768px) {
-  .schedulePage {
-    padding-top: 80px;
+.scheduleLiveMeta {
+  justify-content: flex-end;
+  min-height: 16px;
+  font-size: 9px;
+}
+
+.scheduleLiveIndicator {
+  color: #8be9a8;
+}
+
+.scheduleLiveIndicator span {
+  background: #67d63a;
+  box-shadow: 0 0 8px rgba(103, 214, 58, 0.65);
+}
+
+.scheduleScheduledInfo,
+.scheduleResultOnly {
+  width: min(100%, 360px);
+  margin-left: auto;
+}
+
+@media (max-width: 520px) {
+  .scheduleMatchCard {
+    min-height: 112px;
+    grid-template-columns: 76px minmax(0, 1fr);
+    gap: 9px;
+    padding: 9px;
+    border-radius: 14px;
   }
 
-  .scheduleSection {
-    padding: 1.5rem 1rem 3rem;
+  .scheduleMatchSportTile {
+    min-height: 86px;
+    gap: 5px;
+    padding: 8px 4px;
   }
 
-  .scheduleFilterDropdown {
-    min-width: 200px;
+  .scheduleMatchSportIcon {
+    font-size: 20px;
   }
 
-  .scheduleFilterButton {
-    padding: 0.6rem 0.8rem;
-    font-size: 0.85rem;
+  .scheduleMatchSportTile h3 {
+    font-size: 9px;
   }
 
-  .scheduleFilterOption {
-    padding: 0.6rem 0.8rem;
-    font-size: 0.85rem;
+  .scheduleMatchSportCategory {
+    font-size: 8px;
   }
 
-  .scheduleTable th,
-  .scheduleTable td {
-    padding: 0.75rem 1rem;
+  .scheduleMatchDetails {
+    gap: 6px;
   }
 
-  .scheduleTable {
-    min-width: 600px;
+  .scheduleMatchInfoRow {
+    gap: 6px;
   }
 
-  .scheduleSport {
-    gap: 0.5rem;
+  .scheduleStatusBadge {
+    min-height: 21px;
+    padding: 2px 6px;
+    font-size: 8px;
   }
 
-  .scheduleSportIcon {
-    width: 32px;
-    height: 32px;
-    font-size: 0.8rem;
-  }
-
-  .scheduleTitle {
-    font-size: clamp(24px, 8vw, 40px);
-  }
-
-  .scheduleSubtitle {
-    font-size: clamp(12px, 3vw, 16px);
-  }
-
-  .scheduleHeaderNote {
-    font-size: 0.8rem;
+  .scheduleLiveScore {
+    gap: 5px;
   }
 
   .scheduleLiveTeam {
-    width: 100%;
-    min-width: 0;
+    width: 76px;
+    min-height: 72px;
+    flex-basis: 76px;
+    gap: 2px;
+    padding: 5px 3px;
+    border-width: 1px;
+    border-radius: 13px;
+  }
+
+  .scheduleLiveTeamName {
+    font-size: 9px;
+  }
+
+  .scheduleLiveTeamValue {
+    font-size: 34px;
+  }
+
+  .scheduleLiveMeta {
+    gap: 5px;
+    font-size: 8px;
+  }
+}
+
+@media (max-width: 520px) {
+  .schedulePage {
+    padding-top: 30px;
+  }
+
+  .scheduleSection {
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+
+  .scheduleHeader {
+    gap: 13px;
+    margin-bottom: 20px;
+  }
+
+  .scheduleTitle {
+    font-size: clamp(32px, 10vw, 42px);
+  }
+
+  .scheduleSubtitle {
+    font-size: 13px;
+  }
+
+  .scheduleBoard {
+    padding: 12px;
+    border-radius: 18px;
+  }
+
+  .scheduleTabs {
+    gap: 4px;
+    padding: 4px;
+    margin-bottom: 13px;
+  }
+
+  .scheduleTabs button.scheduleTab {
+    min-height: 58px;
+    gap: 4px;
+    padding: 8px 7px;
+  }
+
+  .scheduleTabLabel {
+    gap: 6px;
+    font-size: 11px;
+  }
+
+  .scheduleTabHint {
+    font-size: 9px;
+  }
+
+  .scheduleTabCount {
+    min-width: 23px;
+    height: 23px;
+    padding: 0 5px;
+    border-radius: 7px;
+    font-size: 10px;
+  }
+
+  .scheduleSearch {
+    min-height: 44px;
+    padding: 0 11px;
+  }
+
+  .scheduleSearch input {
+    min-height: 40px;
+    font-size: 12px;
+  }
+
+  .scheduleEventFilter select {
+    min-height: 44px;
+    font-size: 12px;
+  }
+
+  .scheduleSportBrowser {
+    margin-bottom: 20px;
+    padding: 14px 12px 11px;
+  }
+
+  .scheduleSportBrowserHeading {
+    align-items: flex-start;
+  }
+
+  .scheduleSportBrowserHeading > span {
+    padding-top: 2px;
+    font-size: 10px;
+  }
+
+  .scheduleSportChips button.scheduleSportChip {
+    min-height: 35px;
+    gap: 6px;
+    padding: 0 9px;
+    font-size: 11px;
+  }
+
+  .scheduleResultsHeader h2 {
+    font-size: 15px;
+  }
+
+  .scheduleMatchGrid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  .scheduleMatchCard {
+    padding: 14px;
+    border-radius: 14px;
+  }
+
+  .scheduleLiveTeam {
+    min-height: 54px;
+    padding: 8px;
+  }
+
+  .scheduleLiveTeamName {
+    font-size: 11px;
+  }
+
+  .scheduleLiveTeamValue {
+    font-size: 22px;
+  }
+
+  .scheduleEmptyState {
+    padding: 36px 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .schedulePage *,
+  .schedulePage *::before,
+  .schedulePage *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Keep the match center in the same purple, orange, and stadium style as Home. */
+.schedulePage {
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+}
+
+.scheduleHeader {
+  display: block;
+  text-align: center;
+}
+
+.scheduleTabLiveDot {
+  background: #67d63a;
+  box-shadow: 0 0 0 4px rgba(103, 214, 58, 0.12), 0 0 10px rgba(103, 214, 58, 0.55);
+}
+
+.scheduleTitle {
+  font-size: clamp(30px, 9vw, 56px);
+  letter-spacing: 1px;
+  transform: skewX(-10deg);
+  text-shadow: 0 5px 0 rgba(0, 0, 0, 0.35), 0 20px 42px rgba(0, 0, 0, 0.3);
+  -webkit-text-stroke: 1.5px rgba(0, 0, 0, 0.28);
+}
+
+.scheduleSubtitle {
+  margin: 0 auto;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: clamp(14px, 2vw, 18px);
+  line-height: 1.4;
+}
+
+.scheduleBoard {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+.scheduleTabs {
+  gap: 0.75rem;
+  padding: 0 0 5px;
+  border: 0;
+  border-bottom: 2px solid rgba(255, 150, 55, 0.65);
+  border-radius: 0;
+  background: transparent;
+}
+
+.scheduleTabs button.scheduleTab {
+  min-height: 48px;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px 10px 0 0;
+  background: rgba(255, 255, 255, 0.04);
+  text-align: center;
+}
+
+.scheduleTabs button.scheduleTab:hover {
+  border-color: rgba(255, 178, 74, 0.42);
+  background: rgba(255, 178, 74, 0.1);
+}
+
+.scheduleTabs button.scheduleTabActive {
+  border-color: rgba(255, 178, 74, 0.85);
+  background: linear-gradient(135deg, var(--brand-amber-300), var(--brand-amber-500));
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(255, 178, 74, 0.3);
+}
+
+.scheduleTabHint {
+  color: rgba(255, 255, 255, 0.58);
+}
+
+.scheduleTabCount {
+  border-color: rgba(255, 255, 255, 0.16);
+  background: rgba(0, 0, 0, 0.12);
+}
+
+.scheduleTabs .scheduleTabActive .scheduleTabCount {
+  border-color: rgba(255, 255, 255, 0.25);
+  background: rgba(0, 0, 0, 0.12);
+  color: #fff;
+}
+
+.scheduleSearch {
+  border-color: rgba(255, 150, 55, 0.34);
+  background: rgba(23, 12, 70, 0.58);
+}
+
+.scheduleSearch:focus-within {
+  border-color: rgba(255, 178, 74, 0.82);
+  background: rgba(23, 12, 70, 0.82);
+  box-shadow: 0 0 0 3px rgba(255, 178, 74, 0.12);
+}
+
+.scheduleEventFilter select {
+  border-color: rgba(255, 150, 55, 0.34);
+  background-color: rgba(23, 12, 70, 0.72);
+}
+
+.scheduleEventFilter option {
+  background: #1c0f53;
+}
+
+.scheduleSportBrowser {
+  border-color: rgba(255, 150, 55, 0.34);
+  background: linear-gradient(180deg, rgba(34, 20, 96, 0.88), rgba(23, 12, 70, 0.9));
+  box-shadow: 0 0 0 2px rgba(255, 120, 40, 0.08) inset;
+}
+
+.scheduleSportBrowserHeading h2,
+.scheduleResultsHeader h2 {
+  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.25);
+}
+
+.scheduleSportChips button.scheduleSportChip {
+  border-color: rgba(255, 150, 55, 0.3);
+  background: rgba(255, 142, 47, 0.1);
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.scheduleSportChips button.scheduleSportChip:hover {
+  border-color: rgba(255, 178, 74, 0.7);
+  background: rgba(255, 142, 47, 0.2);
+}
+
+.scheduleSportChips button.scheduleSportChipActive {
+  border-color: rgba(255, 196, 108, 0.85);
+  background: linear-gradient(135deg, var(--brand-amber-300), var(--brand-amber-500));
+  color: #241231;
+  box-shadow: 0 4px 12px rgba(255, 142, 47, 0.24);
+}
+
+.scheduleSportChips .scheduleSportChipActive .scheduleSportChipCount {
+  background: rgba(30, 15, 5, 0.12);
+  color: #241231;
+}
+
+.scheduleMatchCard {
+  border: 2px solid rgba(255, 150, 55, 0.72);
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(34, 20, 96, 0.94), rgba(23, 12, 70, 0.94));
+  box-shadow: 0 0 0 2px rgba(255, 120, 40, 0.14) inset, 0 0 20px rgba(255, 120, 40, 0.14), 0 16px 32px rgba(0, 0, 0, 0.32);
+}
+
+.scheduleMatchCard:hover {
+  border-color: rgba(255, 178, 74, 0.95);
+  box-shadow: 0 0 0 2px rgba(255, 120, 40, 0.2) inset, 0 0 26px rgba(255, 120, 40, 0.22), 0 18px 36px rgba(0, 0, 0, 0.38);
+}
+
+.scheduleMatchCard--ongoing,
+.scheduleMatchCard--finished {
+  border-top-width: 2px;
+}
+
+.scheduleMatchCard--ongoing {
+  border-color: rgba(255, 178, 74, 0.95);
+  background: linear-gradient(180deg, rgba(48, 25, 98, 0.96), rgba(23, 12, 70, 0.96));
+}
+
+.scheduleMatchCard--finished {
+  border-color: rgba(255, 150, 55, 0.6);
+}
+
+.scheduleMatchSportIcon {
+  border-color: rgba(255, 150, 55, 0.4);
+  background: rgba(255, 142, 47, 0.14);
+}
+
+.scheduleSportIdentity h3 {
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.25);
+}
+
+.scheduleStatusBadge--ongoing {
+  border-color: rgba(255, 196, 108, 0.85);
+  background: linear-gradient(135deg, var(--brand-amber-300), var(--brand-amber-500));
+  color: #321a04;
+}
+
+.scheduleStatusBadge--scheduled {
+  border-color: rgba(255, 178, 74, 0.38);
+  background: rgba(255, 142, 47, 0.12);
+  color: #ffd38b;
+}
+
+.scheduleStatusBadge--finished {
+  border-color: rgba(103, 214, 58, 0.38);
+  background: rgba(103, 214, 58, 0.12);
+  color: #b6f39d;
+}
+
+.scheduleLiveTeam {
+  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.scheduleLiveTeamValue {
+  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.3);
+}
+
+.scheduleLiveIndicator {
+  color: #b6f39d;
+}
+
+.scheduleLiveIndicator span {
+  background: #67d63a;
+  box-shadow: 0 0 8px rgba(103, 214, 58, 0.65);
+}
+
+.scheduleWinner {
+  color: var(--brand-amber-300);
+}
+
+.scheduleScheduledInfo {
+  border-color: rgba(255, 150, 55, 0.24);
+  background: rgba(255, 142, 47, 0.08);
+}
+
+.scheduleScheduledIcon {
+  background: rgba(255, 142, 47, 0.16);
+  color: var(--brand-amber-300);
+}
+
+.scheduleEmptyState,
+.scheduleStateCard {
+  border-color: rgba(255, 150, 55, 0.36);
+  background: linear-gradient(180deg, rgba(34, 20, 96, 0.85), rgba(23, 12, 70, 0.88));
+}
+
+.scheduleClearFilters,
+.scheduleRetryButton {
+  border-color: rgba(255, 178, 74, 0.5);
+  background: linear-gradient(135deg, var(--brand-amber-300), var(--brand-amber-500));
+  color: #321a04;
+}
+
+.scheduleClearFilters:hover,
+.scheduleRetryButton:hover {
+  background: linear-gradient(135deg, #ffc46c, var(--brand-amber-400));
+}
+
+@media (max-width: 760px) {
+  .scheduleHeader {
+    display: block;
+    text-align: center;
+  }
+
+}
+
+@media (max-width: 520px) {
+  .scheduleTabs {
+    gap: 4px;
+    padding: 0 0 5px;
+  }
+
+  .scheduleTabs button.scheduleTab {
+    min-height: 58px;
+    gap: 4px;
+    padding: 8px 7px;
+  }
+
+  .scheduleTabLabel {
+    gap: 6px;
+    font-size: 11px;
+  }
+
+  .scheduleTabHint {
+    font-size: 9px;
+  }
+
+  .scheduleTabCount {
+    min-width: 23px;
+    height: 23px;
+    padding: 0 5px;
+    font-size: 10px;
+  }
+
+  .scheduleSportChips button.scheduleSportChip {
+    min-height: 38px;
+    padding: 0 9px;
+    font-size: 11px;
+  }
+}
+
+/* Keep the live-score sport selector aligned with the Home page sports rail. */
+.scheduleSportBrowser {
+  padding: 9px;
+  border: 2px solid rgba(255, 150, 55, 0.72);
+  border-radius: 17px;
+  background: rgba(23, 12, 70, 0.88);
+  box-shadow: 0 0 0 2px rgba(255, 120, 40, 0.1) inset;
+}
+
+.scheduleSportChips {
+  display: flex;
+  align-items: stretch;
+  gap: 4px;
+  overflow-x: auto;
+  padding: 0;
+  scrollbar-width: none;
+}
+
+.scheduleSportChips::-webkit-scrollbar {
+  display: none;
+}
+
+.scheduleSportChips button.scheduleSportChip {
+  position: relative;
+  min-width: 72px;
+  min-height: 80px;
+  flex: 1 0 76px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  max-width: 108px;
+  padding: 8px 6px;
+  border: 1px solid transparent;
+  border-radius: 13px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.76);
+  text-align: center;
+  white-space: normal;
+}
+
+.scheduleSportChips button.scheduleSportChip:hover {
+  border-color: rgba(255, 178, 74, 0.18);
+  background: rgba(255, 142, 47, 0.09);
+  color: #fff;
+}
+
+.scheduleSportChips button.scheduleSportChipActive {
+  border-color: rgba(255, 178, 74, 0.16);
+  background: rgba(255, 142, 47, 0.16);
+  color: var(--brand-amber-300);
+  box-shadow: inset 0 0 0 1px rgba(255, 178, 74, 0.06);
+}
+
+.scheduleSportChips .scheduleSportChipIcon {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.scheduleSportChips .scheduleSportChipName {
+  max-width: 100%;
+  overflow: hidden;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.scheduleSportChips .scheduleSportChipEvent {
+  max-width: 100%;
+  overflow: hidden;
+  color: rgba(255, 255, 255, 0.52);
+  font-size: 8px;
+  line-height: 1.1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.scheduleSportChips .scheduleSportChipCount {
+  position: absolute;
+  top: 5px;
+  right: 6px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.74);
+  font-size: 9px;
+}
+
+.scheduleSportChips .scheduleSportChipActive .scheduleSportChipCount {
+  background: rgba(255, 178, 74, 0.18);
+  color: var(--brand-amber-300);
+}
+
+@media (max-width: 520px) {
+  .scheduleSportBrowser {
+    padding: 7px;
+    border-radius: 15px;
+  }
+
+  .scheduleSportChips button.scheduleSportChip {
+    min-width: 68px;
+    min-height: 74px;
+    flex-basis: 68px;
+    gap: 5px;
+    padding: 7px 5px;
+  }
+
+  .scheduleSportChips .scheduleSportChipIcon {
+    font-size: 18px;
+  }
+
+  .scheduleSportChips .scheduleSportChipName {
+    font-size: 9px;
+  }
+}
+
+@media (max-width: 520px) {
+  .scheduleMatchCard {
+    min-height: 112px;
+    grid-template-columns: 76px minmax(0, 1fr);
+    gap: 9px;
+    padding: 9px;
+  }
+
+  .scheduleMatchSportTile {
+    min-height: 86px;
+    gap: 5px;
+    padding: 8px 4px;
+  }
+
+  .scheduleMatchSportTile h3 {
+    font-size: 9px;
+  }
+
+  .scheduleMatchSportCategory {
+    font-size: 8px;
+  }
+
+  .scheduleMatchDetails {
+    gap: 6px;
+  }
+
+  .scheduleStatusBadge {
+    min-height: 21px;
+    padding: 2px 6px;
+    font-size: 8px;
+  }
+
+  .scheduleLiveScore {
+    gap: 5px;
+  }
+
+  .scheduleLiveTeam {
+    width: 76px;
+    min-height: 72px;
+    flex-basis: 76px;
+    flex-direction: column-reverse;
+    gap: 2px;
+    padding: 5px 3px;
+    border-width: 1px;
+    border-radius: 13px;
+  }
+
+  .scheduleLiveTeamName {
+    font-size: 9px;
+  }
+
+  .scheduleLiveTeamValue {
+    font-size: 34px;
+  }
+
+  .scheduleLiveMeta {
+    gap: 5px;
+    font-size: 8px;
   }
 }

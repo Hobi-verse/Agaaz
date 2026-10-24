@@ -95,7 +95,7 @@
 
 .regPage .selector-field select:focus {
   outline: none;
-  border-color: #ffb24a;
+  border-color: var(--brand-amber-300);
   box-shadow: 0 0 0 3px rgba(255, 150, 55, 0.25);
 }
 
@@ -173,7 +173,7 @@
   border-top: 1px solid rgba(255, 150, 55, 0.28);
   font-size: 16px;
   font-weight: 800;
-  color: #ffb24a;
+  color: var(--brand-amber-300);
 }
 
 .regPage .sport-type-badge {
@@ -207,9 +207,9 @@
 .regPayBtn {
   width: 100%;
   padding: 16px 24px;
-  background: linear-gradient(180deg, #ffb24a 0%, #ff8e2f 45%, #f1771f 100%);
-  color: #1c0f53;
-  border: 2px solid #d3651c;
+  background: linear-gradient(180deg, var(--brand-amber-300) 0%, var(--brand-amber-500) 45%, var(--brand-amber-600) 100%);
+  color: var(--brand-violet-950);
+  border: 2px solid var(--brand-amber-700);
   border-radius: 14px;
   font-size: 16px;
   font-weight: 900;
@@ -254,8 +254,8 @@
   margin: 20px auto;
   padding: 14px 32px;
   background: transparent;
-  color: #ffb24a;
-  border: 3px solid #ffb24a;
+  color: var(--brand-amber-300);
+  border: 3px solid var(--brand-amber-300);
   border-radius: 14px;
   font-size: 14px;
   font-weight: 900;
@@ -310,14 +310,14 @@
 }
 
 .regPage input[type="file"]:hover {
-  border-color: #ffb24a;
+  border-color: var(--brand-amber-300);
   background: rgba(255, 150, 55, 0.1);
 }
 
 /* Remove Button */
 .regPage button[type="button"] {
   padding: 8px 16px;
-  background: #ff8e2f;
+  background: var(--brand-amber-500);
   color: white;
   border: none;
   border-radius: 8px;
@@ -327,7 +327,7 @@
 }
 
 .regPage button[type="button"]:hover {
-  background: #f1771f;
+  background: var(--brand-amber-600);
 }
 
 @media (max-width: 520px) {

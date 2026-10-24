@@ -25,8 +25,8 @@ export default function Login({ onLogin }) {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-100">
-      <div className="max-w-md w-full bg-white rounded-2xl p-8 shadow-sm">
+    <div className="adminShell adminLogin min-h-screen flex items-center justify-center px-4 py-8">
+      <div className="adminLoginCard max-w-md w-full rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
         <h1 className="text-2xl font-bold text-center text-slate-900 mb-6">
           Admin Login
         </h1>
@@ -59,7 +59,7 @@ export default function Login({ onLogin }) {
           <button
             type="submit"
             disabled={loading}
-            className="w-full h-11 rounded-xl bg-slate-900 px-4 text-sm font-semibold text-white shadow-sm disabled:opacity-60"
+            className="w-full h-11 rounded-xl bg-brand-700 px-4 text-sm font-semibold text-white shadow-sm hover:bg-brand-800 disabled:opacity-60"
           >
             {loading ? "Logging in..." : "Login"}
           </button>

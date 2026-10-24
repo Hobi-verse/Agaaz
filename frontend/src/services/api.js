@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
+const API_BASE_URL =
+  import.meta.env.VITE_BACKEND_URL ||
+  (import.meta.env.DEV ? "http://localhost:5000/api" : undefined);
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -139,7 +141,7 @@ export const incrementVisitCount = async () => {
 
 export const getMatches = async (sportId = null) => {
   try {
-    const params = sportId ? { sportId } : {};
+    const params = sportId ? { sportId, limit: 500 } : { limit: 500 };
     const response = await api.get("/matches", { params });
     return {
       success: true,
@@ -149,6 +151,37 @@ export const getMatches = async (sportId = null) => {
   } catch (error) {
     return { success: false, error: error.message || "Failed to fetch matches" };
   }
+};
+
+export const getEvents = async () => {
+  try {
+    const response = await api.get("/events");
+    return { success: true, data: response.data.data || [] };
+  } catch (error) {
+    return { success: false, error: error.message || "Failed to fetch events" };
+  }
+};
+
+export const subscribeToMatchUpdates = (onMatches) => {
+  const baseUrl = String(api.defaults.baseURL || "").replace(/\/+$/, "");
+  let stream;
+  try {
+    stream = new EventSource(`${baseUrl}/matches/live`);
+  } catch {
+    return () => {};
+  }
+  const handleMatches = (event) => {
+    try {
+      onMatches(JSON.parse(event.data));
+    } catch {
+      // Ignore malformed stream events; the regular match fetch will recover.
+    }
+  };
+  stream.addEventListener("matches", handleMatches);
+  return () => {
+    stream.removeEventListener("matches", handleMatches);
+    stream.close();
+  };
 };
 
 export const getPublishedNotices = async (limit = 20) => {

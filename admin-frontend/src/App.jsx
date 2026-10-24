@@ -6,6 +6,7 @@ import Dashboard from "./pages/Dashboard";
 import Matches from "./pages/Matches";
 import Login from "./pages/Login";
 import Notices from "./pages/Notices";
+import Events from "./pages/Events";
 import { clearStoredAuth, readStoredUser } from "./utils/authSession";
 
 export default function App() {
@@ -26,8 +27,8 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-100">
-      <div className="mx-auto max-w-7xl px-4 py-8">
+    <div className="adminShell min-h-screen">
+      <div className="adminContent">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-xl font-semibold text-slate-900">
             Welcome, {user.username}
@@ -48,6 +49,7 @@ export default function App() {
         <div className="mt-6">
           {tab === "registrations" ? <Dashboard /> : null}
           {tab === "matches" ? <Matches user={user} /> : null}
+          {tab === "events" ? <Events /> : null}
           {tab === "notices" ? <Notices /> : null}
         </div>
       </div>

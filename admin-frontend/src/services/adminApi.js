@@ -23,8 +23,55 @@ export function getApiBaseUrl() {
   return API_BASE_URL;
 }
 
+export function subscribeToMatchUpdates(onMatches) {
+  let stream;
+  try {
+    const baseUrl = String(API_BASE_URL || '').replace(/\/+$/, '');
+    stream = new EventSource(`${baseUrl}/api/matches/live`);
+  } catch {
+    return () => {};
+  }
+
+  const handleMatches = (event) => {
+    try {
+      onMatches(JSON.parse(event.data));
+    } catch {
+      // Ignore malformed events; the match list's normal fetch remains available.
+    }
+  };
+
+  stream.addEventListener('matches', handleMatches);
+  return () => {
+    stream.removeEventListener('matches', handleMatches);
+    stream.close();
+  };
+}
+
 export async function fetchSportsList({ signal } = {}) {
   return fetchJson('/api/registrations/sports', { signal });
+}
+
+export async function fetchEvents({ signal } = {}) {
+  return fetchJson('/api/events', { signal });
+}
+
+export async function createEvent({ eventName, description }, { signal } = {}) {
+  return fetchJson('/api/events', {
+    method: 'POST',
+    body: { eventName, description },
+    signal,
+  });
+}
+
+export async function addEventSport(
+  { eventId, sportName, sportCategory, scoringMode },
+  { signal } = {},
+) {
+  return fetchJson(`/api/events/${encodeURIComponent(eventId)}/sports`, {
+    method: 'POST',
+    body: { sportName, sportCategory, scoringMode },
+    signal,
+  });
 }
 
 export async function fetchRegistrations(
@@ -59,7 +106,7 @@ export async function fetchMatches(
 }
 
 export async function createMatch(
-  { sportId, sportName, sportCategory, registrationIdA, nameA, registrationIdB, nameB, scheduledAt },
+  { sportId, sportName, sportCategory, eventId, scoringMode, registrationIdA, nameA, registrationIdB, nameB, scheduledAt },
   { signal } = {},
 ) {
   const token = localStorage.getItem('token');
@@ -68,7 +115,7 @@ export async function createMatch(
   const res = await fetch(`${API_BASE_URL}/api/matches`, {
     method: 'POST',
     headers,
-    body: JSON.stringify({ sportId, sportName, sportCategory, registrationIdA, nameA, registrationIdB, nameB, scheduledAt }),
+    body: JSON.stringify({ sportId, sportName, sportCategory, eventId, scoringMode, registrationIdA, nameA, registrationIdB, nameB, scheduledAt }),
     signal,
   });
   const json = await res.json().catch(() => null);

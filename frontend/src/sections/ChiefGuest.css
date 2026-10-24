@@ -1,12 +1,12 @@
 .committee-section {
   width: 100%;
-  margin-top: 10%;
+  margin-top: var(--ui-section-space);
   color: rgba(255, 255, 255, 0.96);
   background: transparent;
 }
 
 .committee-header {
-  width: min(1180px, 100%);
+  width: min(var(--ui-content-width), 100%);
   margin: 0 auto;
   text-align: center;
   padding: 34px 18px 26px;
@@ -31,7 +31,7 @@
 }
 
 .committee-container {
-  width: min(1180px, 100%);
+  width: min(var(--ui-content-width), 100%);
   margin: 22px auto 0;
   padding: 0 18px 30px;
 

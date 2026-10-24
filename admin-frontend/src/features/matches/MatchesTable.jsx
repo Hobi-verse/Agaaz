@@ -36,7 +36,7 @@ function MatchResultCell({
 }) {
   const participantA = match.participants?.[0];
   const participantB = match.participants?.[1];
-  const canUseLiveScore = supportsLiveScore(match.sportId);
+  const canUseLiveScore = supportsLiveScore(match);
   const scoreValueA = scoreA[match._id] ?? match.scoreA ?? "";
   const scoreValueB = scoreB[match._id] ?? match.scoreB ?? "";
   const isBusy =
@@ -61,7 +61,7 @@ function MatchResultCell({
         type="button"
         onClick={() => onStartMatch(match._id)}
         disabled={statusUpdatingId === match._id}
-        className="h-10 rounded-xl bg-blue-600 px-4 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 disabled:opacity-60"
+        className="h-10 rounded-xl bg-brand-700 px-4 text-sm font-semibold text-white shadow-sm hover:bg-brand-800 disabled:opacity-60"
       >
         {statusUpdatingId === match._id ? "Starting…" : "Start Match"}
       </button>
@@ -137,7 +137,7 @@ function MatchResultCell({
               type="button"
               onClick={() => onUpdateLiveScore(match._id)}
               disabled={isBusy}
-              className="h-10 rounded-xl bg-amber-500 px-4 text-sm font-semibold text-white shadow-sm hover:bg-amber-600 disabled:opacity-60"
+              className="h-10 rounded-xl bg-brand-700 px-4 text-sm font-semibold text-white shadow-sm hover:bg-brand-800 disabled:opacity-60"
             >
               {liveScoreSavingId === match._id ? "Updating…" : "Update live"}
             </button>
@@ -195,8 +195,8 @@ export default function MatchesTable({
         <div>
           <h2 className="text-lg font-semibold text-slate-900">Matches</h2>
           <p className="mt-1 text-sm text-slate-600">
-            Live scoring is available only for point-based sports. Result-only
-            events can still be finished normally.
+            Add any sport under an event collection. Point-based matches publish
+            live scores; result-only events record a winner.
           </p>
         </div>
 
@@ -213,8 +213,9 @@ export default function MatchesTable({
             <option value="">All sports</option>
             {sports.map((sport) => (
               <option key={sport.sportId} value={sport.sportId}>
-                {(sport.sportCategory ? `${sport.sportCategory} · ` : "") +
-                  sport.sportName}
+                {[sport.eventName, sport.sportCategory, sport.sportName]
+                  .filter(Boolean)
+                  .join(" · ")}
               </option>
             ))}
           </select>
@@ -273,7 +274,7 @@ export default function MatchesTable({
                     <td className="px-4 py-3 text-slate-900">
                       <div className="font-medium">{match.sportName || "-"}</div>
                       <div className="mt-0.5 text-xs text-slate-500">
-                        {match.sportCategory || ""}
+                        {[match.eventName, match.sportCategory].filter(Boolean).join(" · ")}
                       </div>
                     </td>
 

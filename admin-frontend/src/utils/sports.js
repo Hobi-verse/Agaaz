@@ -6,5 +6,8 @@ export function normalizeSports(sportsMeta = []) {
       sportName: sport.sportName,
       sportCategory: sport.sportCategory,
       sportType: sport.sportType,
+      eventId: sport.eventId || null,
+      eventName: sport.eventName || null,
+      scoringMode: sport.scoringMode || null,
     }));
 }

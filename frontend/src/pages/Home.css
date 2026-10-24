@@ -73,16 +73,6 @@
 .heroCtaRow button {
   position: relative;
   overflow: hidden;
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
-}
-
-.heroCtaRow button:hover {
-  transform: scale(1.05);
-  box-shadow:
-    0 0 30px rgba(255, 100, 0, 0.6),
-    0 0 60px rgba(255, 50, 0, 0.3);
 }
 
 /* Status */
@@ -152,7 +142,7 @@
   border-radius: 50px;
   background: rgba(255, 142, 47, 0.14);
   border: 2px solid rgba(255, 142, 47, 0.5);
-  color: #ff8e2f;
+  color: var(--brand-amber-500);
   font-weight: 700;
   font-size: clamp(14px, 2.5vw, 20px);
   backdrop-filter: blur(10px);
@@ -216,7 +206,7 @@
 
 /* ==================== SPONSORS SECTION ==================== */
 .sponsorsSection {
-  padding: 60px 20px;
+  padding: var(--ui-section-space) var(--ui-page-gutter);
   text-align: center;
 }
 
@@ -280,7 +270,7 @@
 .sponsorTag {
   margin-top: 8px;
   font-size: 12px;
-  color: #ff9f1c;
+  color: var(--brand-amber-400);
 }
 
 .sponsorName {

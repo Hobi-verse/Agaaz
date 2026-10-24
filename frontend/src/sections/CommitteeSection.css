@@ -1,8 +1,8 @@
 /* Committee Section - Matching Main Site UI */
 
 .committee-section {
-  padding: 80px 18px;
-  background: linear-gradient(180deg, #221060 0%, #1c0f53 100%);
+  padding: var(--ui-section-space) var(--ui-page-gutter);
+  background: linear-gradient(180deg, var(--brand-violet-900) 0%, var(--brand-violet-950) 100%);
   position: relative;
   overflow: hidden;
 }
@@ -21,7 +21,7 @@
 }
 
 .committee-container {
-  max-width: 1180px;
+  max-width: var(--ui-content-width);
   margin: 0 auto;
   position: relative;
   z-index: 1;
@@ -70,7 +70,7 @@
 
 .committee-card:hover {
   transform: translateY(-8px);
-  border-color: #ffb24a;
+  border-color: var(--brand-amber-300);
   box-shadow: 0 0 30px rgba(255, 120, 40, 0.3), 0 16px 40px rgba(0, 0, 0, 0.35);
 }
 
@@ -80,7 +80,7 @@
   margin: 0 auto 20px;
   border-radius: 50%;
   overflow: hidden;
-  border: 3px solid #ffb24a;
+  border: 3px solid var(--brand-amber-300);
   box-shadow: 0 0 20px rgba(255, 150, 55, 0.3);
 }
 
@@ -93,7 +93,7 @@
 .avatar-placeholder {
   width: 100%;
   height: 100%;
-  background: linear-gradient(180deg, #ffb24a 0%, #ff8e2f 45%, #f1771f 100%);
+  background: linear-gradient(180deg, var(--brand-amber-300) 0%, var(--brand-amber-500) 45%, var(--brand-amber-600) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -102,7 +102,7 @@
 .avatar-placeholder svg {
   width: 50px;
   height: 50px;
-  color: #1c0f53;
+  color: var(--brand-violet-950);
 }
 
 .member-info {
@@ -120,7 +120,7 @@
 
 .member-role {
   margin: 0;
-  color: #ffb24a;
+  color: var(--brand-amber-300);
   font-weight: 700;
   font-size: 14px;
   text-transform: uppercase;

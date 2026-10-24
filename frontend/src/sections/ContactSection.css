@@ -1,6 +1,6 @@
 .contactSection {
   width: 100%;
-  padding: 64px 0 86px;
+  padding: var(--ui-section-space) 0;
   position: relative;
   overflow: hidden;
 }
@@ -57,7 +57,7 @@
 }
 
 .contactInner {
-  width: min(1024px, 90%);
+  width: min(1024px, calc(100% - var(--ui-page-gutter) - var(--ui-page-gutter)));
   margin: 0 auto;
   position: relative;
   z-index: 1;
@@ -69,7 +69,7 @@
 }
 
 .contactBlockSpacer {
-  margin-top: 10%;
+  margin-top: var(--ui-section-space);
 }
 
 .contactHeader {
